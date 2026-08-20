@@ -31,10 +31,22 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Archivos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Archivos.h" />
+		<Unit filename="Comunes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Comunes.h" />
 		<Unit filename="Interfaz.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Interfaz.h" />
+		<Unit filename="PJ_Principal.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="PJ_Principal.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

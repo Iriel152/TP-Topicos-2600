@@ -1,0 +1,11 @@
+#ifndef COMUNES_H_INCLUDED
+#define COMUNES_H_INCLUDED
+
+#define ERROR_MEMORIA -1
+#define TODOOK    0
+#define ERROR_ -2
+#define ERROR_ARCH -3
+#define ENCONTRADO 1
+#define NO_ENCONTRADO 0
+
+#endif // COMUNES_H_INCLUDED
