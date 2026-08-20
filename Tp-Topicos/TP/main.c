@@ -1,8 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-
+#include "Interfaz.h"
 int main()
 {
-    printf("Hello world!\n");
+    PantallaInicio();
     return 0;
 }
