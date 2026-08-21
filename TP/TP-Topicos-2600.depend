@@ -10,26 +10,33 @@
 1787195559 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp-topicos\tp\interfaz.c
 	"Interfaz.h"
 
-1787195907 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
+1787353438 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
 	"Interfaz.h"
+	"Comunes.h"
 
-1787195864 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.h
+1787353228 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<conio.h>
 
 1787197280 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.c
 	"PJ_Principal.h"
 
 1787197280 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.h
 
-1787197428 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.c
+1787346976 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.c
 	"Comunes.h"
 
-1787197428 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.h
+1787353368 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.h
 
-1787197475 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\main.c
+1787344677 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\main.c
 	"Interfaz.h"
 	"PJ_Principal.h"
 	"Comunes.h"
+
+1787197652 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.c
+	"Archivos.h"
+
+1787197652 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.h
 

@@ -8,4 +8,6 @@
 #define ENCONTRADO 1
 #define NO_ENCONTRADO 0
 
+int EsLetraValida(int LetraEsperada, int LetraRecibida);
+
 #endif // COMUNES_H_INCLUDED
