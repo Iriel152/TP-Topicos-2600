@@ -43,6 +43,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Interfaz.h" />
+		<Unit filename="Mapa.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Mapa.h" />
 		<Unit filename="PJ_Principal.c">
 			<Option compilerVar="CC" />
 		</Unit>

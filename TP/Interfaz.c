@@ -1,5 +1,6 @@
 #include "Interfaz.h"
 #include "Comunes.h"
+#include "Mapa.h"
 void PantallaInicio(int *seleccion, const char *opciones[])
 {
     TituloSistema();
@@ -22,28 +23,36 @@ void MenuInicio()
     {
         system("cls");
         PantallaInicio(&seleccion, opciones);
-        ejecutando=SeleccionMenu(&seleccion, opciones);
+        ejecutando=SeleccionMenuInicio(&seleccion, opciones);
     }
 }
-int SeleccionMenu(int *seleccion, const char *opciones[])
+int SeleccionMenuInicio(int *seleccion, const char *opciones[])
 {
     int tecla = _getch(), ejecutando = 1;
-    if (tecla == 0 || tecla == 224 || tecla == 13)
+    if (Tecla_ArribaAbajo(tecla) == TODOOK || EsLetraValida('E', tecla) == TODOOK)
     {
-        if(tecla == 13 || EsLetraValida('E', tecla) == TODOOK)
+        if(EsLetraValida('W', tecla) == TODOOK)
+            *seleccion = (*seleccion - 1 + TOTAL_OPCIONES) % TOTAL_OPCIONES;
+        else if(EsLetraValida('S', tecla) == TODOOK)
+            *seleccion = (*seleccion + 1) % TOTAL_OPCIONES;
+        if(EsLetraValida('E', tecla) == TODOOK)
         {
             system("cls");
-//            if (*seleccion == TOTAL_OPCIONES - 1) Es para que salga hasta que estes las condiciones
-//            {
+            if (*seleccion == TOTAL_OPCIONES - 3)
+            {
+                Mapa();
+            }
+            if (*seleccion == TOTAL_OPCIONES - 2)
+            {
                 AlinearCentro("Gracias por jugar!", n_centrado, COLOR_NORMAL, T_No_seleccionado);
                 ejecutando = 0;
-//            }
+            }
+            if (*seleccion == TOTAL_OPCIONES - 1)
+            {
+                AlinearCentro("Gracias por jugar!", n_centrado, COLOR_NORMAL, T_No_seleccionado);
+                ejecutando = 0;
+            }
         }
-        tecla = _getch();
-        if(tecla == 72 || EsLetraValida('W', tecla) == TODOOK)
-            *seleccion = (*seleccion - 1 + TOTAL_OPCIONES) % TOTAL_OPCIONES;
-        else if(tecla == 80 || EsLetraValida('S', tecla) == TODOOK)
-            *seleccion = (*seleccion + 1) % TOTAL_OPCIONES;
     }
     return ejecutando;
 }
@@ -71,4 +80,47 @@ void AlinearCentro(const char* palabra, int total, const char* color, int selec)
     if(selec == 0)
         caracter = "";
     printf("%s%s%s %s\n", color, caracter, palabra, COLOR_RESET);
+}
+void MenuEjecucion()
+{
+    int seleccion = 0, ejecutando = 1;
+    const char *opciones[TOTAL_OPCIONES] = {"Continuar",
+                                            "Nueva Partida",
+                                            "Volver"};
+    while(ejecutando)
+    {
+        system("cls");
+        PantallaInicio(&seleccion, opciones);
+        ejecutando=SeleccionMenuPartida(&seleccion, opciones);
+    }
+}
+int SeleccionMenuPartida(int *seleccion, const char *opciones[])
+{
+    int tecla = _getch(), ejecutando = 1;
+    if (Tecla_ArribaAbajo(tecla) == TODOOK || EsLetraValida('E', tecla) == TODOOK)
+    {
+        if(EsLetraValida('W', tecla) == TODOOK)
+            *seleccion = (*seleccion - 1 + TOTAL_OPCIONES) % TOTAL_OPCIONES;
+        else if(EsLetraValida('S', tecla) == TODOOK)
+            *seleccion = (*seleccion + 1) % TOTAL_OPCIONES;
+        if(EsLetraValida('E', tecla) == TODOOK)
+        {
+            system("cls");
+            if (*seleccion == TOTAL_OPCIONES - 3)
+            {
+                MenuInicio();
+                ejecutando = 0; //deberia de continuar los estados de la partida
+            }
+            if (*seleccion == TOTAL_OPCIONES - 2)
+            {
+                Mapa();
+            }
+            if (*seleccion == TOTAL_OPCIONES - 1)
+            {
+                MenuInicio();
+                ejecutando = 0;
+            }
+        }
+    }
+    return ejecutando;
 }

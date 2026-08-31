@@ -8,6 +8,12 @@
 #define ENCONTRADO 1
 #define NO_ENCONTRADO 0
 
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 int EsLetraValida(int LetraEsperada, int LetraRecibida);
+int Tecla_ArribaAbajo(int tecla);
+int ObtenerNumeroAleatorio(int, int);
 
 #endif // COMUNES_H_INCLUDED
