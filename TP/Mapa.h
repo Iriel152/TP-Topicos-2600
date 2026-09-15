@@ -7,14 +7,16 @@
 #define VACIO 0
 #define FILAS 15
 #define COLUMNAS 49
-#define OBSTACULO 178
+#define OBSTACULO 219
+#define ROMPIBLE 176
 #define ESC 27
 
-void Mapa();
-int** crearMatriz(int filas, int columnas);
-void rellenarBordes(int** matriz, int filas, int columnas);
-void rellenarObstaculosPerm(int** matriz, int filas, int columnas);
-void imprimirMatriz(int** matriz, int filas, int columnas);
-void liberarMatriz(int** matriz, int filas);
+typedef struct{
+    int filas;
+    int columnas;
+    int **celdas;
+}Mapa;
+Mapa* Mapa_CrearMapa(int,  int);
+void Mapa_DestruirMapa(Mapa *);
 
 #endif // MAPA_H_INCLUDED

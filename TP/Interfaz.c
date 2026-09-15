@@ -13,48 +13,35 @@ void PantallaInicio(int *seleccion, const char *opciones[])
     }
     Separador(n_centrado);
 }
-void MenuInicio()
+int MostrarMenuPrincipal()
 {
-    int seleccion = 0, ejecutando = 1;
-    const char *opciones[TOTAL_OPCIONES] = {"Nueva Partida",
-                                            "Cargar Partida",
-                                            "Salir"};
-    while(ejecutando)
+    int seleccion = 0;
+    const char *opciones[TOTAL_OPCIONES] = {
+        "Nueva Partida",
+        "Cargar Partida",
+        "Salir"
+    };
+
+    while (1)
     {
         system("cls");
         PantallaInicio(&seleccion, opciones);
-        ejecutando=SeleccionMenuInicio(&seleccion, opciones);
-    }
-}
-int SeleccionMenuInicio(int *seleccion, const char *opciones[])
-{
-    int tecla = _getch(), ejecutando = 1;
-    if (Tecla_ArribaAbajo(tecla) == TODOOK || EsLetraValida('E', tecla) == TODOOK)
-    {
-        if(EsLetraValida('W', tecla) == TODOOK)
-            *seleccion = (*seleccion - 1 + TOTAL_OPCIONES) % TOTAL_OPCIONES;
-        else if(EsLetraValida('S', tecla) == TODOOK)
-            *seleccion = (*seleccion + 1) % TOTAL_OPCIONES;
-        if(EsLetraValida('E', tecla) == TODOOK)
-        {
+
+        int tecla = _getch();
+
+        // Navegación vertical (W/S o flechas extendidas)
+        if (EsLetraValida('W', tecla) == TODOOK) {
+            seleccion = (seleccion - 1 + TOTAL_OPCIONES) % TOTAL_OPCIONES;
+        }
+        else if (EsLetraValida('S', tecla) == TODOOK) {
+            seleccion = (seleccion + 1) % TOTAL_OPCIONES;
+        }
+        // Confirmación con tecla 'E' o Enter (ASCII 13)
+        else if (EsLetraValida('E', tecla) == TODOOK || tecla == 13) {
             system("cls");
-            if (*seleccion == TOTAL_OPCIONES - 3)
-            {
-                Mapa();
-            }
-            if (*seleccion == TOTAL_OPCIONES - 2)
-            {
-                AlinearCentro("Gracias por jugar!", n_centrado, COLOR_NORMAL, T_No_seleccionado);
-                ejecutando = 0;
-            }
-            if (*seleccion == TOTAL_OPCIONES - 1)
-            {
-                AlinearCentro("Gracias por jugar!", n_centrado, COLOR_NORMAL, T_No_seleccionado);
-                ejecutando = 0;
-            }
+            return seleccion; // Retorna 0, 1 o 2
         }
     }
-    return ejecutando;
 }
 void Separador(int n)
 {
@@ -81,46 +68,34 @@ void AlinearCentro(const char* palabra, int total, const char* color, int selec)
         caracter = "";
     printf("%s%s%s %s\n", color, caracter, palabra, COLOR_RESET);
 }
-void MenuEjecucion()
+//void MenuEjecucion()
+//{
+//    int seleccion = 0, ejecutando = 1;
+//    const char *opciones[TOTAL_OPCIONES] = {"Continuar",
+//                                            "Nueva Partida",
+//                                            "Volver"};
+//    while(ejecutando)
+//    {
+//        system("cls");
+//        PantallaInicio(&seleccion, opciones);
+//        ejecutando=SeleccionMenuPartida(&seleccion, opciones);
+//    }
+//}
+void renderizar(const Mapa *m, const Personaje *p)
 {
-    int seleccion = 0, ejecutando = 1;
-    const char *opciones[TOTAL_OPCIONES] = {"Continuar",
-                                            "Nueva Partida",
-                                            "Volver"};
-    while(ejecutando)
+    int i, j;
+    for (i = 0; i < m->filas; i++)
     {
-        system("cls");
-        PantallaInicio(&seleccion, opciones);
-        ejecutando=SeleccionMenuPartida(&seleccion, opciones);
-    }
-}
-int SeleccionMenuPartida(int *seleccion, const char *opciones[])
-{
-    int tecla = _getch(), ejecutando = 1;
-    if (Tecla_ArribaAbajo(tecla) == TODOOK || EsLetraValida('E', tecla) == TODOOK)
-    {
-        if(EsLetraValida('W', tecla) == TODOOK)
-            *seleccion = (*seleccion - 1 + TOTAL_OPCIONES) % TOTAL_OPCIONES;
-        else if(EsLetraValida('S', tecla) == TODOOK)
-            *seleccion = (*seleccion + 1) % TOTAL_OPCIONES;
-        if(EsLetraValida('E', tecla) == TODOOK)
+        for (j = 0; j < m->columnas; j++)
         {
-            system("cls");
-            if (*seleccion == TOTAL_OPCIONES - 3)
-            {
-                MenuInicio();
-                ejecutando = 0; //deberia de continuar los estados de la partida
-            }
-            if (*seleccion == TOTAL_OPCIONES - 2)
-            {
-                Mapa();
-            }
-            if (*seleccion == TOTAL_OPCIONES - 1)
-            {
-                MenuInicio();
-                ejecutando = 0;
-            }
+            if (p != NULL && p->pos.x == i && p->pos.y == j)
+                printf("%c",PJP);
+            else if (m->celdas[i][j] != VACIO)
+                printf("%c",m->celdas[i][j]);
+            else
+                printf(" ");
         }
+        printf("\n");
     }
-    return ejecutando;
+    system("pause");
 }

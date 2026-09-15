@@ -1,23 +1,45 @@
 #include "PJ_Principal.h"
 #include "Mapa.h"
-void AparicionRandomPJP(int** matriz)
+Personaje* PJ_Princial_CrearPersonaje(int fila, int col, int vidas)
 {
-    int posicion;
-    srand(time(NULL));
-    posicion = ObtenerNumeroAleatorio(1,4);
-    switch(posicion)
+    Personaje *p = (Personaje*)malloc(sizeof(Personaje));
+    if(!p)
+        return NULL;
+    p->pos.x = fila;
+    p->pos.y = col;
+    p->vidas = vidas;
+    p->alcance_bomba = 2;
+    p->esta_vivo = 1;
+
+    return p;
+}
+void PJ_Principal_DestruirPersonaje(Personaje *p)
+{
+    if(p)
+        free(p);
+}
+void PJ_Principal_AparicionRandom(Personaje *p, int fil, int col)
+{
+    int esquina = ObtenerNumeroAleatorio(1,4);
+    if(!p)
+        return NULL;
+    switch(esquina)
     {
         case 1:
-            matriz[1][1]= PJP;
+            p->pos.x = 1;
+            p->pos.y = 1;
             break;
         case 2:
-            matriz[FILAS - 2][1]= PJP;
+            p->pos.x = fil - 2;
+            p->pos.y = 1;
             break;
         case 3:
-            matriz[1][COLUMNAS - 2]= PJP;
+            p->pos.x = 1;
+            p->pos.y = col - 2;
             break;
         case 4:
-            matriz[FILAS - 2][COLUMNAS - 2]= PJP;
+            p->pos.x = fil - 2;
+            p->pos.y = col - 2;
             break;
     }
 }

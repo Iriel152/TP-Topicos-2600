@@ -10,22 +10,24 @@
 1787195559 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp-topicos\tp\interfaz.c
 	"Interfaz.h"
 
-1788154849 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
+1789444717 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
 	"Interfaz.h"
 	"Comunes.h"
 	"Mapa.h"
 
-1788154839 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.h
+1789443890 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<conio.h>
+	"Mapa.h"
+	"PJ_Principal.h"
 
-1788154056 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.c
+1789443120 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.c
 	"PJ_Principal.h"
 	"Mapa.h"
 
-1788153979 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.h
+1789443733 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.h
 	"Comunes.h"
 
 1788152611 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.c
@@ -36,19 +38,22 @@
 	<stdio.h>
 	<stdlib.h>
 
-1788153759 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\main.c
+1789444031 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\main.c
 	"Interfaz.h"
 	"PJ_Principal.h"
 	"Comunes.h"
+	"Mapa.h"
 
-1787197652 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.c
+1789443482 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.c
 	"Archivos.h"
 
-1787197652 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.h
+1789443224 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.h
+	"Mapa.h"
+	"PJ_Principal.h"
 
-1788154499 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\mapa.h
+1789445246 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\mapa.h
 
-1788154499 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\mapa.c
+1789445121 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\mapa.c
 	"Mapa.h"
 	"Comunes.h"
 	"PJ_Principal.h"

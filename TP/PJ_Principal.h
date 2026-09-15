@@ -6,6 +6,18 @@
 
 #define PJP 80
 
-void AparicionRandomPJP(int** matriz);
+typedef struct{
+    int x;
+    int y;
+}Posicion;
+typedef struct{
+    Posicion pos;
+    int vidas;
+    int alcance_bomba;
+    int esta_vivo;
+}Personaje;
+Personaje* PJ_Princial_CrearPersonaje(int, int, int);
+void PJ_Principal_DestruirPersonaje(Personaje*);
+void PJ_Principal_AparicionRandom(Personaje*, int, int);
 
 #endif // PJ_PRINCIPAL_H_INCLUDED

@@ -1,92 +1,73 @@
 #include "Mapa.h"
 #include "Comunes.h"
 #include "PJ_Principal.h"
-void Mapa()
+Mapa* Mapa_CrearMapa(int filas, int columnas)
 {
-    int** mapa = crearMatriz(FILAS, COLUMNAS);
-    int tecla;
-    rellenarBordes(mapa, FILAS, COLUMNAS);
-
-    rellenarObstaculosPerm(mapa, FILAS, COLUMNAS);
-    AparicionRandomPJP(mapa);
-    do{
-        imprimirMatriz(mapa, FILAS, COLUMNAS);
-        tecla = _getch();
-        system("cls");
-    }while(tecla!= ESC);
-    MenuEjecucion();
-    liberarMatriz(mapa, FILAS);
-}
-int** crearMatriz(int filas, int columnas) {
-    int** matriz = (int**)malloc(filas * sizeof(int*));
-    if (matriz == NULL) {
-        perror("Error al asignar memoria para las filas");
-        exit(EXIT_FAILURE);
+    int i, j;
+    Mapa* m = (Mapa*)malloc(sizeof(Mapa));
+    if(!m)
+        return NULL;
+    m->filas = filas;
+    m->columnas = columnas;
+    m->celdas = (int**)malloc(filas * sizeof(int*));
+    if(!m->celdas)
+    {
+        free(m);
+        return NULL;
     }
-
-    for (int i = 0; i < filas; i++) {
-        matriz[i] = (int*)malloc(columnas * sizeof(int));
-        if (matriz[i] == NULL) {
-            perror("Error al asignar memoria para las columnas");
-            exit(EXIT_FAILURE);
-        }
-        // Inicializa el interior en 0
-        for (int j = 0; j < columnas; j++) {
-            matriz[i][j] = VACIO;
-        }
-    }
-    return matriz;
-}
-
-// Rellena el techo (fila 0), el piso (última fila) y las paredes laterales
-void rellenarBordes(int** matriz, int filas, int columnas) {
-    // Techo (fila 0) y Piso (fila filas - 1)
-    for (int j = 0; j < columnas; j++) {
-        if(j==0 || j == columnas -1)
+    for(i=0; i<filas ; i++)
+    {
+        m->celdas[i] = (int*)malloc(columnas * sizeof(int));
+        if(!m->celdas[i])
         {
-            matriz[0][j] = PARED;
-            matriz[filas - 1][j] = PARED;
+            for(j=0 ; j<i; j--)
+                free(m->celdas[j]);
+            free(m->celdas);
+            free(m);
+        }
+        for(j=0 ; j<columnas ; j++)
+            m->celdas[i][j] = VACIO;
+    }
+    return m;
+}
+void Mapa_DestruirMapa(Mapa *p)
+{
+    int i;
+    if(!p)
+        return;
+    for(i=0 ; i<p->filas; i++)
+        free(p->celdas[i]);
+    free(p->celdas);
+    free(p);
+}
+void Mapa_RellenoObstaculos(Mapa *p)
+{
+    int i, j;
+    for(j=0; j < p->columnas; j++)
+    {
+        if(j == 0 || j == p->columnas - 1)
+        {
+            p->celdas[0][j] = PARED;
+            p->celdas[p->filas - 1][j] = PARED;
         }
         else
         {
-            matriz[0][j] = TECHO;
-            matriz[filas - 1][j] = PISO;
+            p->celdas[0][j] = TECHO;
+            p->celdas[p->filas - 1][j] = PISO;
         }
     }
-
-    // Paredes laterales (columnas 0 y columnas - 1) para las filas intermedias
-    for (int i = 1; i < filas - 1; i++) {
-        matriz[i][0] = PARED;
-        matriz[i][columnas - 1] = PARED;
-    }
-}
-void rellenarObstaculosPerm(int** matriz, int filas, int columnas)
-{
-    for(int i = 2; i < filas -1; i = i +2)
+    for (i = 1; i < p->filas - 1; i++)
     {
-        for(int j= 2; j < columnas -2 ; j= j +2)
-        matriz[i][j] = OBSTACULO;
+        p->celdas[i][0] = PARED;
+        p->celdas[i][p->columnas - 1] = PARED;
     }
-}
-// Imprime la matriz como caracteres extendidos/ASCII o números
-void imprimirMatriz(int** matriz, int filas, int columnas) {
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            if (matriz[i][j] != VACIO) {
-                // Se castea a unsigned char para renderizar los bloques si la consola lo soporta
-                printf("%c", (unsigned char)matriz[i][j]);
-            } else {
-                printf(" ");
-            }
+    for (i = 1; i < p->filas - 1; i++)
+        for (j = 1; j < p->columnas - 2; j++)
+        {
+            if((i % 2 == 0) && (j % 2 == 0))
+                p->celdas[i][j] = OBSTACULO;
+            else
+                if(rand() % 10 < 4)
+                    p->celdas[i][j] = ROMPIBLE;
         }
-        printf("\n");
-    }
-}
-
-// Libera la memoria reservada
-void liberarMatriz(int** matriz, int filas) {
-    for (int i = 0; i < filas; i++) {
-        free(matriz[i]);
-    }
-    free(matriz);
 }
