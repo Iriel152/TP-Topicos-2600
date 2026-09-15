@@ -3,6 +3,7 @@
 
 #define PJ_Principal_DAT "../Archivos/PJ_Principal.dat"
 #include "Comunes.h"
+#include "Mapa.h"
 
 #define PJP 80
 
@@ -18,6 +19,6 @@ typedef struct{
 }Personaje;
 Personaje* PJ_Princial_CrearPersonaje(int, int, int);
 void PJ_Principal_DestruirPersonaje(Personaje*);
-void PJ_Principal_AparicionRandom(Personaje*, int, int);
+void PJ_Principal_AparicionRandom(Mapa*,Personaje*);
 
 #endif // PJ_PRINCIPAL_H_INCLUDED

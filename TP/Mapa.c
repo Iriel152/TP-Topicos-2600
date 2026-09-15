@@ -62,7 +62,7 @@ void Mapa_RellenoObstaculos(Mapa *p)
         p->celdas[i][p->columnas - 1] = PARED;
     }
     for (i = 1; i < p->filas - 1; i++)
-        for (j = 1; j < p->columnas - 2; j++)
+        for (j = 1; j < p->columnas - 1; j++)
         {
             if((i % 2 == 0) && (j % 2 == 0))
                 p->celdas[i][j] = OBSTACULO;

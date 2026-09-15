@@ -58,3 +58,52 @@
 	"Comunes.h"
 	"PJ_Principal.h"
 
+1789480748 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\archivos.c
+	"Archivos.h"
+
+1789480748 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\archivos.h
+	"Mapa.h"
+	"PJ_Principal.h"
+
+1789480748 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\mapa.h
+
+1789482018 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.h
+	"Comunes.h"
+	"Mapa.h"
+
+1789480748 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\comunes.h
+	<time.h>
+	<stdio.h>
+	<stdlib.h>
+
+1789480748 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\comunes.c
+	"Comunes.h"
+
+1789480748 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
+	"Interfaz.h"
+	"Comunes.h"
+	"Mapa.h"
+
+1789480748 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"Mapa.h"
+	"PJ_Principal.h"
+
+1789481972 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\main.c
+	"Interfaz.h"
+	"PJ_Principal.h"
+	"Comunes.h"
+	"Mapa.h"
+
+1789482257 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.c
+	"PJ_Principal.h"
+	"Mapa.h"
+
+1789480846 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\mapa.c
+	"Mapa.h"
+	"Comunes.h"
+	"PJ_Principal.h"
+

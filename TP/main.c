@@ -17,7 +17,7 @@ int main() {
             Mapa_RellenoObstaculos(mapa);
 
             Personaje *jugador = PJ_Princial_CrearPersonaje(1, 1, 3);
-            PJ_Principal_AparicionRandom(jugador, mapa->filas, mapa->columnas);
+            PJ_Principal_AparicionRandom(mapa, jugador);
 
             renderizar(mapa, jugador);
 
