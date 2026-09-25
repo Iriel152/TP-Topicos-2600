@@ -18,5 +18,6 @@ typedef struct{
 }Mapa;
 Mapa* Mapa_CrearMapa(int,  int);
 void Mapa_DestruirMapa(Mapa *);
+void Mapa_RellenoObstaculos(Mapa *p);
 
 #endif // MAPA_H_INCLUDED

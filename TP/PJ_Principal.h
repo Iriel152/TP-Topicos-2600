@@ -20,5 +20,8 @@ typedef struct{
 Personaje* PJ_Princial_CrearPersonaje(int, int, int);
 void PJ_Principal_DestruirPersonaje(Personaje*);
 void PJ_Principal_AparicionRandom(Mapa*,Personaje*);
+void LimpiarLadosPJ(Mapa*,Personaje*);
+void NuevaPosicionPJ(Mapa*,Personaje*,int,int);
+int MovimientoPJ(Mapa*,Personaje*);
 
 #endif // PJ_PRINCIPAL_H_INCLUDED

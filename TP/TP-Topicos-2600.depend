@@ -65,9 +65,9 @@
 	"Mapa.h"
 	"PJ_Principal.h"
 
-1789480748 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\mapa.h
+1790297063 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\mapa.h
 
-1789482018 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.h
+1790300176 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.h
 	"Comunes.h"
 	"Mapa.h"
 
@@ -79,7 +79,7 @@
 1789480748 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\comunes.c
 	"Comunes.h"
 
-1789480748 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
+1790299679 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
 	"Interfaz.h"
 	"Comunes.h"
 	"Mapa.h"
@@ -92,17 +92,17 @@
 	"Mapa.h"
 	"PJ_Principal.h"
 
-1789481972 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\main.c
+1790301415 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\main.c
 	"Interfaz.h"
 	"PJ_Principal.h"
 	"Comunes.h"
 	"Mapa.h"
 
-1789482257 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.c
+1790301381 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.c
 	"PJ_Principal.h"
 	"Mapa.h"
 
-1789480846 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\mapa.c
+1790297324 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\mapa.c
 	"Mapa.h"
 	"Comunes.h"
 	"PJ_Principal.h"
