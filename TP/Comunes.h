@@ -12,6 +12,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct{
+    int x;
+    int y;
+}Posicion;
+
 int EsLetraValida(int LetraEsperada, int LetraRecibida);
 int Tecla_ArribaAbajo(int tecla);
 int ObtenerNumeroAleatorio(int, int);

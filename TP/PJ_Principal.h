@@ -4,18 +4,16 @@
 #define PJ_Principal_DAT "../Archivos/PJ_Principal.dat"
 #include "Comunes.h"
 #include "Mapa.h"
+#include <conio.h>
 
 #define PJP 80
 
-typedef struct{
-    int x;
-    int y;
-}Posicion;
 typedef struct{
     Posicion pos;
     int vidas;
     int alcance_bomba;
     int esta_vivo;
+    float velocidad;
 }Personaje;
 Personaje* PJ_Princial_CrearPersonaje(int, int, int);
 void PJ_Principal_DestruirPersonaje(Personaje*);

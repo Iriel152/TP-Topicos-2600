@@ -14,6 +14,7 @@ Personaje* PJ_Princial_CrearPersonaje(int fila, int col, int vidas)
     p->vidas = vidas;
     p->alcance_bomba = 2;
     p->esta_vivo = 1;
+    p->velocidad = 1;
 
     return p;
 }

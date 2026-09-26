@@ -39,6 +39,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Comunes.h" />
+		<Unit filename="Enemigo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Enemigo.h" />
 		<Unit filename="Interfaz.c">
 			<Option compilerVar="CC" />
 		</Unit>

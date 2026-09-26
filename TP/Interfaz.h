@@ -7,6 +7,7 @@
 #include <conio.h>
 #include "Mapa.h"
 #include "PJ_Principal.h"
+#include "Enemigo.h"
 
 ///FORMATO TEXTO
 #define Titulo "BOMBERMAN"
@@ -29,7 +30,7 @@ void AlinearCentro(const char*, int, const char *, int);
 int SeleccionMenuInicio(int *seleccion, const char *opciones[]);
 void MenuEjecucion();
 int SeleccionMenuPartida(int *seleccion, const char *opciones[]);
-void renderizar(const Mapa *m, const Personaje *p);
+void renderizar(const Mapa *m, const Personaje *p, const Enemigo *e);
 int MostrarMenuPrincipal();
 
 #endif // INTERFAZ_H_INCLUDED

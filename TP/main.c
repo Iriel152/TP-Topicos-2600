@@ -21,16 +21,19 @@ int main() {
             PJ_Principal_AparicionRandom(mapa, jugador);
             LimpiarLadosPJ(mapa, jugador);
 
+            Enemigo *enemigo  = Enemigo_Crear(1,1);
+            Enemigo_AparicionRandom(mapa, enemigo);
+
             while(seguir)
             {
+                renderizar(mapa, jugador, enemigo);
                 seguir = MovimientoPJ(mapa, jugador);
-                renderizar(mapa, jugador);
-                system("cls");
             }
 
 
             // Al salir de la partida, liberamos la memoria limpia
             PJ_Principal_DestruirPersonaje(jugador);
+            Enemigo_Destruir(enemigo);
             Mapa_DestruirMapa(mapa);
             seguir = 1;
         }
@@ -38,9 +41,10 @@ int main() {
             // Cargar partida desde archivo binario
             Mapa *mapa = NULL;
             Personaje *jugador = NULL;
+            Enemigo *enemigo = NULL;
 
             if (partida_cargar_binario(RUTA_SAVE, &mapa, &jugador) == TODOOK) {
-                renderizar(mapa, jugador);
+                renderizar(mapa, jugador, enemigo);
                 PJ_Principal_DestruirPersonaje(jugador);
                 Mapa_DestruirMapa(mapa);
             } else {

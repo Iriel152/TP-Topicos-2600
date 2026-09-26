@@ -83,15 +83,18 @@ void AlinearCentro(const char* palabra, int total, const char* color, int selec)
 //        ejecutando=SeleccionMenuPartida(&seleccion, opciones);
 //    }
 //}
-void renderizar(const Mapa *m, const Personaje *p)
+void renderizar(const Mapa *m, const Personaje *p, const Enemigo *e)
 {
     int i, j;
+    printf("\033[H");
     for (i = 0; i < m->filas; i++)
     {
         for (j = 0; j < m->columnas; j++)
         {
             if (p != NULL && p->pos.x == i && p->pos.y == j)
                 printf("%c",PJP);
+            else if(e != NULL && e->pos.x == i && e->pos.y == j)
+                printf("%c",ENEMIGO_VISUAL);
             else if (m->celdas[i][j] != VACIO)
                 printf("%c",m->celdas[i][j]);
             else
@@ -99,5 +102,5 @@ void renderizar(const Mapa *m, const Personaje *p)
         }
         printf("\n");
     }
-    system("pause");
+    fflush(stdout);
 }
