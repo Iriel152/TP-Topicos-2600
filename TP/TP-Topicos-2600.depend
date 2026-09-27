@@ -117,3 +117,61 @@
 	"Comunes.h"
 	"Mapa.h"
 
+1790290626 source:c:\users\admin\documents\github\tp-topicos-2600\tp\archivos.c
+	"Archivos.h"
+
+1790290626 c:\users\admin\documents\github\tp-topicos-2600\tp\archivos.h
+	"Mapa.h"
+	"PJ_Principal.h"
+
+1790375925 c:\users\admin\documents\github\tp-topicos-2600\tp\mapa.h
+
+1790461484 c:\users\admin\documents\github\tp-topicos-2600\tp\pj_principal.h
+	"Comunes.h"
+	"Mapa.h"
+	<conio.h>
+
+1790461483 c:\users\admin\documents\github\tp-topicos-2600\tp\comunes.h
+	<time.h>
+	<stdio.h>
+	<stdlib.h>
+
+1790290626 source:c:\users\admin\documents\github\tp-topicos-2600\tp\comunes.c
+	"Comunes.h"
+
+1790290626 source:c:\users\admin\documents\github\tp-topicos-2600\tp\mapa.c
+	"Mapa.h"
+	"Comunes.h"
+	"PJ_Principal.h"
+
+1790461483 source:c:\users\admin\documents\github\tp-topicos-2600\tp\enemigo.c
+	"Enemigo.h"
+
+1790461483 c:\users\admin\documents\github\tp-topicos-2600\tp\enemigo.h
+	"Comunes.h"
+	"Mapa.h"
+
+1790461483 source:c:\users\admin\documents\github\tp-topicos-2600\tp\interfaz.c
+	"Interfaz.h"
+	"Comunes.h"
+	"Mapa.h"
+
+1790461483 c:\users\admin\documents\github\tp-topicos-2600\tp\interfaz.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"Mapa.h"
+	"PJ_Principal.h"
+	"Enemigo.h"
+
+1790461484 source:c:\users\admin\documents\github\tp-topicos-2600\tp\main.c
+	"Interfaz.h"
+	"PJ_Principal.h"
+	"Comunes.h"
+	"Mapa.h"
+
+1790461483 source:c:\users\admin\documents\github\tp-topicos-2600\tp\pj_principal.c
+	"PJ_Principal.h"
+	"Mapa.h"
+
