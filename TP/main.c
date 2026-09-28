@@ -2,6 +2,10 @@
 #include "PJ_Principal.h"
 #include "Comunes.h"
 #include "Mapa.h"
+#include "Enemigo.h"
+#include "Bomba.h"
+#include "Archivos.h"
+
 int main() {
     int opcion = 0;
     int salir = 0;
@@ -21,17 +25,21 @@ int main() {
             PJ_Principal_AparicionRandom(mapa, jugador);
             LimpiarLadosPJ(mapa, jugador);
 
+            vBombas *bombas = crear_vec_bombs();
+
             Enemigo *enemigo  = Enemigo_Crear(1,1);
             Enemigo_AparicionRandom(mapa, enemigo);
 
             while(seguir)
             {
+                system("cls");
                 renderizar(mapa, jugador, enemigo);
-                seguir = MovimientoPJ(mapa, jugador);
+                seguir = MovimientoPJ(mapa, jugador, bombas);
             }
 
 
             // Al salir de la partida, liberamos la memoria limpia
+            free_vec_bombs(bombas);
             PJ_Principal_DestruirPersonaje(jugador);
             Enemigo_Destruir(enemigo);
             Mapa_DestruirMapa(mapa);

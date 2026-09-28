@@ -15,11 +15,14 @@ typedef struct{
     int esta_vivo;
     float velocidad;
 }Personaje;
+
+typedef struct vBombas vBombas;
+
 Personaje* PJ_Princial_CrearPersonaje(int, int, int);
 void PJ_Principal_DestruirPersonaje(Personaje*);
 void PJ_Principal_AparicionRandom(Mapa*,Personaje*);
 void LimpiarLadosPJ(Mapa*,Personaje*);
-void NuevaPosicionPJ(Mapa*,Personaje*,int,int);
-int MovimientoPJ(Mapa*,Personaje*);
+void NuevaPosicionPJ(Mapa*,Personaje*,int,int, vBombas*);
+int MovimientoPJ(Mapa*,Personaje*,vBombas*);
 
 #endif // PJ_PRINCIPAL_H_INCLUDED

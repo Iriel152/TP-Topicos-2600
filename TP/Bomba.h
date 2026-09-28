@@ -5,17 +5,19 @@
 #include "Mapa.h"
 #include "PJ_Principal.h"
 
-#define MAX_BOMBAS 8
-#define TIMER_BOMBA 3      // se desactiva tras 3 turnos del jugador
+
+#define MAX_BOMBAS 2
+#define TIMER_BOMBA 5      // se desactiva tras 3 turnos del jugador
 #define SIMBOLO_BOMBA 254  // simbolito bomba  ■
 
-typedef struct {
+
+typedef struct Bomba{
     Posicion pos;
     int activa;
     int turnos_restantes;
 } Bomba;
 
-typedef struct {
+typedef struct vBombas{
     Bomba bombas[MAX_BOMBAS];
 } vBombas;
 
@@ -25,6 +27,6 @@ void inicializar_vec_bombs(vBombas *vbomb);
 
 int  bomba_poner(vBombas *vbomb, Mapa *m, Personaje *p);
 int  hay_bomba(const vBombas *vbomb, int x, int y);
-void actualizar_bomba(vBombas *vbomb, int x_actual, int y_actual);
+void actualizar_bomba(vBombas *vbomb, Mapa *m, int x_actual, int y_actual);
 
 #endif // BOMBA_H_INCLUDED

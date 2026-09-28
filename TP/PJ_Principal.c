@@ -1,5 +1,6 @@
 #include "PJ_Principal.h"
 #include "Mapa.h"
+#include "Bomba.h"
 #define SEGUIR 1
 #define SALIR 0
 #define AMAYUSCULA(X) ((X) >= 'a' && (X) <= 'z') ? (X) - 32 : (X)
@@ -76,7 +77,7 @@ void LimpiarLadosPJ(Mapa *m, Personaje *p)
     }
 }
 
-void NuevaPosicionPJ(Mapa *m, Personaje *p, int NuevaPosX, int NuevaPosY)
+void NuevaPosicionPJ(Mapa *m, Personaje *p, int NuevaPosX, int NuevaPosY, vBombas *vbombs)
 {
     if(m->celdas[NuevaPosX][NuevaPosY] == VACIO)
     {
@@ -85,19 +86,25 @@ void NuevaPosicionPJ(Mapa *m, Personaje *p, int NuevaPosX, int NuevaPosY)
     }
 }
 
-int MovimientoPJ(Mapa *m, Personaje *p)
+int MovimientoPJ(Mapa *m, Personaje *p, vBombas *vbomb)
 {
     char tecla = _getch();
+    int hay_mov = 0;
 
     tecla = AMAYUSCULA(tecla);
 
     switch(tecla)
     {
-        case 'W': NuevaPosicionPJ(m,p,p->pos.x-1,p->pos.y); return SEGUIR; break;
-        case 'S': NuevaPosicionPJ(m,p,p->pos.x+1,p->pos.y); return SEGUIR; break;
-        case 'A': NuevaPosicionPJ(m,p,p->pos.x,p->pos.y-1); return SEGUIR; break;
-        case 'D': NuevaPosicionPJ(m,p,p->pos.x,p->pos.y+1); return SEGUIR; break;
+        case 'W': NuevaPosicionPJ(m,p,p->pos.x-1,p->pos.y, vbomb); hay_mov = 1; break;
+        case 'S': NuevaPosicionPJ(m,p,p->pos.x+1,p->pos.y, vbomb); hay_mov = 1; break;
+        case 'A': NuevaPosicionPJ(m,p,p->pos.x,p->pos.y-1, vbomb); hay_mov = 1; break;
+        case 'D': NuevaPosicionPJ(m,p,p->pos.x,p->pos.y+1, vbomb); hay_mov = 1; break;
+        case 'B': bomba_poner(vbomb,m,p); hay_mov = 0; break;
         case 27: return SALIR; break;
         default: return SEGUIR; break;
     }
+    if (hay_mov)
+        actualizar_bomba(vbomb, m, p->pos.x, p->pos.y);
+
+    return SEGUIR;
 }
