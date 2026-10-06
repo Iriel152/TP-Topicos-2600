@@ -29,9 +29,9 @@ vBombas* crear_vec_bombs();
 void free_vec_bombs(vBombas *vbomb);
 int inicializar_vec_bombs(vBombas *vbomb);
 int insertar_bomba(vBombas*vbomb);
-int  bomba_poner(vBombas *vbomb, Mapa *m, Personaje *p);
+int  bomba_poner(vBombas *vbomb, tMapa *m, Personaje *p);
 int  hay_bomba(const vBombas *vbomb, int x, int y);
-void actualizar_bomba(vBombas *vbomb, Mapa *m);
-void explotar_bomba(Mapa *m, int x, int y, int rango);
+void actualizar_bomba(vBombas *vbomb, tMapa *m);
+void explotar_bomba(tMapa *m, int x, int y, int rango);
 
 #endif // BOMBA_H_INCLUDED

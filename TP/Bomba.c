@@ -54,7 +54,7 @@ int insertar_bomba(vBombas*vbomb)
 int inicializar_vec_bombs(vBombas *vbomb)
 {
     if(!vbomb)
-        return NULL;
+        return ERROR_MEMORIA;
 
     vbomb->rango=1;
     if(insertar_bomba(vbomb) != TODOOK)
@@ -84,7 +84,7 @@ int hay_bomba(const vBombas *vbomb, int x, int y)
 }
 
 
-int bomba_poner(vBombas*vbomb, Mapa *m, Personaje *p)
+int bomba_poner(vBombas*vbomb, tMapa *m, Personaje *p)
 {
     int i;
     Bomba *pivot;
@@ -116,7 +116,7 @@ int bomba_poner(vBombas*vbomb, Mapa *m, Personaje *p)
 
 //FUNCION PARA QUE EL TIMER DE LA BOMBA DECREMENTE A LAP AR QUE EL JUGADOR INTENTE MOVERSE NO LIMPIA DEL MAPA LA BOMBA
 //FALTA FUNCION BORRAR BOMBA LO TENGO AHI TODO METIDO. EN EL MOMENTO Q BORRA LA BOMBA EPLOTA
-void actualizar_bomba(vBombas *vbomb, Mapa *m)
+void actualizar_bomba(vBombas *vbomb, tMapa *m)
 {
     int i;
     Bomba *pivot;
@@ -136,7 +136,7 @@ void actualizar_bomba(vBombas *vbomb, Mapa *m)
             {
                 m->celdas[pivot->pos.x][pivot->pos.y] = VACIO;
 
-                //explotar_bomba
+//                explotar_bomba(m, vbomb->bombas.pos.x , vbomb->bombas.pos.y, vbomb->rango);
 
                 pivot->activa = 0;
                 pivot->pos.x = -1;
@@ -147,4 +147,33 @@ void actualizar_bomba(vBombas *vbomb, Mapa *m)
     }
 }
 
-
+//void explotar_bomba(Mapa *m, int x, int y, int rango)
+//{
+//    int i, j, aux_x, aux_y;
+//    int dx[] = {-1,1,0,0};
+//    int dy[] = {0,0,-1,1};
+//    pivot
+//    for (i = 0 ; i < 4 ; i++)
+//    {
+//        for (j=1 ; j <= rango ; j++)
+//        {
+//            aux_x = x + (j * dx[i]);
+//            aux_y = y + (j * dy[i]);
+//
+//            if (aux_x < 0 || aux_x >= m->filas || aux_y < 0 || aux_y >= m->columnas)
+//                break;
+//
+//            if (m->celdas[aux_x][aux_y] == OBSTACULO || m->celdas[aux_x][aux_y] == PARED)
+//                break;
+//            if (m->celdas[aux_x][aux_y] == ROMPIBLE)
+//            {
+//                m->celdas[aux_x][aux_y] = VACIO;
+//                break;
+//            }
+//
+//
+//        }
+//
+//    }
+//
+//}

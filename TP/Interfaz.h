@@ -34,7 +34,7 @@ void AlinearCentro(const char*, int, const char *, int);
 int SeleccionMenuInicio(int *seleccion, const char *opciones[]);
 void MenuEjecucion();
 int SeleccionMenuPartida(int *seleccion, const char *opciones[]);
-void renderizar(const Mapa *m, const Personaje *p, const Enemigo *e);
+void renderizar(const tMapa *m/*, const Personaje *p, const Enemigo *e*/);
 int MostrarMenuPrincipal();
 
 #endif // INTERFAZ_H_INCLUDED

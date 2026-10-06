@@ -29,9 +29,9 @@ typedef struct vBombas vBombas;
 
 Personaje* PJ_Princial_CrearPersonaje(int, int, int);
 void PJ_Principal_DestruirPersonaje(Personaje*);
-void PJ_Principal_AparicionRandom(Mapa*,Personaje*);
-void LimpiarLadosPJ(Mapa*,Personaje*);
-void NuevaPosicionPJ(Mapa*,Personaje*,int,int, vBombas*);
-int MovimientoPJ(Mapa*,Personaje*,vBombas*);
+void PJ_Principal_AparicionRandom(tMapa*,Personaje*);
+void LimpiarLadosPJ(tMapa*,Personaje*);
+void NuevaPosicionPJ(tMapa*,Personaje*,int,int, vBombas*);
+int MovimientoPJ(tMapa*,Personaje*,vBombas*);
 
 #endif // PJ_PRINCIPAL_H_INCLUDED

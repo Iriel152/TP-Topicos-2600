@@ -18,7 +18,7 @@ void PJ_Principal_DestruirPersonaje(Personaje *p)
     if(p)
         free(p);
 }
-void PJ_Principal_AparicionRandom(Mapa *m, Personaje *p)
+void PJ_Principal_AparicionRandom(tMapa *m, Personaje *p)
 {
     int esquina = ObtenerNumeroAleatorio(1,4);
     if(!p)
@@ -44,7 +44,7 @@ void PJ_Principal_AparicionRandom(Mapa *m, Personaje *p)
     }
 }
 
-void LimpiarLadosPJ(Mapa *m, Personaje *p)
+void LimpiarLadosPJ(tMapa *m, Personaje *p)
 {
     int* arriba = &m->celdas[p->pos.x-1][p->pos.y];
     int* abajo = &m->celdas[p->pos.x+1][p->pos.y];
@@ -71,7 +71,7 @@ void LimpiarLadosPJ(Mapa *m, Personaje *p)
     }
 }
 
-void NuevaPosicionPJ(Mapa *m, Personaje *p, int NuevaPosX, int NuevaPosY, vBombas *vbombs)
+void NuevaPosicionPJ(tMapa *m, Personaje *p, int NuevaPosX, int NuevaPosY, vBombas *vbombs)
 {
     if(m->celdas[NuevaPosX][NuevaPosY] == VACIO)
     {
@@ -80,25 +80,25 @@ void NuevaPosicionPJ(Mapa *m, Personaje *p, int NuevaPosX, int NuevaPosY, vBomba
     }
 }
 
-int MovimientoPJ(Mapa *m, Personaje *p, vBombas *vbomb)
+int MovimientoPJ(tMapa *m, Personaje *p, vBombas *vbomb)
 {
     char tecla = _getch();
-    int hay_mov = 0;
+//    int hay_mov = 0;
 
     tecla = AMAYUSCULA(tecla);
 
     switch(tecla)
     {
-        case 'W': NuevaPosicionPJ(m,p,p->pos.x-1,p->pos.y, vbomb); hay_mov = 1; break;
-        case 'S': NuevaPosicionPJ(m,p,p->pos.x+1,p->pos.y, vbomb); hay_mov = 1; break;
-        case 'A': NuevaPosicionPJ(m,p,p->pos.x,p->pos.y-1, vbomb); hay_mov = 1; break;
-        case 'D': NuevaPosicionPJ(m,p,p->pos.x,p->pos.y+1, vbomb); hay_mov = 1; break;
-        case 'B': bomba_poner(vbomb,m,p); hay_mov = 1; break;
+        case 'W': NuevaPosicionPJ(m,p,p->pos.x-1,p->pos.y, vbomb); /*hay_mov = 1*/; break;
+        case 'S': NuevaPosicionPJ(m,p,p->pos.x+1,p->pos.y, vbomb); /*hay_mov = 1*/; break;
+        case 'A': NuevaPosicionPJ(m,p,p->pos.x,p->pos.y-1, vbomb); /*hay_mov = 1*/; break;
+        case 'D': NuevaPosicionPJ(m,p,p->pos.x,p->pos.y+1, vbomb); /*hay_mov = 1*/; break;
+//        case 'B': bomba_poner(vbomb,m,p); hay_mov = 1; break;
         case 27: return SALIR; break;
         default: return SEGUIR; break;
     }
-    if (hay_mov)
-        actualizar_bomba(vbomb,m);
+//    if (hay_mov)
+//        actualizar_bomba(vbomb,m);
 
     return SEGUIR;
 }
