@@ -1,4 +1,5 @@
 #include "Bomba.h"
+
 vBombas* crear_vec_bombs()
 {
     vBombas *vbomb = (vBombas*)malloc(sizeof(vBombas));
@@ -136,7 +137,7 @@ void actualizar_bomba(vBombas *vbomb, Mapa *m)
             {
                 m->celdas[pivot->pos.x][pivot->pos.y] = VACIO;
 
-                //explotar_bomba
+                explotar_bomba(m,pivot->pos.x,pivot->pos.y,vbomb->rango);
 
                 pivot->activa = 0;
                 pivot->pos.x = -1;
@@ -147,4 +148,32 @@ void actualizar_bomba(vBombas *vbomb, Mapa *m)
     }
 }
 
+
+void explotar_bomba(Mapa *m, int x, int y, int rango)
+{
+    int i, j, aux_x, aux_y;
+    int dir_x[] = {-1,1,0,0};
+    int dir_y[] = {0,0,-1,1};
+
+    for (i=0 ; i<4 ; i++)
+    {
+        for(j=1; j<=rango; j++)
+        {
+            aux_x = x + (j * dir_x[i]);
+            aux_y = y + (j * dir_y[i]);
+            if(aux_x < 0 || aux_y < 0 || aux_x >= m->filas || aux_y >= m->columnas) //chequeamos bordes
+                break;             // no me gusta usar break, le voy a preguntar. Si lo tengo q hacer con bandera
+            if(m->celdas[aux_x][aux_y] == PARED || m->celdas[aux_x][aux_y] == OBSTACULO)
+                break;
+            if(m->celdas[aux_x][aux_y] == ROMPIBLE)
+            {
+                m->celdas[aux_x][aux_y] = VACIO;
+                break;
+            }
+            /*if(m->celdas[aux_x][aux_y] == VACIO)
+                m->celdas[aux_x][aux_y] = '#';*/ //esto es como muestra, el tema es q no borra la estela.
+        }
+
+    }
+}
 
