@@ -1,13 +1,17 @@
 #ifndef INTERFAZ_H_INCLUDED
 #define INTERFAZ_H_INCLUDED
 
+///.h
+#include "Mapa.h"
+#include "PJ_Principal.h"
+#include "Enemigo.h"
+
+
+///BIBLIOTECAS
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
-#include "Mapa.h"
-#include "PJ_Principal.h"
-#include "Enemigo.h"
 
 ///FORMATO TEXTO
 #define Titulo "BOMBERMAN"

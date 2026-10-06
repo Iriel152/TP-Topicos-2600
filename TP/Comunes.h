@@ -1,6 +1,12 @@
 #ifndef COMUNES_H_INCLUDED
 #define COMUNES_H_INCLUDED
 
+///BIBLIOTECAS
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+///DEFINE
 #define ERROR_MEMORIA -1
 #define TODOOK    0
 #define ERROR_ -2
@@ -8,10 +14,7 @@
 #define ENCONTRADO 1
 #define NO_ENCONTRADO 0
 
-#include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
-
+///ESTRUCTURAS
 typedef struct{
     int x;
     int y;

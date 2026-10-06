@@ -6,17 +6,18 @@
 #include "Bomba.h"
 #include "Archivos.h"
 
-int main() {
-    int opcion = 0;
-    int salir = 0;
-    int seguir = 1;
+int main()
+{
+    int opcion = 0, salir = 0, seguir = 1;
 
     srand((unsigned int)time(NULL));
 
-    while (!salir) {
+    while (!salir)
+    {
         opcion = MostrarMenuPrincipal(); // Retorna 0: Nueva, 1: Cargar, 2: Salir
 
-        if (opcion == 0) {
+        if (opcion == 0)
+        {
             // Nueva partida
             Mapa *mapa = Mapa_CrearMapa(FILAS, COLUMNAS);
             Mapa_RellenoObstaculos(mapa);
@@ -51,25 +52,29 @@ int main() {
             Mapa_DestruirMapa(mapa);
             seguir = 1;
         }
-        else if (opcion == 1) {
+        else if (opcion == 1)
+        {
             // Cargar partida desde archivo binario
             Mapa *mapa = NULL;
             Personaje *jugador = NULL;
             Enemigo *enemigo = NULL;
 
-            if (partida_cargar_binario(RUTA_SAVE, &mapa, &jugador) == TODOOK) {
+            if (partida_cargar_binario(RUTA_SAVE, &mapa, &jugador) == TODOOK)
+            {
                 renderizar(mapa, jugador, enemigo);
                 PJ_Principal_DestruirPersonaje(jugador);
                 Mapa_DestruirMapa(mapa);
-            } else {
+            }
+            else
+            {
                 printf("\nNo se pudo cargar la partida guardada.\n");
                 _getch();
             }
         }
-        else if (opcion == 2) {
+        else if (opcion == 2)
+        {
             salir = 1;
         }
     }
-
     return 0;
 }

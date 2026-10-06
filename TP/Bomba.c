@@ -1,5 +1,4 @@
 #include "Bomba.h"
-
 vBombas* crear_vec_bombs()
 {
     vBombas *vbomb = (vBombas*)malloc(sizeof(vBombas));

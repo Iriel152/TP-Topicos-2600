@@ -1,10 +1,4 @@
 #include "PJ_Principal.h"
-#include "Mapa.h"
-#include "Bomba.h"
-#define SEGUIR 1
-#define SALIR 0
-#define AMAYUSCULA(X) ((X) >= 'a' && (X) <= 'z') ? (X) - 32 : (X)
-
 Personaje* PJ_Princial_CrearPersonaje(int fila, int col, int vidas)
 {
     Personaje *p = (Personaje*)malloc(sizeof(Personaje));
