@@ -15,7 +15,7 @@ typedef struct
 
 Enemigo* Enemigo_Crear(int fila, int columna); //crea enemigo
 void Enemigo_Destruir(Enemigo*); //libera memoria
-void Enemigo_Mover(Mapa*, Enemigo*); //intenta moverse
-void Enemigo_AparicionRandom(Mapa*, Enemigo*);//aparicion random
+void Enemigo_Mover(tMapa*, Enemigo*); //intenta moverse
+void Enemigo_AparicionRandom(tMapa*, Enemigo*);//aparicion random
 
 #endif // ENEMIGO_H_INCLUDED

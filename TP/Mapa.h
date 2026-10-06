@@ -20,10 +20,10 @@ typedef struct{
     int filas;
     int columnas;
     int **celdas;
-}Mapa;
+}tMapa;
 
-Mapa* Mapa_CrearMapa(int,  int);
-void Mapa_DestruirMapa(Mapa *);
-void Mapa_RellenoObstaculos(Mapa *p);
+tMapa* Mapa_CrearMapa(int,  int);
+void Mapa_DestruirMapa(tMapa *);
+void Mapa_RellenoObstaculos(tMapa *p);
 
 #endif // MAPA_H_INCLUDED

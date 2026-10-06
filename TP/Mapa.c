@@ -1,8 +1,8 @@
 #include "Mapa.h"
-Mapa* Mapa_CrearMapa(int filas, int columnas)
+tMapa* Mapa_CrearMapa(int filas, int columnas)
 {
     int i, j;
-    Mapa* m = (Mapa*)malloc(sizeof(Mapa));
+    tMapa* m = (tMapa*)malloc(sizeof(tMapa));
     if(!m)
         return NULL;
     m->filas = filas;
@@ -28,7 +28,7 @@ Mapa* Mapa_CrearMapa(int filas, int columnas)
     }
     return m;
 }
-void Mapa_DestruirMapa(Mapa *p)
+void Mapa_DestruirMapa(tMapa *p)
 {
     int i;
     if(!p)
@@ -38,7 +38,7 @@ void Mapa_DestruirMapa(Mapa *p)
     free(p->celdas);
     free(p);
 }
-void Mapa_RellenoObstaculos(Mapa *p)
+void Mapa_RellenoObstaculos(tMapa *p)
 {
     int i, j;
     for(j=0; j < p->columnas; j++)

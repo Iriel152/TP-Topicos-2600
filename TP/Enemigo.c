@@ -19,7 +19,7 @@ void Enemigo_Destruir(Enemigo *e)
         free(e);
 }
 
-void Enemigo_AparicionRandom(Mapa *m, Enemigo *e) //hay que mejorarla para que no se posicione encima de otro enemigo/del jugador
+void Enemigo_AparicionRandom(tMapa *m, Enemigo *e) //hay que mejorarla para que no se posicione encima de otro enemigo/del jugador
 {
     int fila;
     int columna;
