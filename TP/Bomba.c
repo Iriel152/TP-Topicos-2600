@@ -5,98 +5,146 @@ vBombas* crear_vec_bombs()
     vBombas *vbomb = (vBombas*)malloc(sizeof(vBombas));
     if (!vbomb)
         return NULL;
-    inicializar_vec_bombs(vbomb);
+    vbomb->bombas = (Bomba*)malloc(sizeof(Bomba)*MAX_BOMBAS);
+    if (!vbomb->bombas)
+    {
+        free(vbomb);
+        return NULL;
+    }
+
+    vbomb->ce=0;
+    vbomb->tam=MAX_BOMBAS;
+
+    if(inicializar_vec_bombs(vbomb)!= TODOOK)
+    {
+        free_vec_bombs(vbomb);
+        return NULL;
+    }
+
     return vbomb;
 }
 
 void free_vec_bombs(vBombas *vbomb)
 {
     if(vbomb != NULL)
-        free(vbomb);
+        {
+            if(vbomb->bombas != NULL)
+                free(vbomb->bombas);
+            free(vbomb);
+        }
 }
 
-void inicializar_vec_bombs(vBombas *vbomb)
+int insertar_bomba(vBombas*vbomb)
 {
-    int i=0;
+    Bomba b;
+
+    if(!vbomb || vbomb->ce >= vbomb->tam)
+        return ERROR_;
+
+    b.activa = 0;
+    b.pos.x = -1;
+    b.pos.y = -1;
+    b.turnos_restantes = 0;
+
+    *(vbomb->bombas + vbomb->ce) = b;
+    vbomb->ce++;
+
+    return TODOOK;
+}
+
+int inicializar_vec_bombs(vBombas *vbomb)
+{
     if(!vbomb)
         return NULL;
-    for(i=0;i<MAX_BOMBAS; i++)
-    {
-        vbomb->bombas[i].activa=0;
-        vbomb->bombas[i].turnos_restantes=0;
-        vbomb->bombas[i].pos.x = -1;
-        vbomb->bombas[i].pos.y = -1;
-    }
+
+    vbomb->rango=1;
+    if(insertar_bomba(vbomb) != TODOOK)
+       return ERROR_;
+    return TODOOK;
 }
 
 //chequea si hay bomba xd
 
 int hay_bomba(const vBombas *vbomb, int x, int y)
 {
-    int i=0;
+    int i;
+    Bomba *pivot;
+
     if(!vbomb)
-        return NULL;
-    for(i=0 ; i < MAX_BOMBAS ; i++)
+        return ERROR_;
+
+    pivot = vbomb->bombas;
+
+    for(i=0 ; i < vbomb->ce ; i++)
     {
-        if(vbomb->bombas[i].activa && vbomb->bombas[i].pos.x == x && vbomb->bombas[i].pos.y == y)
+        if(pivot->activa == 1 && pivot->pos.x == x && pivot->pos.y == y) // es lo mismo pivot->activa y pivot->activa == 1
             return ENCONTRADO;
+        pivot++;
     }
     return NO_ENCONTRADO;
 }
 
+
 int bomba_poner(vBombas*vbomb, Mapa *m, Personaje *p)
 {
     int i;
-    if(!vbomb || !m || !p)
-        return NULL;
-    if(hay_bomba(vbomb, p->pos.x , p->pos.y))
-        return NULL;
+    Bomba *pivot;
 
-    for (i = 0; i < MAX_BOMBAS; i++)
+    if(!vbomb || !m || !p)
+        return ERROR_;
+
+    if(hay_bomba(vbomb, p->pos.x , p->pos.y) == ENCONTRADO)
+        return ERROR_;
+
+    pivot = vbomb->bombas;
+
+    for (i = 0; i < vbomb->ce; i++)
     {
-        if(!vbomb->bombas[i].activa) //TODAVÍA NO ESTOY PONDERANDO LA CANT DE BOMBAS DEL PJ
+        if(!pivot->activa)
         {
-            vbomb->bombas[i].activa = 1;
-            vbomb->bombas[i].pos.x = p->pos.x;
-            vbomb->bombas[i].pos.y = p->pos.y;
-            vbomb->bombas[i].turnos_restantes = TIMER_BOMBA;
+            pivot->activa = 1;
+            pivot->pos.x = p->pos.x;
+            pivot->pos.y = p->pos.y;
+            pivot->turnos_restantes = TIMER_BOMBA;
             m->celdas[p->pos.x][p->pos.y] = SIMBOLO_BOMBA;
             return TODOOK;
         }
+        pivot++;
     }
-    return NULL;
+    return ERROR_;
 
 }
 
 //FUNCION PARA QUE EL TIMER DE LA BOMBA DECREMENTE A LAP AR QUE EL JUGADOR INTENTE MOVERSE NO LIMPIA DEL MAPA LA BOMBA
-
-void actualizar_bomba(vBombas *vbomb, Mapa *m, int x_actual, int y_actual)
+//FALTA FUNCION BORRAR BOMBA LO TENGO AHI TODO METIDO. EN EL MOMENTO Q BORRA LA BOMBA EPLOTA
+void actualizar_bomba(vBombas *vbomb, Mapa *m)
 {
-    int i, bomb_x, bomb_y;
+    int i;
+    Bomba *pivot;
+
     if (!vbomb || !m)
         return;
-    for(i=0 ; i<MAX_BOMBAS ; i++)
+
+    pivot = vbomb->bombas;
+
+    for(i=0 ; i<vbomb->ce; i++)
     {
-        if(vbomb->bombas[i].activa != 1)
-            continue;
-        vbomb->bombas[i].turnos_restantes--;
-
-        if(vbomb->bombas[i].turnos_restantes <= 0)
+        if(pivot->activa)
         {
-            bomb_x = vbomb->bombas[i].pos.x;
-            bomb_y = vbomb->bombas[i].pos.y;
+            vbomb->bombas[i].turnos_restantes--;
 
-            if(bomb_x >= 0 && bomb_y >= 0 && m->celdas[bomb_x][bomb_y] == SIMBOLO_BOMBA)
+            if(vbomb->bombas[i].turnos_restantes <= 0)
             {
-                m->celdas[bomb_x][bomb_y] = VACIO;
+                m->celdas[pivot->pos.x][pivot->pos.y] = VACIO;
+
+                //explotar_bomba
+
+                pivot->activa = 0;
+                pivot->pos.x = -1;
+                pivot->pos.y = -1;
             }
-
-            vbomb->bombas[i].activa = 0;
-            vbomb->bombas[i].turnos_restantes = 0;
-            vbomb->bombas[i].pos.x = -1;
-            vbomb->bombas[i].pos.y = -1;
+            pivot++;
         }
-
     }
 }
 

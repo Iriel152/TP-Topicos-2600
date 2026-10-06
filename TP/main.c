@@ -26,6 +26,12 @@ int main() {
             LimpiarLadosPJ(mapa, jugador);
 
             vBombas *bombas = crear_vec_bombs();
+            if(!bombas)
+            {
+                PJ_Principal_DestruirPersonaje(jugador);
+                Mapa_DestruirMapa(mapa);
+                continue;
+            }
 
             Enemigo *enemigo  = Enemigo_Crear(1,1);
             Enemigo_AparicionRandom(mapa, enemigo);

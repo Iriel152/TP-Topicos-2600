@@ -99,12 +99,12 @@ int MovimientoPJ(Mapa *m, Personaje *p, vBombas *vbomb)
         case 'S': NuevaPosicionPJ(m,p,p->pos.x+1,p->pos.y, vbomb); hay_mov = 1; break;
         case 'A': NuevaPosicionPJ(m,p,p->pos.x,p->pos.y-1, vbomb); hay_mov = 1; break;
         case 'D': NuevaPosicionPJ(m,p,p->pos.x,p->pos.y+1, vbomb); hay_mov = 1; break;
-        case 'B': bomba_poner(vbomb,m,p); hay_mov = 0; break;
+        case 'B': bomba_poner(vbomb,m,p); hay_mov = 1; break;
         case 27: return SALIR; break;
         default: return SEGUIR; break;
     }
     if (hay_mov)
-        actualizar_bomba(vbomb, m, p->pos.x, p->pos.y);
+        actualizar_bomba(vbomb,m);
 
     return SEGUIR;
 }

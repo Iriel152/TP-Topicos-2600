@@ -18,15 +18,19 @@ typedef struct Bomba{
 } Bomba;
 
 typedef struct vBombas{
-    Bomba bombas[MAX_BOMBAS];
+    Bomba *bombas;
+    int ce;
+    int tam;
+    int rango;
 } vBombas;
 
 vBombas* crear_vec_bombs();
 void free_vec_bombs(vBombas *vbomb);
-void inicializar_vec_bombs(vBombas *vbomb);
-
+int inicializar_vec_bombs(vBombas *vbomb);
+int insertar_bomba(vBombas*vbomb);
 int  bomba_poner(vBombas *vbomb, Mapa *m, Personaje *p);
 int  hay_bomba(const vBombas *vbomb, int x, int y);
-void actualizar_bomba(vBombas *vbomb, Mapa *m, int x_actual, int y_actual);
+void actualizar_bomba(vBombas *vbomb, Mapa *m);
+void explotar_bomba(Mapa *m, int x, int y, int rango);
 
 #endif // BOMBA_H_INCLUDED
