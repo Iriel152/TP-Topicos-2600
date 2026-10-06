@@ -10,56 +10,55 @@
 1787195559 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp-topicos\tp\interfaz.c
 	"Interfaz.h"
 
-1790452465 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
+1791258703 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
 	"Interfaz.h"
-	"Comunes.h"
-	"Mapa.h"
 
-1790452487 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.h
+1791258308 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.h
+	"Mapa.h"
+	"PJ_Principal.h"
+	"Enemigo.h"
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<conio.h>
-	"Mapa.h"
-	"PJ_Principal.h"
-	"Enemigo.h"
 
-1790451803 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.c
+1791258308 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.c
 	"PJ_Principal.h"
-	"Mapa.h"
 
-1790451803 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.h
+1791258696 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.h
+	"Mapa.h"
 	"Comunes.h"
-	"Mapa.h"
 	<conio.h>
 
-1790370542 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.c
+1791249548 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.c
 	"Comunes.h"
 
-1790451584 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.h
+1791249290 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.h
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
 
-1790452520 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\main.c
+1791247737 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\main.c
 	"Interfaz.h"
 	"PJ_Principal.h"
 	"Comunes.h"
 	"Mapa.h"
-
-1790370542 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.c
+	"Enemigo.h"
+	"Bomba.h"
 	"Archivos.h"
 
-1790370542 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.h
+1791258308 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.c
+	"Archivos.h"
+
+1791258696 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.h
 	"Mapa.h"
 	"PJ_Principal.h"
 
-1790370542 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\mapa.h
-
-1790370542 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\mapa.c
-	"Mapa.h"
+1791258341 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\mapa.h
 	"Comunes.h"
-	"PJ_Principal.h"
+
+1791258308 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\mapa.c
+	"Mapa.h"
 
 1789480748 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\archivos.c
 	"Archivos.h"
@@ -110,10 +109,10 @@
 	"Comunes.h"
 	"PJ_Principal.h"
 
-1790451653 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.c
+1791258308 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.c
 	"Enemigo.h"
 
-1790452465 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.h
+1791258230 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.h
 	"Comunes.h"
 	"Mapa.h"
 
@@ -217,6 +216,47 @@
 	"Enemigo.h"
 
 1790512275 source:c:\users\admin\documents\github\tp-topicos-2600\tp\pj_principal.h
+	"Comunes.h"
+	"Mapa.h"
+	<conio.h>
+
+1791246115 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.h
+	"Mapa.h"
+	"PJ_Principal.h"
+
+1791258308 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\bomba.c
+	"Bomba.h"
+
+1791258183 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\bomba.h
+	"PJ_Principal.h"
+	"Comunes.h"
+
+1791246115 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\bomba.h
+	"Comunes.h"
+	"Mapa.h"
+	"PJ_Principal.h"
+
+1791246115 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.h
+	<time.h>
+	<stdio.h>
+	<stdlib.h>
+
+1791246115 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.h
+	"Comunes.h"
+	"Mapa.h"
+
+1791246115 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"Mapa.h"
+	"PJ_Principal.h"
+	"Enemigo.h"
+
+1791246115 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\mapa.h
+
+1791246115 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.h
 	"Comunes.h"
 	"Mapa.h"
 	<conio.h>

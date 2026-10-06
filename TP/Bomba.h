@@ -1,14 +1,13 @@
 #ifndef BOMBA_H_INCLUDED
 #define BOMBA_H_INCLUDED
-
-#include "Comunes.h"
-#include "Mapa.h"
 #include "PJ_Principal.h"
+#include "Comunes.h"
 
 
 #define MAX_BOMBAS 2
 #define TIMER_BOMBA 5      // se desactiva tras 3 turnos del jugador
 #define SIMBOLO_BOMBA 254  // simbolito bomba  ■
+
 
 
 typedef struct Bomba{
@@ -20,6 +19,8 @@ typedef struct Bomba{
 typedef struct vBombas{
     Bomba bombas[MAX_BOMBAS];
 } vBombas;
+
+
 
 vBombas* crear_vec_bombs();
 void free_vec_bombs(vBombas *vbomb);

@@ -1,5 +1,4 @@
 #include "Archivos.h"
-
 int partida_guardar_binario(const char *ruta, const Mapa *mapa, const Personaje *jugador) {
     FILE *arch = fopen(ruta, "wb");
     if (!arch) return ERROR_ARCH;

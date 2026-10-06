@@ -1,6 +1,4 @@
 #include "Interfaz.h"
-#include "Comunes.h"
-#include "Mapa.h"
 void PantallaInicio(int *seleccion, const char *opciones[])
 {
     TituloSistema();
@@ -16,6 +14,7 @@ void PantallaInicio(int *seleccion, const char *opciones[])
 int MostrarMenuPrincipal()
 {
     int seleccion = 0;
+    int tecla;
     const char *opciones[TOTAL_OPCIONES] = {
         "Nueva Partida",
         "Cargar Partida",
@@ -24,22 +23,19 @@ int MostrarMenuPrincipal()
 
     while (1)
     {
+
         system("cls");
         PantallaInicio(&seleccion, opciones);
-
-        int tecla = _getch();
-
-        // Navegación vertical (W/S o flechas extendidas)
-        if (EsLetraValida('W', tecla) == TODOOK) {
+        tecla = _getch();
+        if (EsLetraValida('W', tecla) == TODOOK)
             seleccion = (seleccion - 1 + TOTAL_OPCIONES) % TOTAL_OPCIONES;
-        }
-        else if (EsLetraValida('S', tecla) == TODOOK) {
+        else if (EsLetraValida('S', tecla) == TODOOK)
             seleccion = (seleccion + 1) % TOTAL_OPCIONES;
-        }
         // Confirmación con tecla 'E' o Enter (ASCII 13)
         /// Acá le quiero poner el "Enter" pero no sé si jode otra función, lo probé y anda pero igual,
         /// habría que ver bien en la función EsLetraValida. Pero creo que no jode.
-        else if (EsLetraValida('E', tecla) == TODOOK || tecla == 13) {
+        else if (EsLetraValida('E', tecla) == TODOOK || tecla == 13)
+        {
             system("cls");
             return seleccion; // Retorna 0, 1 o 2
         }

@@ -1,13 +1,22 @@
 #ifndef PJ_PRINCIPAL_H_INCLUDED
 #define PJ_PRINCIPAL_H_INCLUDED
 
-#define PJ_Principal_DAT "../Archivos/PJ_Principal.dat"
-#include "Comunes.h"
+///.h
 #include "Mapa.h"
+#include "Comunes.h"
+//#include "Bomba.h"
+
+///BIBLIOTECAS
 #include <conio.h>
 
+///DEFINE
 #define PJP 80
+#define PJ_Principal_DAT "../Archivos/PJ_Principal.dat"
+#define SEGUIR 1
+#define SALIR 0
+#define AMAYUSCULA(X) ((X) >= 'a' && (X) <= 'z') ? (X) - 32 : (X)
 
+///ESTRUCTURAS
 typedef struct{
     Posicion pos;
     int vidas;

@@ -1,6 +1,4 @@
 #include "Mapa.h"
-#include "Comunes.h"
-#include "PJ_Principal.h"
 Mapa* Mapa_CrearMapa(int filas, int columnas)
 {
     int i, j;
