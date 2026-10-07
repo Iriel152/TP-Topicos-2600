@@ -69,3 +69,46 @@ void Mapa_RellenoObstaculos(tMapa *p)
                     p->celdas[i][j] = ROMPIBLE;
         }
 }
+int Archivos_GuardarMapa(const char* binPath, tMapa *mapa)
+{
+    int i;
+    FILE *fbin;
+    fbin=fopen(binPath,"wb");
+    if(!fbin)
+        return ERROR_ARCH;
+    fwrite(&(mapa->filas), sizeof(int), 1, fbin);
+    fwrite(&(mapa->columnas), sizeof(int), 1, fbin);
+    for(i=0 ; i< mapa->filas ; i++)
+    {
+        fwrite(mapa->celdas[i], sizeof(int), mapa->columnas, fbin);
+    }
+    fclose(fbin);
+    return TODOOK;
+}
+tMapa* Archivos_CargarMapa(const char* binPath)
+{
+    int i, filas, columnas;
+    tMapa* mapa;
+    FILE *pf;
+
+    pf = fopen(binPath, "rb");
+    if(!pf)
+        return NULL;
+
+    fread(&filas, sizeof(int), 1, pf);
+    fread(&columnas, sizeof(int), 1, pf);
+
+    mapa = Mapa_CrearMapa(FILAS, COLUMNAS);
+    if(!mapa)
+    {
+        fclose(pf);
+        return NULL;
+    }
+
+    for(i=0; i<mapa->filas; i++)
+    {
+        fread(mapa->celdas[i], sizeof(int), mapa->columnas, pf);
+    }
+    fclose(pf);
+    return mapa;
+}

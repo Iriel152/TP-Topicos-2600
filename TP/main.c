@@ -8,19 +8,13 @@
 int main()
 {
     int opcion = 0, salir = 0, seguir = 1;
-    FILE *pfMapa, *pfPrincipal, *pfEnemigo;
-    tMapa *mapa;
 
-    pfMapa = fopen(MAPA_DAT,"rb");
-    if(!pfMapa)
-    {
-        mapa = Mapa_CrearMapa(FILAS, COLUMNAS);
-        Mapa_RellenoObstaculos(mapa);
-        Archivos_GuardarMapa(MAPA_DAT, mapa);
-        Mapa_DestruirMapa(mapa);
-    }
-    else
-        fclose(pfMapa);
+    tMapa *mapa;
+    tPersonaje *personaje;
+    tEnemigo *enemigo;
+
+    if(ArchivosCargaDatos() == ERROR_ARCH)
+        return ERROR_ARCH;
 
     while(!salir)
     {
@@ -28,81 +22,43 @@ int main()
         if(opcion == 0)
         {
             mapa = Archivos_CargarMapa(MAPA_DAT);
-            system("cls");
-            renderizar(mapa/*, jugador, enemigo*/);
+
+            personaje = Archivos_CargarPersonaje(PJ_DAT);
+            PJ_Principal_AparicionRandom(mapa, personaje);
+            LimpiarLadosPJ(mapa, personaje);
+
+            enemigo = Archivos_CargarEnemigo(ENEMIGO_DAT);
+            Enemigo_AparicionRandom(mapa, enemigo);
+
+            while(seguir)
+            {
+                system("cls");
+                renderizar(mapa, personaje, enemigo);
+                seguir = MovimientoPJ(mapa, personaje/*, Bomba */);
+            }
+
             Mapa_DestruirMapa(mapa);
+            PJ_Principal_DestruirPersonaje(personaje);
+            Enemigo_Destruir(enemigo);
+
+            seguir = 1;
+        }else if(opcion == 1)
+        {
+
+            if (partida_cargar_binario(RUTA_SAVE, &mapa, &personaje) == TODOOK)
+            {
+                renderizar(mapa, personaje, enemigo);
+                PJ_Principal_DestruirPersonaje(personaje);
+                Mapa_DestruirMapa(mapa);
+            }
+            else
+            {
+                printf("\nNo se pudo cargar la partida guardada.\n");
+                _getch();
+            }
         }
         else if(opcion == 2)
             salir = 1;
     }
     return 0;
 }
-
-//    srand((unsigned int)time(NULL));
-//
-//    while (!salir)
-//    {
-//        opcion = MostrarMenuPrincipal(); // Retorna 0: Nueva, 1: Cargar, 2: Salir
-//
-//        if (opcion == 0)
-//        {
-//            // Nueva partida
-//            Mapa *mapa = Mapa_CrearMapa(FILAS, COLUMNAS);
-//            Mapa_RellenoObstaculos(mapa);
-//
-//            Personaje *jugador = PJ_Princial_CrearPersonaje(1, 1, 3);
-//            PJ_Principal_AparicionRandom(mapa, jugador);
-//            LimpiarLadosPJ(mapa, jugador);
-//
-//            vBombas *bombas = crear_vec_bombs();
-//            if(!bombas)
-//            {
-//                PJ_Principal_DestruirPersonaje(jugador);
-//                Mapa_DestruirMapa(mapa);
-//                continue;
-//            }
-//
-//            Enemigo *enemigo  = Enemigo_Crear(1,1);
-//            Enemigo_AparicionRandom(mapa, enemigo);
-//
-//            while(seguir)
-//            {
-//                system("cls");
-//                renderizar(mapa, jugador, enemigo);
-//                seguir = MovimientoPJ(mapa, jugador, bombas);
-//            }
-//
-//
-//            // Al salir de la partida, liberamos la memoria limpia
-//            free_vec_bombs(bombas);
-//            PJ_Principal_DestruirPersonaje(jugador);
-//            Enemigo_Destruir(enemigo);
-//            Mapa_DestruirMapa(mapa);
-//            seguir = 1;
-//        }
-//        else if (opcion == 1)
-//        {
-//            // Cargar partida desde archivo binario
-//            Mapa *mapa = NULL;
-//            Personaje *jugador = NULL;
-//            Enemigo *enemigo = NULL;
-//
-//            if (partida_cargar_binario(RUTA_SAVE, &mapa, &jugador) == TODOOK)
-//            {
-//                renderizar(mapa, jugador, enemigo);
-//                PJ_Principal_DestruirPersonaje(jugador);
-//                Mapa_DestruirMapa(mapa);
-//            }
-//            else
-//            {
-//                printf("\nNo se pudo cargar la partida guardada.\n");
-//                _getch();
-//            }
-//        }
-//        else if (opcion == 2)
-//        {
-//            salir = 1;
-//        }
-//    }
-//    return 0;
-//}

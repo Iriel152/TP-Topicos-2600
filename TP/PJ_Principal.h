@@ -14,6 +14,8 @@
 #define PJ_Principal_DAT "../Archivos/PJ_Principal.dat"
 #define SEGUIR 1
 #define SALIR 0
+#define VIDAS_BASE 3
+#define PJ_DAT "../Archivos/PJ.dat"
 #define AMAYUSCULA(X) ((X) >= 'a' && (X) <= 'z') ? (X) - 32 : (X)
 
 ///ESTRUCTURAS
@@ -23,15 +25,17 @@ typedef struct{
     int alcance_bomba;
     int esta_vivo;
     float velocidad;
-}Personaje;
+}tPersonaje;
 
 typedef struct vBombas vBombas;
 
-Personaje* PJ_Princial_CrearPersonaje(int, int, int);
-void PJ_Principal_DestruirPersonaje(Personaje*);
-void PJ_Principal_AparicionRandom(tMapa*,Personaje*);
-void LimpiarLadosPJ(tMapa*,Personaje*);
-void NuevaPosicionPJ(tMapa*,Personaje*,int,int, vBombas*);
-int MovimientoPJ(tMapa*,Personaje*,vBombas*);
+tPersonaje* PJ_Princial_CrearPersonaje(int, int, int);
+void PJ_Principal_DestruirPersonaje(tPersonaje*);
+void PJ_Principal_AparicionRandom(tMapa*,tPersonaje*);
+void LimpiarLadosPJ(tMapa*,tPersonaje*);
+void NuevaPosicionPJ(tMapa*,tPersonaje*,int,int/*, vBombas**/);
+int MovimientoPJ(tMapa*,tPersonaje*/*,vBombas**/);
+int Archivos_GuardarPersonaje(const char* binPath, tPersonaje *personaje);
+tPersonaje* Archivos_CargarPersonaje(const char* binPath);
 
 #endif // PJ_PRINCIPAL_H_INCLUDED

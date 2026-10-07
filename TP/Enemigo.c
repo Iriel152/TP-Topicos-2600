@@ -1,7 +1,7 @@
 #include "Enemigo.h"
-Enemigo* Enemigo_Crear(int fila, int columna)
+tEnemigo* Enemigo_Crear(int fila, int columna)
 {
-    Enemigo *e = (Enemigo*)malloc(sizeof(Enemigo));
+    tEnemigo *e = (tEnemigo*)malloc(sizeof(tEnemigo));
 
     if(!e)
         return NULL;
@@ -13,13 +13,13 @@ Enemigo* Enemigo_Crear(int fila, int columna)
     return e;
 }
 
-void Enemigo_Destruir(Enemigo *e)
+void Enemigo_Destruir(tEnemigo *e)
 {
     if(e)
         free(e);
 }
 
-void Enemigo_AparicionRandom(tMapa *m, Enemigo *e) //hay que mejorarla para que no se posicione encima de otro enemigo/del jugador
+void Enemigo_AparicionRandom(tMapa *m, tEnemigo *e) //hay que mejorarla para que no se posicione encima de otro enemigo/del jugador
 {
     int fila;
     int columna;
@@ -33,4 +33,40 @@ void Enemigo_AparicionRandom(tMapa *m, Enemigo *e) //hay que mejorarla para que 
 
     e->pos.x = fila;
     e->pos.y = columna;
+}
+int Archivos_GuardarEnemigo(const char* binPath, tEnemigo *enemigo)
+{
+    FILE *fbin;
+    fbin = fopen(binPath, "wb");
+
+    if(!fbin)
+        return ERROR_ARCH;
+
+    fwrite(&(enemigo->esta_vivo), sizeof(int), 1, fbin);
+    fwrite(&(enemigo->pos), sizeof(int), 1, fbin);
+
+    fclose(fbin);
+    return TODOOK;
+}
+tEnemigo* Archivos_CargarEnemigo(const char* binPath)
+{
+    tEnemigo *enemigo;
+    FILE *pf;
+
+    pf = fopen(binPath, "rb");
+    if(!pf)
+        return NULL;
+
+    enemigo = Enemigo_Crear(1, 1);
+    if(!enemigo)
+    {
+        fclose(pf);
+        return NULL;
+    }
+
+    fread(&(enemigo->esta_vivo), sizeof(int), 1, pf);
+    fread(&(enemigo->pos), sizeof(int), 1, pf);
+
+    fclose(pf);
+    return enemigo;
 }

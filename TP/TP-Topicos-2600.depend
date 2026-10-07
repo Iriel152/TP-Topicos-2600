@@ -10,10 +10,10 @@
 1787195559 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp-topicos\tp\interfaz.c
 	"Interfaz.h"
 
-1791324662 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
+1791342704 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
 	"Interfaz.h"
 
-1791323929 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.h
+1791342718 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.h
 	"Mapa.h"
 	"PJ_Principal.h"
 	"Enemigo.h"
@@ -22,23 +22,23 @@
 	<string.h>
 	<conio.h>
 
-1791319409 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.c
+1791343934 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.c
 	"PJ_Principal.h"
 
-1791319263 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.h
+1791343934 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.h
 	"Mapa.h"
 	"Comunes.h"
 	<conio.h>
 
-1791249548 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.c
+1791342187 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.c
 	"Comunes.h"
 
-1791249290 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.h
+1791342187 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.h
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
 
-1791324662 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\main.c
+1791343249 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\main.c
 	"Interfaz.h"
 	"PJ_Principal.h"
 	"Comunes.h"
@@ -46,19 +46,19 @@
 	"Enemigo.h"
 	"Bomba.h"
 	"Archivos.h"
-	<windows.h>
 
-1791321443 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.c
+1791343934 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.c
 	"Archivos.h"
 
-1791321285 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.h
+1791343934 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.h
 	"Mapa.h"
 	"PJ_Principal.h"
+	"Enemigo.h"
 
-1791324074 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\mapa.h
+1791343934 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\mapa.h
 	"Comunes.h"
 
-1791319395 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\mapa.c
+1791343934 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\mapa.c
 	"Mapa.h"
 
 1789480748 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\archivos.c
@@ -110,10 +110,10 @@
 	"Comunes.h"
 	"PJ_Principal.h"
 
-1791319343 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.c
+1791343934 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.c
 	"Enemigo.h"
 
-1791319343 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.h
+1791343934 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.h
 	"Comunes.h"
 	"Mapa.h"
 
@@ -225,12 +225,13 @@
 	"Mapa.h"
 	"PJ_Principal.h"
 
-1791319343 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\bomba.c
+1791340001 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\bomba.c
 	"Bomba.h"
 
-1791319315 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\bomba.h
-	"PJ_Principal.h"
+1791342704 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\bomba.h
 	"Comunes.h"
+	"Mapa.h"
+	"PJ_Principal.h"
 
 1791246115 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\bomba.h
 	"Comunes.h"

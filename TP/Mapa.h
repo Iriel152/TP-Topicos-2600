@@ -14,6 +14,7 @@
 #define OBSTACULO 219
 #define ROMPIBLE 176
 #define ESC 27
+#define MAPA_DAT "../Archivos/Mapa.dat"
 
 ///ESTRUCTURAS
 typedef struct{
@@ -25,5 +26,7 @@ typedef struct{
 tMapa* Mapa_CrearMapa(int,  int);
 void Mapa_DestruirMapa(tMapa *);
 void Mapa_RellenoObstaculos(tMapa *p);
+int Archivos_GuardarMapa(const char* binPath, tMapa *mapa);
+tMapa* Archivos_CargarMapa(const char* binPath);
 
 #endif // MAPA_H_INCLUDED
