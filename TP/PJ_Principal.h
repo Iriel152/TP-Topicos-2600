@@ -4,6 +4,7 @@
 ///.h
 #include "Mapa.h"
 #include "Comunes.h"
+
 //#include "Bomba.h"
 
 ///BIBLIOTECAS
@@ -12,11 +13,13 @@
 ///DEFINE
 #define PJP 80
 #define PJ_Principal_DAT "../Archivos/PJ_Principal.dat"
-#define SEGUIR 1
-#define SALIR 0
 #define VIDAS_BASE 3
 #define PJ_DAT "../Archivos/PJ.dat"
 #define AMAYUSCULA(X) ((X) >= 'a' && (X) <= 'z') ? (X) - 32 : (X)
+#define NUEVAP 0
+#define CARGARP 1
+#define CONTINUAR 2
+#define SALIR 3
 
 ///ESTRUCTURAS
 typedef struct{
@@ -29,7 +32,7 @@ typedef struct{
 
 typedef struct vBombas vBombas;
 
-tPersonaje* PJ_Princial_CrearPersonaje(int, int, int);
+tPersonaje* PJ_Princial_CrearPersonaje(int, int);
 void PJ_Principal_DestruirPersonaje(tPersonaje*);
 void PJ_Principal_AparicionRandom(tMapa*,tPersonaje*);
 void LimpiarLadosPJ(tMapa*,tPersonaje*);

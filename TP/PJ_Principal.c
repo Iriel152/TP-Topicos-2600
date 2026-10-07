@@ -1,12 +1,12 @@
 #include "PJ_Principal.h"
-tPersonaje* PJ_Princial_CrearPersonaje(int fila, int col, int vidas)
+tPersonaje* PJ_Princial_CrearPersonaje(int fila, int col)
 {
     tPersonaje *p = (tPersonaje*)malloc(sizeof(tPersonaje));
     if(!p)
         return NULL;
     p->pos.x = fila;
     p->pos.y = col;
-    p->vidas = vidas;
+    p->vidas = VIDAS_BASE;
     p->alcance_bomba = 2;
     p->esta_vivo = 1;
     p->velocidad = 1;
@@ -95,12 +95,12 @@ int MovimientoPJ(tMapa *m, tPersonaje *p/*, vBombas *vbomb*/)
         case 'D': NuevaPosicionPJ(m,p,p->pos.x,p->pos.y+1/*, vbomb*/); /*hay_mov = 1*/; break;
 //        case 'B': bomba_poner(vbomb,m,p); hay_mov = 1; break;
         case 27: return SALIR; break;
-        default: return SEGUIR; break;
+        default: return CONTINUAR; break;
     }
 //    if (hay_mov)
 //        actualizar_bomba(vbomb,m);
 
-    return SEGUIR;
+    return CONTINUAR;
 }
 int Archivos_GuardarPersonaje(const char* binPath, tPersonaje *personaje)
 {
@@ -128,7 +128,7 @@ tPersonaje* Archivos_CargarPersonaje(const char* binPath)
     if(!pf)
         return NULL;
 
-    personaje = PJ_Princial_CrearPersonaje(1, 1, VIDAS_BASE);
+    personaje = (tPersonaje*)malloc(sizeof(tPersonaje));
     if(!personaje)
     {
         fclose(pf);

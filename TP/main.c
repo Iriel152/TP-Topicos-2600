@@ -7,7 +7,7 @@
 #include "Archivos.h"
 int main()
 {
-    int opcion = 0, salir = 0, seguir = 1;
+    int opcion, fin = 0, seguir;
 
     tMapa *mapa;
     tPersonaje *personaje;
@@ -16,10 +16,10 @@ int main()
     if(ArchivosCargaDatos() == ERROR_ARCH)
         return ERROR_ARCH;
 
-    while(!salir)
+    while(!fin)
     {
         opcion = MostrarMenuPrincipal();
-        if(opcion == 0)
+        while(opcion == NUEVAP)
         {
             mapa = Archivos_CargarMapa(MAPA_DAT);
 
@@ -30,19 +30,26 @@ int main()
             enemigo = Archivos_CargarEnemigo(ENEMIGO_DAT);
             Enemigo_AparicionRandom(mapa, enemigo);
 
-            while(seguir)
+            seguir = CONTINUAR;
+
+            while(seguir == CONTINUAR)
             {
                 system("cls");
                 renderizar(mapa, personaje, enemigo);
                 seguir = MovimientoPJ(mapa, personaje/*, Bomba */);
+                if(seguir == SALIR)
+                    seguir = MenuEjecucion();
             }
 
+            if(seguir != NUEVAP)
+                opcion = -1;
             Mapa_DestruirMapa(mapa);
             PJ_Principal_DestruirPersonaje(personaje);
             Enemigo_Destruir(enemigo);
 
-            seguir = 1;
-        }else if(opcion == 1)
+            seguir = SALIR;
+        }
+        if(opcion == CARGARP)
         {
 
             if (partida_cargar_binario(RUTA_SAVE, &mapa, &personaje) == TODOOK)
@@ -57,8 +64,8 @@ int main()
                 _getch();
             }
         }
-        else if(opcion == 2)
-            salir = 1;
+        else if(opcion == SALIR)
+            fin = 1;
     }
     return 0;
 }

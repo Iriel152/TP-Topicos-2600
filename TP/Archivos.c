@@ -21,7 +21,7 @@ int ArchivosCargaDatos(void)
     pfPrincipal = fopen(PJ_DAT,"rb");
     if(!pfPrincipal)
     {
-        personaje = PJ_Princial_CrearPersonaje(1, 1, VIDAS_BASE);
+        personaje = PJ_Princial_CrearPersonaje(1, 1);
         if(!personaje)
             return ERROR_ARCH;
         Archivos_GuardarPersonaje(PJ_DAT, personaje);

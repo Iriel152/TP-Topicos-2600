@@ -57,7 +57,7 @@ tEnemigo* Archivos_CargarEnemigo(const char* binPath)
     if(!pf)
         return NULL;
 
-    enemigo = Enemigo_Crear(1, 1);
+    enemigo = (tEnemigo*)malloc(sizeof(tEnemigo));
     if(!enemigo)
     {
         fclose(pf);

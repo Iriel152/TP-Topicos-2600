@@ -22,9 +22,10 @@ tMapa* Mapa_CrearMapa(int filas, int columnas)
                 free(m->celdas[j]);
             free(m->celdas);
             free(m);
+            return NULL;
         }
-        for(j=0 ; j<columnas ; j++)
-            m->celdas[i][j] = VACIO;
+//        for(j=0 ; j<columnas ; j++)
+//            m->celdas[i][j] = VACIO;
     }
     return m;
 }

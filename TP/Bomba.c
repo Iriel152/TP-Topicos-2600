@@ -56,7 +56,7 @@ int insertar_bomba(vBombas*vbomb)
 int inicializar_vec_bombs(vBombas *vbomb)
 {
     if(!vbomb)
-        return NULL;
+        return ERROR_MEMORIA;
 
     vbomb->rango=1;
     if(insertar_bomba(vbomb) != TODOOK)
@@ -86,7 +86,7 @@ int hay_bomba(const vBombas *vbomb, int x, int y)
 }
 
 
-int bomba_poner(vBombas*vbomb, tMapa *m, Personaje *p)
+int bomba_poner(vBombas*vbomb, tMapa *m, tPersonaje *p)
 {
     int i;
     Bomba *pivot;

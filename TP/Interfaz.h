@@ -20,6 +20,7 @@
 #define T_No_seleccionado 0
 #define TOTAL_OPCIONES 3
 
+
 ///COLORES
 #define COLOR_RESET   "\033[0m"
 #define COLOR_ACTIVO  "\033[1;30;47m" // Texto negro, fondo blanco
@@ -32,7 +33,7 @@ void Separador(int);
 void TituloSistema();
 void AlinearCentro(const char*, int, const char *, int);
 int SeleccionMenuInicio(int *seleccion, const char *opciones[]);
-void MenuEjecucion();
+int MenuEjecucion();
 int SeleccionMenuPartida(int *seleccion, const char *opciones[]);
 void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e);
 int MostrarMenuPrincipal();

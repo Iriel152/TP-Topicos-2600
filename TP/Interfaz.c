@@ -37,6 +37,18 @@ int MostrarMenuPrincipal()
         else if (EsLetraValida('E', tecla) == TODOOK || tecla == 13)
         {
             system("cls");
+            switch(seleccion)
+            {
+                case 0:
+                    seleccion = NUEVAP;
+                    break;
+                case 1:
+                    seleccion = CARGARP;
+                    break;
+                case 2:
+                    seleccion = SALIR;
+                    break;
+            }
             return seleccion; // Retorna 0, 1 o 2
         }
     }
@@ -66,19 +78,40 @@ void AlinearCentro(const char* palabra, int total, const char* color, int selec)
         caracter = "";
     printf("%s%s%s %s\n", color, caracter, palabra, COLOR_RESET);
 }
-//void MenuEjecucion()
-//{
-//    int seleccion = 0, ejecutando = 1;
-//    const char *opciones[TOTAL_OPCIONES] = {"Continuar",
-//                                            "Nueva Partida",
-//                                            "Volver"};
-//    while(ejecutando)
-//    {
-//        system("cls");
-//        PantallaInicio(&seleccion, opciones);
-//        ejecutando=SeleccionMenuPartida(&seleccion, opciones);
-//    }
-//}
+int MenuEjecucion()
+{
+    int seleccion=0, tecla;
+    const char *opciones[TOTAL_OPCIONES] = {"Continuar",
+                                            "Nueva Partida",
+                                            "Volver"};
+    while(1)
+    {
+        system("cls");
+        PantallaInicio(&seleccion, opciones);
+        tecla = _getch();
+        if (EsLetraValida('W', tecla) == TODOOK)
+            seleccion = (seleccion - 1 + TOTAL_OPCIONES) % TOTAL_OPCIONES;
+        else if (EsLetraValida('S', tecla) == TODOOK)
+            seleccion = (seleccion + 1) % TOTAL_OPCIONES;
+        else if (EsLetraValida('E', tecla) == TODOOK || tecla == 13)
+        {
+            system("cls");
+            switch(seleccion)
+            {
+                case 0:
+                    seleccion = CONTINUAR;
+                    break;
+                case 1:
+                    seleccion = NUEVAP;
+                    break;
+                case 2:
+                    seleccion = SALIR;
+                    break;
+            }
+            return seleccion; // Retorna 0, 1 o 2
+        }
+    }
+}
 void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e)
 {
     int i, j;
