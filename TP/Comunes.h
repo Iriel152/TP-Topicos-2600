@@ -13,6 +13,10 @@
 #define ERROR_ARCH -3
 #define ENCONTRADO 1
 #define NO_ENCONTRADO 0
+#define ARRIBA 1
+#define ABAJO 2
+#define IZQ 3
+#define DER 4
 
 ///ESTRUCTURAS
 typedef struct{
@@ -23,5 +27,6 @@ typedef struct{
 int EsLetraValida(int LetraEsperada, int LetraRecibida);
 int Tecla_ArribaAbajo(int tecla);
 int ObtenerNumeroAleatorio(int, int);
+
 
 #endif // COMUNES_H_INCLUDED

@@ -65,9 +65,19 @@ void Mapa_RellenoObstaculos(tMapa *p)
         {
             if((i % 2 == 0) && (j % 2 == 0))
                 p->celdas[i][j] = OBSTACULO;
-            else
-                if(rand() % 10 < 4)
-                    p->celdas[i][j] = ROMPIBLE;
+//            else
+//                if(rand() % 10 < 4)
+//                    p->celdas[i][j] = ROMPIBLE;
+        }
+}
+void Mapa_RellenoObstaculosRombiples(tMapa *p)
+{
+    int i, j;
+    for (i = 1; i < p->filas - 1; i++)
+        for (j = 1; j < p->columnas - 1; j++)
+        {
+            if(p->celdas[i][j] == VACIO && rand() % 10 < 4)
+                p->celdas[i][j] = ROMPIBLE;
         }
 }
 int Archivos_GuardarMapa(const char* binPath, tMapa *mapa)
@@ -112,4 +122,19 @@ tMapa* Archivos_CargarMapa(const char* binPath)
     }
     fclose(pf);
     return mapa;
+}
+int MovimientoValido(tMapa *mapa, int fila, int columna)
+{
+    if(fila < 0 || fila >= FILAS ||
+       columna < 0 || columna >= COLUMNAS)
+    {
+        return 0;
+    }
+
+    if(mapa->celdas[fila][columna] != VACIO)
+    {
+        return 0;
+    }
+
+    return 1;
 }

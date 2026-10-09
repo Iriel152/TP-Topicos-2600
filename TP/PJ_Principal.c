@@ -71,31 +71,51 @@ void LimpiarLadosPJ(tMapa *m, tPersonaje *p)
     }
 }
 
-void NuevaPosicionPJ(tMapa *m, tPersonaje *p, int NuevaPosX, int NuevaPosY/*, vBombas *vbombs*/)
-{
-    if(m->celdas[NuevaPosX][NuevaPosY] == VACIO)
-    {
-        p->pos.x = NuevaPosX;
-        p->pos.y = NuevaPosY;
-    }
-}
+//void NuevaPosicionPJ(tMapa *m, tPersonaje *p, int NuevaPosX, int NuevaPosY/*, vBombas *vbombs*/)
+//{
+//    if(m->celdas[NuevaPosX][NuevaPosY] == VACIO)
+//    {
+//        p->pos.x = NuevaPosX;
+//        p->pos.y = NuevaPosY;
+//    }
+//}
 
 int MovimientoPJ(tMapa *m, tPersonaje *p/*, vBombas *vbomb*/)
 {
     char tecla = _getch();
+    int NuevaFila, NuevaColumna;
 //    int hay_mov = 0;
+
+    NuevaFila = p->pos.x;
+    NuevaColumna = p->pos.y;
 
     tecla = AMAYUSCULA(tecla);
 
     switch(tecla)
     {
-        case 'W': NuevaPosicionPJ(m,p,p->pos.x-1,p->pos.y/*, vbomb*/); /*hay_mov = 1*/; break;
-        case 'S': NuevaPosicionPJ(m,p,p->pos.x+1,p->pos.y/*, vbomb*/); /*hay_mov = 1*/; break;
-        case 'A': NuevaPosicionPJ(m,p,p->pos.x,p->pos.y-1/*, vbomb*/); /*hay_mov = 1*/; break;
-        case 'D': NuevaPosicionPJ(m,p,p->pos.x,p->pos.y+1/*, vbomb*/); /*hay_mov = 1*/; break;
+        case 'W':
+            NuevaFila--;
+            break;
+        case 'S':
+            NuevaFila++;
+            break;
+        case 'A':
+            NuevaColumna--;
+            break;
+        case 'D':
+            NuevaColumna++;
+            break;
 //        case 'B': bomba_poner(vbomb,m,p); hay_mov = 1; break;
-        case 27: return SALIR; break;
-        default: return CONTINUAR; break;
+        case 27:
+            return SALIR; break;
+        default:
+            return CONTINUAR; break;
+    }
+
+    if(MovimientoValido(m, NuevaFila, NuevaColumna))
+    {
+        p->pos.x = NuevaFila;
+        p->pos.y = NuevaColumna;
     }
 //    if (hay_mov)
 //        actualizar_bomba(vbomb,m);

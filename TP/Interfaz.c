@@ -115,7 +115,10 @@ int MenuEjecucion()
 void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e)
 {
     int i, j;
+    UINT consolaOriginal;
+
     printf("\033[H");
+
     for (i = 0; i < m->filas; i++)
     {
         for (j = 0; j < m->columnas; j++)
@@ -131,5 +134,12 @@ void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e)
         }
         printf("\n");
     }
+    consolaOriginal = GetConsoleOutputCP();
+    SetConsoleOutputCP(CP_UTF8);
+
+    for(i=0; i<p->vidas ; i++)
+        printf("\u2665");
+
+    SetConsoleOutputCP(consolaOriginal);
     fflush(stdout);
 }

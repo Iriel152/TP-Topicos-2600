@@ -20,5 +20,6 @@ void Enemigo_Mover(tMapa*, tEnemigo*); //intenta moverse
 void Enemigo_AparicionRandom(tMapa*, tEnemigo*);//aparicion random
 int Archivos_GuardarEnemigo(const char* binPath, tEnemigo *enemigo);
 tEnemigo* Archivos_CargarEnemigo(const char* binPath);
+void EnemigoMover(tMapa *m, tEnemigo *e);
 
 #endif // ENEMIGO_H_INCLUDED

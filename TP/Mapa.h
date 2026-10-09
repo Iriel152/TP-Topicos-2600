@@ -28,5 +28,7 @@ void Mapa_DestruirMapa(tMapa *);
 void Mapa_RellenoObstaculos(tMapa *p);
 int Archivos_GuardarMapa(const char* binPath, tMapa *mapa);
 tMapa* Archivos_CargarMapa(const char* binPath);
+void Mapa_RellenoObstaculosRombiples(tMapa *p);
+int MovimientoValido(tMapa *mapa, int fila, int columna);
 
 #endif // MAPA_H_INCLUDED

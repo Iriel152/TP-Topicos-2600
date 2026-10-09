@@ -70,3 +70,39 @@ tEnemigo* Archivos_CargarEnemigo(const char* binPath)
     fclose(pf);
     return enemigo;
 }
+void EnemigoMover(tMapa *mapa, tEnemigo *enemigo)
+{
+    int direccion;
+    int nuevaFila;
+    int nuevaColumna;
+
+    direccion = ObtenerNumeroAleatorio(1,4);
+
+    nuevaFila = enemigo->pos.x;
+    nuevaColumna = enemigo->pos.y;
+
+    switch(direccion)
+    {
+        case ARRIBA:
+            nuevaFila--;       // arriba
+            break;
+
+        case ABAJO:
+            nuevaFila++;       // abajo
+            break;
+
+        case IZQ:
+            nuevaColumna--;    // izquierda
+            break;
+
+        case DER:
+            nuevaColumna++;    // derecha
+            break;
+    }
+
+    if(MovimientoValido(mapa, nuevaFila, nuevaColumna))
+    {
+        enemigo->pos.x = nuevaFila;
+        enemigo->pos.y = nuevaColumna;
+    }
+}
