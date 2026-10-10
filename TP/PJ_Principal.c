@@ -136,6 +136,7 @@ int Archivos_GuardarPersonaje(const char* binPath, tPersonaje *personaje)
     fwrite(&(personaje->pos), sizeof(int), 1, fbin);
     fwrite(&(personaje->velocidad), sizeof(int), 1, fbin);
     fwrite(&(personaje->vidas), sizeof(int), 1, fbin);
+    fwrite(&(personaje->puntaje), sizeof(int), 1, fbin);
 
     fclose(fbin);
     return TODOOK;
@@ -161,6 +162,7 @@ tPersonaje* Archivos_CargarPersonaje(const char* binPath)
     fread(&(personaje->pos), sizeof(int), 1, pf);
     fread(&(personaje->velocidad), sizeof(int), 1, pf);
     fread(&(personaje->vidas), sizeof(int), 1, pf);
+    fread(&(personaje->puntaje), sizeof(int), 1, pf);
 
     fclose(pf);
     return personaje;
