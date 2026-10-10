@@ -17,3 +17,7 @@ int ObtenerNumeroAleatorio(int min, int max)
 {
     return (rand()%(max - min + 1)) + min;
 }
+int ASegundos(DWORD tiempo)
+{
+    return ((int)tiempo / SEGUNDOS);
+}

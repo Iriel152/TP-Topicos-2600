@@ -14,12 +14,6 @@
 #define PJP 80
 #define PJ_Principal_DAT "../Archivos/PJ_Principal.dat"
 #define VIDAS_BASE 3
-#define PJ_DAT "../Archivos/PJ.dat"
-#define AMAYUSCULA(X) ((X) >= 'a' && (X) <= 'z') ? (X) - 32 : (X)
-#define NUEVAP 0
-#define CARGARP 1
-#define CONTINUAR 2
-#define SALIR 3
 
 ///ESTRUCTURAS
 typedef struct{
@@ -28,6 +22,7 @@ typedef struct{
     int alcance_bomba;
     int esta_vivo;
     float velocidad;
+    int puntaje;
 }tPersonaje;
 
 typedef struct vBombas vBombas;

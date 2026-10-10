@@ -10,6 +10,7 @@ tPersonaje* PJ_Princial_CrearPersonaje(int fila, int col)
     p->alcance_bomba = 2;
     p->esta_vivo = 1;
     p->velocidad = 1;
+    p->puntaje = 0;
 
     return p;
 }
@@ -22,7 +23,7 @@ void PJ_Principal_AparicionRandom(tMapa *m, tPersonaje *p)
 {
     int esquina = ObtenerNumeroAleatorio(1,4);
     if(!p)
-        return;// NULL;
+        return;
     switch(esquina)
     {
         case 1:

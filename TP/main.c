@@ -7,8 +7,8 @@
 #include "Archivos.h"
 int main()
 {
-    int opcion, fin = 0, seguir;
-    DWORD ahora, tiempo_enemigo;
+    int opcion, fin = 0, seguir, temporizador;
+    DWORD ahora, tiempo_enemigo, tiempo_reloj, tiempo_juego;
     tMapa *mapa;
     tPersonaje *personaje;
     tEnemigo *enemigo;
@@ -26,7 +26,7 @@ int main()
             mapa = Archivos_CargarMapa(MAPA_DAT);
             Mapa_RellenoObstaculosRombiples(mapa);
 
-            personaje = Archivos_CargarPersonaje(PJ_DAT);
+            personaje = Archivos_CargarPersonaje(PJ_Principal_DAT);
             PJ_Principal_AparicionRandom(mapa, personaje);
             LimpiarLadosPJ(mapa, personaje);
 
@@ -35,19 +35,31 @@ int main()
 
             seguir = CONTINUAR;
             tiempo_enemigo = GetTickCount();
+            tiempo_reloj = GetTickCount();
 
             while(seguir == CONTINUAR)
             {
                 ahora = GetTickCount();//COMENTAR PARA HACER ANDAR EL PJ
+
                 if(ahora - tiempo_enemigo >= 1000)//COMENTAR PARA HACER ANDAR EL PJ
                 {//COMENTAR PARA HACER ANDAR EL PJ
                     EnemigoMover(mapa, enemigo);//COMENTAR PARA HACER ANDAR EL PJ
                     tiempo_enemigo = ahora;//COMENTAR PARA HACER ANDAR EL PJ
                 }//COMENTAR PARA HACER ANDAR EL PJ
-                renderizar(mapa, personaje, enemigo);
+
+                tiempo_juego = ahora - tiempo_reloj;
+                temporizador = TIEMPOFIN - ASegundos(tiempo_juego);
+
+                renderizar(mapa, personaje, enemigo, temporizador);
 //                seguir = MovimientoPJ(mapa, personaje/*, Bomba */);//COMENTAR PARA HACER ANDAR EL ENEMIGO
+                if(temporizador == 0)
+                {
+                    seguir = GAMEOVER;
+                    PantallaGameOver();
+                }
                 if(seguir == SALIR)
                     seguir = MenuEjecucion();
+
                 Sleep(16);
             }
 
@@ -64,7 +76,7 @@ int main()
 
             if (partida_cargar_binario(RUTA_SAVE, &mapa, &personaje) == TODOOK)
             {
-                renderizar(mapa, personaje, enemigo);
+                renderizar(mapa, personaje, enemigo, ahora - tiempo_reloj);
                 PJ_Principal_DestruirPersonaje(personaje);
                 Mapa_DestruirMapa(mapa);
             }

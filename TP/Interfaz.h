@@ -12,8 +12,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
-#include <windows.h>
-#include <time.h>
 
 ///FORMATO TEXTO
 #define Titulo "BOMBERMAN"
@@ -37,7 +35,8 @@ void AlinearCentro(const char*, int, const char *, int);
 int SeleccionMenuInicio(int *seleccion, const char *opciones[]);
 int MenuEjecucion();
 int SeleccionMenuPartida(int *seleccion, const char *opciones[]);
-void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e);
+void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e, int);
 int MostrarMenuPrincipal();
+void PantallaGameOver();
 
 #endif // INTERFAZ_H_INCLUDED

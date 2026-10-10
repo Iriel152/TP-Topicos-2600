@@ -1,8 +1,9 @@
 #include "Interfaz.h"
 void PantallaInicio(int *seleccion, const char *opciones[])
 {
+    int i;
     TituloSistema();
-    for (int i = 0; i < TOTAL_OPCIONES; i++)
+    for (i = 0; i < TOTAL_OPCIONES; i++)
     {
         if (i == *seleccion)
             AlinearCentro(opciones[i], n_centrado, COLOR_ACTIVO, T_seleccionado);
@@ -112,13 +113,22 @@ int MenuEjecucion()
         }
     }
 }
-void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e)
+void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e, int temporizador)
 {
     int i, j;
     UINT consolaOriginal;
 
     printf("\033[H");
+    printf("TIEMPO %3d\t PUNTAJE %7d\tVIDAS ", temporizador, p->puntaje);
 
+    consolaOriginal = GetConsoleOutputCP();
+    SetConsoleOutputCP(CP_UTF8);
+
+    for(i=0; i<p->vidas ; i++)
+        printf("\u2665");
+
+    SetConsoleOutputCP(consolaOriginal);
+    printf("\n");
     for (i = 0; i < m->filas; i++)
     {
         for (j = 0; j < m->columnas; j++)
@@ -134,12 +144,14 @@ void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e)
         }
         printf("\n");
     }
-    consolaOriginal = GetConsoleOutputCP();
-    SetConsoleOutputCP(CP_UTF8);
 
-    for(i=0; i<p->vidas ; i++)
-        printf("\u2665");
-
-    SetConsoleOutputCP(consolaOriginal);
     fflush(stdout);
+}
+void PantallaGameOver()
+{
+    system("cls");
+    TituloSistema();
+    printf("\n\n");
+    AlinearCentro("GAME OVER", n_centrado, COLOR_NORMAL, T_No_seleccionado);
+    Sleep(6000);
 }

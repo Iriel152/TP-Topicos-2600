@@ -18,13 +18,13 @@ int ArchivosCargaDatos(void)
     }else
         fclose(pfMapa);
 
-    pfPrincipal = fopen(PJ_DAT,"rb");
+    pfPrincipal = fopen(PJ_Principal_DAT,"rb");
     if(!pfPrincipal)
     {
         personaje = PJ_Princial_CrearPersonaje(1, 1);
         if(!personaje)
             return ERROR_ARCH;
-        Archivos_GuardarPersonaje(PJ_DAT, personaje);
+        Archivos_GuardarPersonaje(PJ_Principal_DAT, personaje);
         PJ_Principal_DestruirPersonaje(personaje);
     }else
         fclose(pfPrincipal);
