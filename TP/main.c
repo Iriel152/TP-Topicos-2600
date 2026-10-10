@@ -12,6 +12,11 @@ int main()
     tMapa *mapa;
     tPersonaje *personaje;
     tEnemigo *enemigo;
+    ///
+    int eRebotes = 3;
+    int eDireccion = 0;
+    int eLado = 0;
+    ///
 
     srand(time(NULL));
 
@@ -43,7 +48,9 @@ int main()
 
                 if(ahora - tiempo_enemigo >= 1000)//COMENTAR PARA HACER ANDAR EL PJ
                 {//COMENTAR PARA HACER ANDAR EL PJ
-                    EnemigoMover(mapa, enemigo);//COMENTAR PARA HACER ANDAR EL PJ
+                    ///EnemigoMover(mapa, enemigo/*, &eRebotes, &eDireccion, &eLado*/);//COMENTAR PARA HACER ANDAR EL PJ
+                    DireccionEnemigo(enemigo, &eRebotes, &eDireccion, &eLado);
+                    EnemigoMoverRandom(mapa, enemigo, &eRebotes, &eDireccion, &eLado);
                     tiempo_enemigo = ahora;//COMENTAR PARA HACER ANDAR EL PJ
                 }//COMENTAR PARA HACER ANDAR EL PJ
 

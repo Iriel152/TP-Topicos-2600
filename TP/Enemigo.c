@@ -9,6 +9,9 @@ tEnemigo* Enemigo_Crear(int fila, int columna)
     e->pos.x = fila;
     e->pos.y = columna;
     e->esta_vivo = 1;
+    ///e->rebotes = 4;
+    ///e->direccion = 0;
+    ///e->lado = 0;
 
     return e;
 }
@@ -44,6 +47,9 @@ int Archivos_GuardarEnemigo(const char* binPath, tEnemigo *enemigo)
 
     fwrite(&(enemigo->esta_vivo), sizeof(int), 1, fbin);
     fwrite(&(enemigo->pos), sizeof(int), 1, fbin);
+    ///fwrite(&(enemigo->rebotes), sizeof(int), 1, fbin);
+    ///fwrite(&(enemigo->direccion), sizeof(int), 1, fbin);
+    ///fwrite(&(enemigo->lado), sizeof(int), 1, fbin);
 
     fclose(fbin);
     return TODOOK;
@@ -66,10 +72,87 @@ tEnemigo* Archivos_CargarEnemigo(const char* binPath)
 
     fread(&(enemigo->esta_vivo), sizeof(int), 1, pf);
     fread(&(enemigo->pos), sizeof(int), 1, pf);
+    ///fread(&(enemigo->rebotes), sizeof(int), 1, pf);
+    ///fread(&(enemigo->direccion), sizeof(int), 1, pf);
+    ///fread(&(enemigo->lado), sizeof(int), 1, pf);
 
     fclose(pf);
     return enemigo;
 }
+void DireccionEnemigo(tEnemigo *enemigo, int *eRebotes, int *eDireccion, int *eLado)
+{
+    if(*eDireccion == 0)
+    {
+        *eDireccion = ObtenerNumeroAleatorio(1,2);
+        *eLado = ObtenerNumeroAleatorio(1,2);
+    }
+
+    if(*eRebotes == 0)
+    {
+        if(/*enemigo->direccion*/*eDireccion == 1)
+            {
+                /*enemigo->direccion*/*eDireccion = 2;
+            }else
+                {
+                    /*enemigo->direccion*/*eDireccion = 1;
+                }
+
+        *eRebotes = 4;
+    }
+}
+void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, int *eRebotes, int *eDireccion, int *eLado)
+{
+    //int direccion;
+    int nuevaFila;
+    int nuevaColumna;
+
+    nuevaFila = enemigo->pos.x;
+    nuevaColumna = enemigo->pos.y;
+
+    switch(/*enemigo->direccion*/ *eDireccion)
+    {
+        case ARRIBA:
+            switch(*eLado)
+            {
+                case IZQUIERDA:
+                nuevaColumna--;    // izquierda
+                break;
+
+                case DERECHA:
+                nuevaColumna++;    // derecha
+                break;
+            }break;
+
+        case ABAJO:
+            switch(*eLado)
+                {
+                    case ARRIBA:
+                    nuevaFila--;       // arriba
+                    break;
+
+                    case ABAJO:
+                    nuevaFila++;       // abajo
+                    break;
+                }break;
+            }
+
+            if(MovimientoValido(mapa, nuevaFila, nuevaColumna))
+            {
+                enemigo->pos.x = nuevaFila;
+                enemigo->pos.y = nuevaColumna;
+            }else
+                {
+                    /*enemigo->rebotes*/(*eRebotes)--;
+                    if(*eLado == 1)
+                    {
+                        /*enemigo->lado*/*eLado = 2;
+                    }else
+                        {
+                            /*enemigo->lado*/*eLado = 1;
+                        }
+                }
+}
+
 void EnemigoMover(tMapa *mapa, tEnemigo *enemigo)
 {
     int direccion;

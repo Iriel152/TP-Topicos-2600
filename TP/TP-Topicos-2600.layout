@@ -2,14 +2,24 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="Interfaz.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
+	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="130" topLine="117" />
+			<Cursor1 position="380" topLine="3" />
 		</Cursor>
 	</File>
-	<File name="Enemigo.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+	<File name="Interfaz.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="805" topLine="0" />
+			<Cursor1 position="3928" topLine="55" />
+		</Cursor>
+	</File>
+	<File name="Bomba.c" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1533" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="PJ_Principal.c" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4182" topLine="142" />
 		</Cursor>
 	</File>
 	<File name="Archivos.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="9" zoom_2="0">
@@ -17,64 +27,54 @@
 			<Cursor1 position="100" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Enemigo.c" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+	<File name="Archivos.c" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1596" topLine="0" />
+			<Cursor1 position="730" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Interfaz.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="8" zoom_2="0">
+	<File name="Mapa.c" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1021" topLine="15" />
+			<Cursor1 position="3282" topLine="113" />
 		</Cursor>
 	</File>
-	<File name="Archivos.c" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
+	<File name="Comunes.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="730" topLine="3" />
+			<Cursor1 position="369" topLine="7" />
 		</Cursor>
 	</File>
-	<File name="Mapa.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="8" zoom_2="0">
+	<File name="PJ_Principal.h" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="737" topLine="7" />
+			<Cursor1 position="231" topLine="12" />
 		</Cursor>
 	</File>
-	<File name="Comunes.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
+	<File name="Interfaz.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="598" topLine="17" />
+			<Cursor1 position="1021" topLine="3" />
 		</Cursor>
 	</File>
-	<File name="Bomba.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="789" topLine="8" />
-		</Cursor>
-	</File>
-	<File name="Comunes.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="Comunes.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="555" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Bomba.c" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+	<File name="Enemigo.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1066" topLine="31" />
+			<Cursor1 position="2482" topLine="164" />
 		</Cursor>
 	</File>
-	<File name="Mapa.c" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+	<File name="Bomba.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3283" topLine="100" />
+			<Cursor1 position="789" topLine="9" />
 		</Cursor>
 	</File>
-	<File name="PJ_Principal.c" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+	<File name="Mapa.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4182" topLine="149" />
+			<Cursor1 position="737" topLine="7" />
 		</Cursor>
 	</File>
-	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
+	<File name="Enemigo.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="377" topLine="65" />
-		</Cursor>
-	</File>
-	<File name="PJ_Principal.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="231" topLine="0" />
+			<Cursor1 position="433" topLine="3" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

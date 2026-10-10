@@ -16,6 +16,10 @@
 #define ENCONTRADO 1
 #define NO_ENCONTRADO 0
 
+///
+#define IZQUIERDA 1
+#define DERECHA 2
+///
 #define ARRIBA 1
 #define ABAJO 2
 #define IZQ 3
