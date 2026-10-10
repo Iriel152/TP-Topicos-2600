@@ -81,13 +81,13 @@ tEnemigo* Archivos_CargarEnemigo(const char* binPath)
 }
 void DireccionEnemigo(tEnemigo *enemigo, int *eRebotes, int *eDireccion, int *eLado)
 {
-    if(*eDireccion == 0)
+    if(/*enemigo->direccion*/*eDireccion == 0)
     {
-        *eDireccion = ObtenerNumeroAleatorio(1,2);
-        *eLado = ObtenerNumeroAleatorio(1,2);
+        /*enemigo->direccion*/*eDireccion = ObtenerNumeroAleatorio(1,2);
+        /*enemigo->lado*/*eLado = ObtenerNumeroAleatorio(1,2);
     }
 
-    if(*eRebotes == 0)
+    if(/*enemigo->rebotes*/*eRebotes == 0)
     {
         if(/*enemigo->direccion*/*eDireccion == 1)
             {
@@ -97,7 +97,7 @@ void DireccionEnemigo(tEnemigo *enemigo, int *eRebotes, int *eDireccion, int *eL
                     /*enemigo->direccion*/*eDireccion = 1;
                 }
 
-        *eRebotes = 4;
+        /*enemigo->rebotes*/*eRebotes = 4;
     }
 }
 void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, int *eRebotes, int *eDireccion, int *eLado)
@@ -112,7 +112,7 @@ void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, int *eRebotes, int *eDir
     switch(/*enemigo->direccion*/ *eDireccion)
     {
         case ARRIBA:
-            switch(*eLado)
+            switch(/*enemigo->lado*/*eLado)
             {
                 case IZQUIERDA:
                 nuevaColumna--;    // izquierda
@@ -124,7 +124,7 @@ void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, int *eRebotes, int *eDir
             }break;
 
         case ABAJO:
-            switch(*eLado)
+            switch(/*enemigo->lado*/*eLado)
                 {
                     case ARRIBA:
                     nuevaFila--;       // arriba
