@@ -24,7 +24,7 @@ int main()
         while(opcion == NUEVAP)
         {
             mapa = Archivos_CargarMapa(MAPA_DAT);
-            Mapa_RellenoObstaculosRombiples(mapa);
+//            Mapa_RellenoObstaculosRombiples(mapa); //DESCOMENTAR PARA PONER OBSTACULOS
 
             personaje = Archivos_CargarPersonaje(PJ_Principal_DAT);
             PJ_Principal_AparicionRandom(mapa, personaje);
@@ -40,15 +40,15 @@ int main()
 
             while(seguir == CONTINUAR)
             {
-                ahora = GetTickCount();//COMENTAR PARA HACER ANDAR EL PJ
+                ahora = GetTickCount();
 
 
                 temporizador = TIEMPOFIN - ASegundos(ahora - tiempo_reloj);
                 renderizar(mapa, personaje, enemigo, temporizador);
 
-                EnemigoMovimientoxTiempo(ahora, enemigo, mapa, &tiempo_enemigo);
+                EnemigoMovimientoxTiempo(ahora, enemigo, mapa, &tiempo_enemigo, personaje);
                 PJMovimientoxTiempo(ahora, personaje, mapa, &tiempo_pj, &seguir);
-//                seguir = MovimientoPJ(mapa, personaje/*, Bomba */);//COMENTAR PARA HACER ANDAR EL ENEMIGO
+
                 if(temporizador == 0)
                 {
                     seguir = GAMEOVER;

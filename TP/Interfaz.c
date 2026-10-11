@@ -127,6 +127,7 @@ void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e, int temp
     for(i=0; i<p->vidas ; i++)
         printf("\u2665");
 
+    printf("\033[K");
     SetConsoleOutputCP(consolaOriginal);
     printf("\n");
     for (i = 0; i < m->filas; i++)

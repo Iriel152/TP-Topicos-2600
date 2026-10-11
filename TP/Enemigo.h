@@ -3,6 +3,7 @@
 
 #include "Comunes.h"
 #include "Mapa.h"
+#include "PJ_Principal.h"
 
 #define MAX_ENEMIGOS 5
 #define ENEMIGO_VISUAL 69
@@ -16,6 +17,7 @@ typedef struct
     int rebotes;
     int direccion;
     int lado;
+    int valor;
 }tEnemigo;
 
 tEnemigo* Enemigo_Crear(int fila, int columna); //crea enemigo
@@ -26,7 +28,8 @@ int Archivos_GuardarEnemigo(const char* binPath, tEnemigo *enemigo);
 tEnemigo* Archivos_CargarEnemigo(const char* binPath);
 void EnemigoMover(tMapa *m, tEnemigo *e/*, int *eRebotes, int *eDireccion, int *eLados*/);
 void DireccionEnemigo(tEnemigo *enemigo);
-void EnemigoMoverRandom(tMapa *m, tEnemigo *e);
-void EnemigoMovimientoxTiempo(DWORD tiempo, tEnemigo *enemigo, tMapa *mapa, DWORD *tiempo_enemigo);
+void EnemigoMoverRandom(tMapa *m, tEnemigo *e, tPersonaje *p);
+void EnemigoMovimientoxTiempo(DWORD tiempo, tEnemigo *enemigo, tMapa *mapa, DWORD *tiempo_enemigo, tPersonaje *p);
+void EnemigoDanioaPJ(tEnemigo *enemigo, tPersonaje *personaje);
 
 #endif // ENEMIGO_H_INCLUDED
