@@ -8,15 +8,10 @@
 int main()
 {
     int opcion, fin = 0, seguir, temporizador;
-    DWORD ahora, tiempo_enemigo, tiempo_reloj, tiempo_juego;
+    DWORD ahora, tiempo_enemigo, tiempo_reloj, tiempo_pj;
     tMapa *mapa;
     tPersonaje *personaje;
     tEnemigo *enemigo;
-    ///
-    int eRebotes = 3;
-    int eDireccion = 0;
-    int eLado = 0;
-    ///
 
     srand(time(NULL));
 
@@ -40,24 +35,19 @@ int main()
 
             seguir = CONTINUAR;
             tiempo_enemigo = GetTickCount();
+            tiempo_pj = GetTickCount();
             tiempo_reloj = GetTickCount();
 
             while(seguir == CONTINUAR)
             {
                 ahora = GetTickCount();//COMENTAR PARA HACER ANDAR EL PJ
 
-                if(ahora - tiempo_enemigo >= 1000)//COMENTAR PARA HACER ANDAR EL PJ
-                {//COMENTAR PARA HACER ANDAR EL PJ
-                    ///EnemigoMover(mapa, enemigo/*, &eRebotes, &eDireccion, &eLado*/);//COMENTAR PARA HACER ANDAR EL PJ
-                    DireccionEnemigo(enemigo, &eRebotes, &eDireccion, &eLado);
-                    EnemigoMoverRandom(mapa, enemigo, &eRebotes, &eDireccion, &eLado);
-                    tiempo_enemigo = ahora;//COMENTAR PARA HACER ANDAR EL PJ
-                }//COMENTAR PARA HACER ANDAR EL PJ
 
-                tiempo_juego = ahora - tiempo_reloj;
-                temporizador = TIEMPOFIN - ASegundos(tiempo_juego);
-
+                temporizador = TIEMPOFIN - ASegundos(ahora - tiempo_reloj);
                 renderizar(mapa, personaje, enemigo, temporizador);
+
+                EnemigoMovimientoxTiempo(ahora, enemigo, mapa, &tiempo_enemigo);
+                PJMovimientoxTiempo(ahora, personaje, mapa, &tiempo_pj, &seguir);
 //                seguir = MovimientoPJ(mapa, personaje/*, Bomba */);//COMENTAR PARA HACER ANDAR EL ENEMIGO
                 if(temporizador == 0)
                 {

@@ -21,7 +21,7 @@ typedef struct{
     int vidas;
     int alcance_bomba;
     int esta_vivo;
-    float velocidad;
+    int velocidad;
     int puntaje;
 }tPersonaje;
 
@@ -35,5 +35,6 @@ void NuevaPosicionPJ(tMapa*,tPersonaje*,int,int/*, vBombas**/);
 int MovimientoPJ(tMapa*,tPersonaje*/*,vBombas**/);
 int Archivos_GuardarPersonaje(const char* binPath, tPersonaje *personaje);
 tPersonaje* Archivos_CargarPersonaje(const char* binPath);
+void PJMovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa, DWORD *tiempo_personaje, int* seguir);
 
 #endif // PJ_PRINCIPAL_H_INCLUDED

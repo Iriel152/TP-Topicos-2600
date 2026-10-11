@@ -9,7 +9,7 @@ tPersonaje* PJ_Princial_CrearPersonaje(int fila, int col)
     p->vidas = VIDAS_BASE;
     p->alcance_bomba = 2;
     p->esta_vivo = 1;
-    p->velocidad = 1;
+    p->velocidad = 800;
     p->puntaje = 0;
 
     return p;
@@ -83,10 +83,15 @@ void LimpiarLadosPJ(tMapa *m, tPersonaje *p)
 
 int MovimientoPJ(tMapa *m, tPersonaje *p/*, vBombas *vbomb*/)
 {
-    char tecla = _getch();
+    char tecla;
     int NuevaFila, NuevaColumna;
 //    int hay_mov = 0;
+    if(!_kbhit())
+    {
+        return CONTINUAR;
+    }
 
+    tecla = _getch();
     NuevaFila = p->pos.x;
     NuevaColumna = p->pos.y;
 
@@ -166,4 +171,12 @@ tPersonaje* Archivos_CargarPersonaje(const char* binPath)
 
     fclose(pf);
     return personaje;
+}
+void PJMovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa, DWORD *tiempo_personaje, int *seguir)
+{
+    if(ahora - (*tiempo_personaje) >= personaje->velocidad)
+    {
+        *seguir = MovimientoPJ(mapa, personaje/*, Bomba */);
+        *tiempo_personaje = ahora;
+    }
 }
