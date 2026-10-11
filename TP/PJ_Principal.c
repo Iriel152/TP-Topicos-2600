@@ -9,7 +9,7 @@ tPersonaje* PJ_Princial_CrearPersonaje(int fila, int col)
     p->vidas = VIDAS_BASE;
     p->alcance_bomba = 2;
     p->esta_vivo = 1;
-    p->velocidad = 800;
+    p->velocidad = 150;
     p->puntaje = 0;
 
     return p;
@@ -22,7 +22,7 @@ void PJ_Principal_DestruirPersonaje(tPersonaje *p)
 void PJ_Principal_AparicionRandom(tMapa *m, tPersonaje *p)
 {
     int esquina = ObtenerNumeroAleatorio(1,4);
-    if(!p)
+    if(!p || !m)
         return;
     switch(esquina)
     {
@@ -81,15 +81,10 @@ void LimpiarLadosPJ(tMapa *m, tPersonaje *p)
 //    }
 //}
 
-int MovimientoPJ(tMapa *m, tPersonaje *p/*, vBombas *vbomb*/)
+int MovimientoPJ(tMapa *m, tPersonaje *p, vBombas *vbomb)
 {
     char tecla;
     int NuevaFila, NuevaColumna;
-//    int hay_mov = 0;
-    if(!_kbhit())
-    {
-        return CONTINUAR;
-    }
 
     tecla = _getch();
     NuevaFila = p->pos.x;
@@ -99,23 +94,13 @@ int MovimientoPJ(tMapa *m, tPersonaje *p/*, vBombas *vbomb*/)
 
     switch(tecla)
     {
-        case 'W':
-            NuevaFila--;
-            break;
-        case 'S':
-            NuevaFila++;
-            break;
-        case 'A':
-            NuevaColumna--;
-            break;
-        case 'D':
-            NuevaColumna++;
-            break;
-//        case 'B': bomba_poner(vbomb,m,p); hay_mov = 1; break;
-        case 27:
-            return SALIR; break;
-        default:
-            return CONTINUAR; break;
+        case 'W': case 'w' : NuevaFila--; break;
+        case 'S': case 's' : NuevaFila++; break;
+        case 'A': case 'a' : NuevaColumna--; break;
+        case 'D': case 'd' : NuevaColumna++; break;
+        case 'B': case 'b' : bomba_poner(vbomb,m,p); break;
+        case 27: return SALIR; break;
+        default: return CONTINUAR; break;
     }
 
     if(MovimientoValido(m, NuevaFila, NuevaColumna))
@@ -123,8 +108,6 @@ int MovimientoPJ(tMapa *m, tPersonaje *p/*, vBombas *vbomb*/)
         p->pos.x = NuevaFila;
         p->pos.y = NuevaColumna;
     }
-//    if (hay_mov)
-//        actualizar_bomba(vbomb,m);
 
     return CONTINUAR;
 }
@@ -172,11 +155,45 @@ tPersonaje* Archivos_CargarPersonaje(const char* binPath)
     fclose(pf);
     return personaje;
 }
-void PJMovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa, DWORD *tiempo_personaje, int *seguir)
+void PJMovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa, DWORD *tiempo_personaje, int *seguir, vBombas *vbomb)
 {
-    if(ahora - (*tiempo_personaje) >= personaje->velocidad)
+    if(_kbhit())
     {
-        *seguir = MovimientoPJ(mapa, personaje/*, Bomba */);
-        *tiempo_personaje = ahora;
+        if(ahora - (*tiempo_personaje) >= personaje->velocidad)
+        {
+            *seguir = MovimientoPJ(mapa, personaje, vbomb);
+            *tiempo_personaje = ahora;
+        }
+        else
+            _getch();
     }
+}
+int bomba_poner(vBombas*vbomb, tMapa *m, tPersonaje *p)
+{
+    int i;
+    Bomba *pivot;
+
+    if(!vbomb || !m || !p)
+        return ERROR_;
+
+    if(hay_bomba(vbomb, p->pos.x , p->pos.y) == ENCONTRADO)
+        return ERROR_;
+
+    pivot = vbomb->bombas;
+
+    for (i = 0; i < vbomb->ce; i++)
+    {
+        if(!pivot->activa)
+        {
+            pivot->activa = 1;
+            pivot->pos.x = p->pos.x;
+            pivot->pos.y = p->pos.y;
+            pivot->tiempo_bomba = GetTickCount();
+            m->celdas[p->pos.x][p->pos.y] = SIMBOLO_BOMBA;
+            return TODOOK;
+        }
+        pivot++;
+    }
+    return ERROR_;
+
 }

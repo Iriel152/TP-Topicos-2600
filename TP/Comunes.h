@@ -17,6 +17,8 @@
 #define NO_ENCONTRADO 0
 
 ///
+#define HORIZONTAL 1
+#define VERTICAL 2
 #define IZQUIERDA 1
 #define DERECHA 2
 ///

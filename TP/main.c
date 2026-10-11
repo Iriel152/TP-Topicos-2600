@@ -12,6 +12,7 @@ int main()
     tMapa *mapa;
     tPersonaje *personaje;
     tEnemigo *enemigo;
+    vBombas *bombs;
 
     srand(time(NULL));
 
@@ -23,8 +24,9 @@ int main()
         opcion = MostrarMenuPrincipal();
         while(opcion == NUEVAP)
         {
+
             mapa = Archivos_CargarMapa(MAPA_DAT);
-//            Mapa_RellenoObstaculosRombiples(mapa); //DESCOMENTAR PARA PONER OBSTACULOS
+            Mapa_RellenoObstaculosRombiples(mapa); //DESCOMENTAR PARA PONER OBSTACULOS
 
             personaje = Archivos_CargarPersonaje(PJ_Principal_DAT);
             PJ_Principal_AparicionRandom(mapa, personaje);
@@ -32,6 +34,8 @@ int main()
 
             enemigo = Archivos_CargarEnemigo(ENEMIGO_DAT);
             Enemigo_AparicionRandom(mapa, enemigo);
+
+            bombs = crear_vec_bombs();
 
             seguir = CONTINUAR;
             tiempo_enemigo = GetTickCount();
@@ -46,8 +50,9 @@ int main()
                 temporizador = TIEMPOFIN - ASegundos(ahora - tiempo_reloj);
                 renderizar(mapa, personaje, enemigo, temporizador);
 
+                actualizar_bomba(bombs,mapa,ahora);
                 EnemigoMovimientoxTiempo(ahora, enemigo, mapa, &tiempo_enemigo, personaje);
-                PJMovimientoxTiempo(ahora, personaje, mapa, &tiempo_pj, &seguir);
+                PJMovimientoxTiempo(ahora, personaje, mapa, &tiempo_pj, &seguir,bombs);
 
                 if(temporizador == 0)
                 {
@@ -65,14 +70,19 @@ int main()
             Mapa_DestruirMapa(mapa);
             PJ_Principal_DestruirPersonaje(personaje);
             Enemigo_Destruir(enemigo);
+            free_vec_bombs(bombs);
 
             seguir = SALIR;
         }
-        if(opcion == CARGARP)
+       /* if(opcion == CARGARP)
         {
 
             if (partida_cargar_binario(RUTA_SAVE, &mapa, &personaje) == TODOOK)
             {
+                bombs = Archivos_CargarBombas(BOMB_DAT);
+                if(!bombs)
+                    bombs = crear_vec_bombs();
+
                 renderizar(mapa, personaje, enemigo, ahora - tiempo_reloj);
                 PJ_Principal_DestruirPersonaje(personaje);
                 Mapa_DestruirMapa(mapa);
@@ -82,8 +92,8 @@ int main()
                 printf("\nNo se pudo cargar la partida guardada.\n");
                 _getch();
             }
-        }
-        else if(opcion == SALIR)
+        }*/
+        /*else*/ if(opcion == SALIR)
             fin = 1;
     }
     return 0;

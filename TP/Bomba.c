@@ -45,7 +45,7 @@ int insertar_bomba(vBombas*vbomb)
     b.activa = 0;
     b.pos.x = -1;
     b.pos.y = -1;
-    b.turnos_restantes = 0;
+    b.tiempo_bomba = 0;
 
     *(vbomb->bombas + vbomb->ce) = b;
     vbomb->ce++;
@@ -85,43 +85,44 @@ int hay_bomba(const vBombas *vbomb, int x, int y)
     return NO_ENCONTRADO;
 }
 
-
-int bomba_poner(vBombas*vbomb, tMapa *m, tPersonaje *p)
-{
-    int i;
-    Bomba *pivot;
-
-    if(!vbomb || !m || !p)
-        return ERROR_;
-
-    if(hay_bomba(vbomb, p->pos.x , p->pos.y) == ENCONTRADO)
-        return ERROR_;
-
-    pivot = vbomb->bombas;
-
-    for (i = 0; i < vbomb->ce; i++)
-    {
-        if(!pivot->activa)
-        {
-            pivot->activa = 1;
-            pivot->pos.x = p->pos.x;
-            pivot->pos.y = p->pos.y;
-            pivot->turnos_restantes = TIMER_BOMBA;
-            m->celdas[p->pos.x][p->pos.y] = SIMBOLO_BOMBA;
-            return TODOOK;
-        }
-        pivot++;
-    }
-    return ERROR_;
-
-}
-
+/////*
+//int bomba_poner(vBombas*vbomb, tMapa *m, tPersonaje *p)
+//{
+//    int i;
+//    Bomba *pivot;
+//
+//    if(!vbomb || !m || !p)
+//        return ERROR_;
+//
+//    if(hay_bomba(vbomb, p->pos.x , p->pos.y) == ENCONTRADO)
+//        return ERROR_;
+//
+//    pivot = vbomb->bombas;
+//
+//    for (i = 0; i < vbomb->ce; i++)
+//    {
+//        if(!pivot->activa)
+//        {
+//            pivot->activa = 1;
+//            pivot->pos.x = p->pos.x;
+//            pivot->pos.y = p->pos.y;
+//            pivot->tiempo_bomba = GetTickCount();
+//            m->celdas[p->pos.x][p->pos.y] = SIMBOLO_BOMBA;
+//            return TODOOK;
+//        }
+//        pivot++;
+//    }
+//    return ERROR_;
+//
+//}
+//*///
 //FUNCION PARA QUE EL TIMER DE LA BOMBA DECREMENTE A LAP AR QUE EL JUGADOR INTENTE MOVERSE NO LIMPIA DEL MAPA LA BOMBA
 //FALTA FUNCION BORRAR BOMBA LO TENGO AHI TODO METIDO. EN EL MOMENTO Q BORRA LA BOMBA EPLOTA
-void actualizar_bomba(vBombas *vbomb, tMapa *m)
+void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora)
 {
     int i;
     Bomba *pivot;
+    DWORD RELOJ_BOMBA = 3000;
 
     if (!vbomb || !m)
         return;
@@ -132,9 +133,7 @@ void actualizar_bomba(vBombas *vbomb, tMapa *m)
     {
         if(pivot->activa)
         {
-            vbomb->bombas[i].turnos_restantes--;
-
-            if(vbomb->bombas[i].turnos_restantes <= 0)
+            if(ahora - pivot->tiempo_bomba >= RELOJ_BOMBA)
             {
                 m->celdas[pivot->pos.x][pivot->pos.y] = VACIO;
 
@@ -144,8 +143,9 @@ void actualizar_bomba(vBombas *vbomb, tMapa *m)
                 pivot->pos.x = -1;
                 pivot->pos.y = -1;
             }
-            pivot++;
+
         }
+        pivot++;
     }
 }
 
@@ -176,4 +176,58 @@ void explotar_bomba(tMapa *m, int x, int y, int rango)
         }
 
     }
+}
+
+int Archivos_GuardarBombas(const char* binPath, vBombas *vbomb)
+{
+    FILE *fbin;
+    fbin = fopen(binPath,"wb");
+
+    if(!fbin)
+        return ERROR_ARCH;
+    fwrite(&(vbomb->ce),sizeof(int),1,fbin);
+    fwrite(&(vbomb->rango),sizeof(int),1,fbin);
+    fwrite(&(vbomb->tam),sizeof(int),1,fbin);
+
+    if(vbomb->tam > 0 && vbomb->bombas != NULL)
+    {
+        fwrite(vbomb->bombas,sizeof(Bomba),vbomb->tam,fbin);
+    }
+    fclose(fbin);
+    return TODOOK;
+}
+
+vBombas* Archivos_CargarBombas(const char* binPath)
+{
+    FILE *pf;
+    vBombas *vbomb;
+
+    pf = fopen(binPath,"rb");
+    if(!pf)
+        return NULL;
+
+    vbomb = (vBombas*)malloc(sizeof(vBombas));
+    if(!vbomb)
+    {
+        fclose(pf);
+        return NULL;
+    }
+
+    fread(&(vbomb->ce),sizeof(int),1,pf);
+    fread(&(vbomb->rango),sizeof(int),1,pf);
+    fread(&(vbomb->tam),sizeof(int),1,pf);
+
+    vbomb->bombas = (Bomba*)malloc(sizeof(Bomba) * vbomb->tam);
+    if(!vbomb->bombas)
+    {
+        free(vbomb);
+        fclose(pf);
+        return NULL;
+    }
+
+    if (vbomb->tam > 0)
+        fread(vbomb->bombas,sizeof(Bomba),vbomb->tam,pf);
+
+    fclose(pf);
+    return vbomb;
 }

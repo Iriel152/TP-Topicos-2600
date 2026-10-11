@@ -1,10 +1,12 @@
 #include "Archivos.h"
 int ArchivosCargaDatos(void)
 {
-    FILE *pfMapa, *pfPrincipal, *pfEnemigo;
+    FILE *pfMapa, *pfPrincipal, *pfEnemigo, *pfBombs;
     tMapa *mapa;
     tPersonaje *personaje;
     tEnemigo *enemigo;
+    vBombas *vbomb;
+
 
     pfMapa = fopen(MAPA_DAT,"rb");
     if(!pfMapa)
@@ -13,8 +15,11 @@ int ArchivosCargaDatos(void)
         if(!mapa)
             return ERROR_ARCH;
         Mapa_RellenoObstaculos(mapa);
-        Archivos_GuardarMapa(MAPA_DAT, mapa);
-        Mapa_DestruirMapa(mapa);
+        if(Archivos_GuardarMapa(MAPA_DAT, mapa) == ERROR_ARCH)
+           {
+              Mapa_DestruirMapa(mapa);
+              return ERROR_ARCH;
+           }
     }else
         fclose(pfMapa);
 
@@ -39,6 +44,19 @@ int ArchivosCargaDatos(void)
         Enemigo_Destruir(enemigo);
     }else
         fclose(pfEnemigo);
+
+    pfBombs = fopen(BOMB_DAT, "rb");
+    if(!pfBombs)
+    {
+        vbomb=crear_vec_bombs();
+        if(!vbomb)
+            return ERROR_ARCH;
+        Archivos_GuardarBombas(BOMB_DAT, vbomb);
+        free_vec_bombs(vbomb);
+    }
+    else
+        fclose(pfBombs);
+
     return TODOOK;
 }
 int partida_guardar_binario(const char *ruta, const tMapa *mapa, const tPersonaje *jugador) {
