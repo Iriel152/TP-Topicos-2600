@@ -199,6 +199,11 @@ void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo 
                 e->pos.y = -1;
             }
 
+            if(pj!=NULL && pj->pos.x == aux_x && pj->pos.y == aux_y)
+            {
+                pj->vidas--;
+            }
+
             if(m->celdas[aux_x][aux_y] == VACIO)
                if(m->celdas[aux_x][aux_y] != TECHO && m->celdas[aux_x][aux_y] != PISO)  //Detectar q la estela no haya muro
                     m->celdas[aux_x][aux_y] = '#'; //esto es como muestra, el tema es q no borra la estela.
