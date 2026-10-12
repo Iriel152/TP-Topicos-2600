@@ -4,6 +4,7 @@
 #include "Comunes.h"
 #include "Mapa.h"
 //#include "PJ_Principal.h"
+//#include "Enemigo.h"
 
 
 #define MAX_BOMBAS 7
@@ -24,14 +25,17 @@ typedef struct vBombas{
     int rango;
 } vBombas;
 
+typedef struct tEnemigo tEnemigo;
+
 vBombas* crear_vec_bombs();
 void free_vec_bombs(vBombas *vbomb);
 int inicializar_vec_bombs(vBombas *vbomb);
 int insertar_bomba(vBombas*vbomb);
 ///int  bomba_poner(vBombas *vbomb, tMapa *m, tPersonaje *p);
 int  hay_bomba(const vBombas *vbomb, int x, int y);
-void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta);
-void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta);
+void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta,tEnemigo *e);
+void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo *e);
+void limpiar_estela(tMapa *m, int x, int y, int rango);
 int Archivos_GuardarBombas(const char* binPath, vBombas *vbomb);
 vBombas* Archivos_CargarB(const char* binPath);
 

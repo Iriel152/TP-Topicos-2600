@@ -1,4 +1,5 @@
 #include "Bomba.h"
+#include "Enemigo.h"
 vBombas* crear_vec_bombs()
 {
     vBombas *vbomb = (vBombas*)malloc(sizeof(vBombas));
@@ -116,7 +117,7 @@ int hay_bomba(const vBombas *vbomb, int x, int y)
 //*///
 //FUNCION PARA QUE EL TIMER DE LA BOMBA DECREMENTE A LAP AR QUE EL JUGADOR INTENTE MOVERSE NO LIMPIA DEL MAPA LA BOMBA
 //FALTA FUNCION BORRAR BOMBA LO TENGO AHI TODO METIDO. EN EL MOMENTO Q BORRA LA BOMBA EPLOTA
-void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta)
+void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta, tEnemigo *e)
 {
     int i;
     Bomba *pivot;
@@ -129,26 +130,39 @@ void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta)
 
     for(i=0 ; i<vbomb->ce; i++)
     {
-        if(pivot->activa)
+        if(pivot->activa == 1)
         {
             if(ahora - pivot->tiempo_bomba >= RELOJ_BOMBA)
             {
-                m->celdas[pivot->pos.x][pivot->pos.y] = VACIO;
+                m->celdas[pivot->pos.x][pivot->pos.y] = '#';
 
-                explotar_bomba(m,pivot->pos.x,pivot->pos.y,vbomb->rango,puerta);
+                explotar_bomba(m,pivot->pos.x,pivot->pos.y,vbomb->rango,puerta,e);
+
+                pivot->activa = 2;
+                pivot->tiempo_bomba = ahora;
+            }
+
+        }
+
+        else
+            if(pivot->activa == 2)
+        {
+            if(ahora - pivot->tiempo_bomba >= 300) //300 ms de retardo
+            {
+                m->celdas[pivot->pos.x][pivot->pos.y] = VACIO;
+                limpiar_estela(m, pivot->pos.x, pivot->pos.y,vbomb->rango);
 
                 pivot->activa = 0;
                 pivot->pos.x = -1;
                 pivot->pos.y = -1;
             }
-
         }
         pivot++;
     }
 }
 
 
-void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta)
+void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo *e)
 {
     int i, j, aux_x, aux_y;
     int dir_x[] = {-1,1,0,0};
@@ -176,11 +190,50 @@ void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta)
                     }
                 break;
             }
-            /*if(m->celdas[aux_x][aux_y] == VACIO)
-                m->celdas[aux_x][aux_y] = '#';*/ //esto es como muestra, el tema es q no borra la estela.
-        }
 
+           if(e != NULL && e->esta_vivo == 1 && e->pos.x == aux_x && e->pos.y == aux_y)
+            {
+                e->esta_vivo == 0;
+                e->pos.x =-1;
+                e->pos.y = -1;
+            }
+
+            if(m->celdas[aux_x][aux_y] == VACIO)
+               if(m->celdas[aux_x][aux_y] != TECHO && m->celdas[aux_x][aux_y] != PISO)  //Detectar q la estela no haya muro
+                    m->celdas[aux_x][aux_y] = '#'; //esto es como muestra, el tema es q no borra la estela.
+
+
+
+        }
     }
+}
+
+void limpiar_estela(tMapa *m, int x, int y, int rango)
+{
+    int i, j, aux_x, aux_y;
+    int dir_x[] = {-1,1,0,0};
+    int dir_y[] = {0,0,-1,1};
+
+    if(m->celdas[x][y] == '#')
+        m->celdas[x][y]=VACIO;
+
+    for (i=0 ; i<4 ; i++)
+    {
+        for(j=1; j<=rango; j++)
+        {
+            aux_x = x + (j * dir_x[i]);
+            aux_y = y + (j * dir_y[i]);
+            if(aux_x < 0 || aux_y < 0 || aux_x >= m->filas || aux_y >= m->columnas)
+                break;
+            if(m->celdas[aux_x][aux_y] == PARED || m->celdas[aux_x][aux_y] == OBSTACULO)
+                break;
+
+            if(m->celdas[aux_x][aux_y] == '#')
+               m->celdas[aux_x][aux_y] = VACIO;
+        }
+    }
+
+
 }
 
 int Archivos_GuardarBombas(const char* binPath, vBombas *vbomb)

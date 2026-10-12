@@ -9,7 +9,7 @@
 #define ENEMIGO_VISUAL 69
 #define ENEMIGO_DAT "../Archivos/Enemigo.dat"
 
-typedef struct
+typedef struct tEnemigo
 {
     Posicion pos; //teniendo en cuenta que ponemos Posicion dentro de
     int esta_vivo; //comunes para que tanto el personaje como  los enemigos puedan usarla

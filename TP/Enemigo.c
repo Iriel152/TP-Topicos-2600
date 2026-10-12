@@ -161,7 +161,7 @@ void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, tPersonaje *personaje)
 }
 void EnemigoMovimientoxTiempo(DWORD ahora, tEnemigo *enemigo, tMapa *mapa, DWORD *tiempo_enemigo, tPersonaje *p)
 {
-    if(ahora - (*tiempo_enemigo) >= enemigo->velocidad)
+    if(ahora - (*tiempo_enemigo) >= enemigo->velocidad && enemigo->esta_vivo == 1)
     {
         DireccionEnemigo(enemigo);
         EnemigoMoverRandom(mapa, enemigo, p);

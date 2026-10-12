@@ -136,7 +136,7 @@ void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e, int temp
         {
             if (p != NULL && p->pos.x == i && p->pos.y == j)
                 printf("%c",PJP);
-            else if(e != NULL && e->pos.x == i && e->pos.y == j)
+            else if(e != NULL && e->esta_vivo == 1 && e->pos.x == i && e->pos.y == j)
                 printf("%c",ENEMIGO_VISUAL);
             else if (m->celdas[i][j] != VACIO)
                 printf("%c",m->celdas[i][j]);
