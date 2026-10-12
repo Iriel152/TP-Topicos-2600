@@ -9,7 +9,7 @@ tEnemigo* Enemigo_Crear(int fila, int columna)
     e->pos.x = fila;
     e->pos.y = columna;
     e->esta_vivo = 1;
-    e->velocidad = 800;
+    e->velocidad = 600;
     e->rebotes = 3;
     e->direccion = 0;
     e->lado = 0;

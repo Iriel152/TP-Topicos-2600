@@ -35,7 +35,7 @@ int MostrarMenuPrincipal()
         // Confirmación con tecla 'E' o Enter (ASCII 13)
         /// Acá le quiero poner el "Enter" pero no sé si jode otra función, lo probé y anda pero igual,
         /// habría que ver bien en la función EsLetraValida. Pero creo que no jode.
-        else if (EsLetraValida('E', tecla) == TODOOK || tecla == 13)
+        else if (EsLetraValida('E', tecla) == TODOOK)
         {
             system("cls");
             switch(seleccion)
@@ -94,7 +94,7 @@ int MenuEjecucion()
             seleccion = (seleccion - 1 + TOTAL_OPCIONES) % TOTAL_OPCIONES;
         else if (EsLetraValida('S', tecla) == TODOOK)
             seleccion = (seleccion + 1) % TOTAL_OPCIONES;
-        else if (EsLetraValida('E', tecla) == TODOOK || tecla == 13)
+        else if (EsLetraValida('E', tecla) == TODOOK)
         {
             system("cls");
             switch(seleccion)

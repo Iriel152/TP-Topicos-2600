@@ -1,12 +1,12 @@
 #include "Archivos.h"
 int ArchivosCargaDatos(void)
 {
-    FILE *pfMapa, *pfPrincipal, *pfEnemigo, *pfBombs;
+    FILE *pfMapa, *pfPrincipal, *pfEnemigo, *pfBombs, *pfPuerta;
     tMapa *mapa;
     tPersonaje *personaje;
     tEnemigo *enemigo;
     vBombas *vbomb;
-
+    tPuerta *puerta;
 
     pfMapa = fopen(MAPA_DAT,"rb");
     if(!pfMapa)
@@ -56,6 +56,18 @@ int ArchivosCargaDatos(void)
     }
     else
         fclose(pfBombs);
+
+    pfPuerta = fopen(PUERTA_DAT, "rb");
+    if(!pfPuerta)
+    {
+        puerta = Mapa_CrearPuerta();
+        if(!puerta)
+            return ERROR_ARCH;
+        Archivos_GuardarPuerta_Mapa(PUERTA_DAT, puerta);
+        Mapa_DestruirPuerta(puerta);
+    }
+    else
+        fclose(pfPuerta);
 
     return TODOOK;
 }

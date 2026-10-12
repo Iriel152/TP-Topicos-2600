@@ -9,7 +9,7 @@ tPersonaje* PJ_Princial_CrearPersonaje(int fila, int col)
     p->vidas = VIDAS_BASE;
     p->alcance_bomba = 2;
     p->esta_vivo = 1;
-    p->velocidad = 150;
+    p->velocidad = 550;
     p->puntaje = 0;
 
     return p;
@@ -84,8 +84,9 @@ void LimpiarLadosPJ(tMapa *m, tPersonaje *p)
 int MovimientoPJ(tMapa *m, tPersonaje *p, vBombas *vbomb)
 {
     char tecla;
-    int NuevaFila, NuevaColumna;
+    int NuevaFila, NuevaColumna, escenario;
 
+    escenario = CONTINUAR;
     tecla = _getch();
     NuevaFila = p->pos.x;
     NuevaColumna = p->pos.y;
@@ -94,13 +95,24 @@ int MovimientoPJ(tMapa *m, tPersonaje *p, vBombas *vbomb)
 
     switch(tecla)
     {
-        case 'W': case 'w' : NuevaFila--; break;
-        case 'S': case 's' : NuevaFila++; break;
-        case 'A': case 'a' : NuevaColumna--; break;
-        case 'D': case 'd' : NuevaColumna++; break;
-        case 'B': case 'b' : bomba_poner(vbomb,m,p); break;
-        case 27: return SALIR; break;
-        default: return CONTINUAR; break;
+        case 'W':
+            NuevaFila--;
+            break;
+        case 'S':
+            NuevaFila++;
+            break;
+        case 'A':
+            NuevaColumna--;
+            break;
+        case 'D':
+            NuevaColumna++;
+            break;
+        case 'E':
+            bomba_poner(vbomb,m,p);
+            break;
+        case 27:
+            escenario = SALIR;
+            break;
     }
 
     if(MovimientoValido(m, NuevaFila, NuevaColumna, 1))
@@ -109,7 +121,7 @@ int MovimientoPJ(tMapa *m, tPersonaje *p, vBombas *vbomb)
         p->pos.y = NuevaColumna;
     }
 
-    return CONTINUAR;
+    return escenario;
 }
 int Archivos_GuardarPersonaje(const char* binPath, tPersonaje *personaje)
 {

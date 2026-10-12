@@ -150,9 +150,6 @@ void AparicionPuerta(tMapa *mapa, tPuerta *puerta)
 {
     int i,j;
 
-    puerta->cualquiera = 0;
-    puerta->vacio = 0;
-
     for(i = 1; i < mapa->filas - 1; i++)
     {
         for(j = 1; j < mapa->columnas - 1; j++)
@@ -175,4 +172,60 @@ void AparicionPuerta(tMapa *mapa, tPuerta *puerta)
     {
         puerta->estado_puerta = ACTIVAR;
     }
+}
+tPuerta *Mapa_CrearPuerta()
+{
+    tPuerta *puerta = (tPuerta*)malloc(sizeof(tPuerta));
+    if(!puerta)
+        return NULL;
+    puerta->estado_puerta = DESACTIVADA;
+    puerta->cualquiera = 0;
+    puerta->prob = 0;
+    puerta->vacio = 0;
+
+    return puerta;
+}
+void Mapa_DestruirPuerta(tPuerta *puerta)
+{
+    if(puerta)
+        free(puerta);
+}
+tPuerta* Archivos_CargarPuerta(const char* binPath)
+{
+    FILE *pf;
+    tPuerta *puerta;
+    pf = fopen(binPath, "rb");
+    if(!pf)
+        return NULL;
+
+    puerta = (tPuerta*)malloc(sizeof(tPuerta));
+    if(!puerta)
+    {
+        fclose(pf);
+        return NULL;
+    }
+
+    fread(&(puerta->cualquiera), sizeof(int), 1, pf);
+    fread(&(puerta->estado_puerta), sizeof(int), 1, pf);
+    fread(&(puerta->prob), sizeof(float), 1, pf);
+    fread(&(puerta->vacio), sizeof(int), 1, pf);
+
+    fclose(pf);
+    return puerta;
+}
+int Archivos_GuardarPuerta_Mapa(const char* binPath, tPuerta *puerta)
+{
+    FILE *fbin;
+    fbin = fopen(binPath,"wb");
+
+    if(!fbin)
+        return ERROR_ARCH;
+
+    fwrite(&(puerta->cualquiera), sizeof(int), 1, fbin);
+    fwrite(&(puerta->estado_puerta), sizeof(int), 1, fbin);
+    fwrite(&(puerta->prob), sizeof(float), 1, fbin);
+    fwrite(&(puerta->vacio), sizeof(int), 1, fbin);
+
+    fclose(fbin);
+    return TODOOK;
 }

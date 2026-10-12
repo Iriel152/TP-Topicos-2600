@@ -19,7 +19,9 @@
 #define DESACTIVADA 0
 #define SALIDA 'S'
 #define PROBABILIDADPUERTA 0.7
+
 #define MAPA_DAT "../Archivos/Mapa.dat"
+#define PUERTA_DAT "../Archivos/Puerta.dat"
 
 ///ESTRUCTURAS
 typedef struct{
@@ -43,5 +45,9 @@ tMapa* Archivos_CargarMapa(const char* binPath);
 void Mapa_RellenoObstaculosRombiples(tMapa *p);
 int MovimientoValido(tMapa *mapa, int fila, int columna, int esPJP);
 void AparicionPuerta(tMapa *mapa, tPuerta *puerta);
+tPuerta *Mapa_CrearPuerta();
+void Mapa_DestruirPuerta(tPuerta *puerta);
+int Archivos_GuardarPuerta_Mapa(const char* binPath, tPuerta *puerta);
+tPuerta* Archivos_CargarPuerta(const char* binPath);
 
 #endif // MAPA_H_INCLUDED
