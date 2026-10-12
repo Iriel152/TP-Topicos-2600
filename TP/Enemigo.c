@@ -143,7 +143,7 @@ void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, tPersonaje *personaje)
                     break;
                 }break;
             }
-            if(MovimientoValido(mapa, nuevaFila, nuevaColumna, 0) && (personaje->pos.x != nuevaFila || personaje->pos.y != nuevaColumna))
+            if(MovimientoValido(mapa, nuevaFila, nuevaColumna, 0) /*&& (personaje->pos.x != nuevaFila || personaje->pos.y != nuevaColumna)*/)
             {
                 enemigo->pos.x = nuevaFila;
                 enemigo->pos.y = nuevaColumna;
@@ -174,8 +174,8 @@ void EnemigoDanioaPJ(tEnemigo *enemigo, tPersonaje *personaje)
     int distancia_x, distancia_y;
     distancia_x = enemigo->pos.x - personaje->pos.x;
     distancia_y = enemigo->pos.y - personaje->pos.y;
-    if(((distancia_x == 1 || distancia_x == -1) && distancia_y == 0) ||
-        ((distancia_y == 1 || distancia_y == -1) && distancia_x == 0))
+    if((distancia_x == 0 && distancia_y == 0)/*((distancia_x == 1 || distancia_x == -1) && distancia_y == 0) ||
+        ((distancia_y == 1 || distancia_y == -1) && distancia_x == 0)*/)
         personaje->vidas--;
 }
 void EnemigoMover(tMapa *mapa, tEnemigo *enemigo)

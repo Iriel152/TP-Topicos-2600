@@ -193,7 +193,7 @@ void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo 
 
            if(e != NULL && e->esta_vivo == 1 && e->pos.x == aux_x && e->pos.y == aux_y)
             {
-                e->esta_vivo == 0;
+                e->esta_vivo = 0;
                 pj->puntaje += 270;
                 e->pos.x =-1;
                 e->pos.y = -1;

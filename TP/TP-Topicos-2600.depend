@@ -122,75 +122,70 @@
 	"Mapa.h"
 	"PJ_Principal.h"
 
-1790290626 source:c:\users\admin\documents\github\tp-topicos-2600\tp\archivos.c
+1791811995 source:c:\users\admin\documents\github\tp-topicos-2600\tp\archivos.c
 	"Archivos.h"
 
-1790290626 c:\users\admin\documents\github\tp-topicos-2600\tp\archivos.h
+1791772399 c:\users\admin\documents\github\tp-topicos-2600\tp\archivos.h
 	"Mapa.h"
 	"PJ_Principal.h"
+	"Enemigo.h"
+	"Bomba.h"
 
-1790375925 c:\users\admin\documents\github\tp-topicos-2600\tp\mapa.h
-
-1790612445 c:\users\admin\documents\github\tp-topicos-2600\tp\pj_principal.h
+1791811996 c:\users\admin\documents\github\tp-topicos-2600\tp\mapa.h
 	"Comunes.h"
+
+1791845847 c:\users\admin\documents\github\tp-topicos-2600\tp\pj_principal.h
 	"Mapa.h"
+	"Comunes.h"
+	"Bomba.h"
 	<conio.h>
 
-1790461483 c:\users\admin\documents\github\tp-topicos-2600\tp\comunes.h
+1791772399 c:\users\admin\documents\github\tp-topicos-2600\tp\comunes.h
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
+	<windows.h>
+	<time.h>
 
-1790290626 source:c:\users\admin\documents\github\tp-topicos-2600\tp\comunes.c
+1791671108 source:c:\users\admin\documents\github\tp-topicos-2600\tp\comunes.c
 	"Comunes.h"
 
-1790290626 source:c:\users\admin\documents\github\tp-topicos-2600\tp\mapa.c
+1791811996 source:c:\users\admin\documents\github\tp-topicos-2600\tp\mapa.c
 	"Mapa.h"
-	"Comunes.h"
-	"PJ_Principal.h"
 
-1790461483 source:c:\users\admin\documents\github\tp-topicos-2600\tp\enemigo.c
+1791838664 source:c:\users\admin\documents\github\tp-topicos-2600\tp\enemigo.c
 	"Enemigo.h"
 
-1790461483 c:\users\admin\documents\github\tp-topicos-2600\tp\enemigo.h
+1791820393 c:\users\admin\documents\github\tp-topicos-2600\tp\enemigo.h
 	"Comunes.h"
 	"Mapa.h"
+	"PJ_Principal.h"
 
-1790461483 source:c:\users\admin\documents\github\tp-topicos-2600\tp\interfaz.c
+1791838498 source:c:\users\admin\documents\github\tp-topicos-2600\tp\interfaz.c
 	"Interfaz.h"
-	"Comunes.h"
-	"Mapa.h"
 
-1790461483 c:\users\admin\documents\github\tp-topicos-2600\tp\interfaz.h
+1791772399 c:\users\admin\documents\github\tp-topicos-2600\tp\interfaz.h
+	"Mapa.h"
+	"PJ_Principal.h"
+	"Enemigo.h"
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<conio.h>
-	"Mapa.h"
-	"PJ_Principal.h"
-	"Enemigo.h"
 
-1790604726 source:c:\users\admin\documents\github\tp-topicos-2600\tp\main.c
-	"Interfaz.h"
+1791811996 source:c:\users\admin\documents\github\tp-topicos-2600\tp\main.c
+	"Juego.h"
+
+1791811996 source:c:\users\admin\documents\github\tp-topicos-2600\tp\pj_principal.c
 	"PJ_Principal.h"
+
+1791844635 c:\users\admin\documents\github\tp-topicos-2600\tp\bomba.h
 	"Comunes.h"
 	"Mapa.h"
+
+1791845847 source:c:\users\admin\documents\github\tp-topicos-2600\tp\bomba.c
+	"Bomba.h"
 	"Enemigo.h"
-	"Bomba.h"
-	"Archivos.h"
-
-1790612065 source:c:\users\admin\documents\github\tp-topicos-2600\tp\pj_principal.c
-	"PJ_Principal.h"
-	"Mapa.h"
-	"Bomba.h"
-
-1790612445 c:\users\admin\documents\github\tp-topicos-2600\tp\bomba.h
-	"Comunes.h"
-	"Mapa.h"
-	"PJ_Principal.h"
-
-1790612065 source:c:\users\admin\documents\github\tp-topicos-2600\tp\bomba.c
-	"Bomba.h"
 
 1790375925 source:c:\users\admin\documents\github\tp-topicos-2600\tp\mapa.h
 
@@ -293,4 +288,93 @@
 	"Enemigo.h"
 	"Bomba.h"
 	"Archivos.h"
+
+1791811996 c:\users\admin\documents\github\tp-topicos-2600\tp\juego.h
+	"Interfaz.h"
+	"PJ_Principal.h"
+	"Comunes.h"
+	"Mapa.h"
+	"Enemigo.h"
+	"Bomba.h"
+	"Archivos.h"
+
+1791844629 source:c:\users\admin\documents\github\tp-topicos-2600\tp\juego.c
+	"Juego.h"
+
+1791811995 source:c:\users\mattf\downloads\tp-topicos-2600\tp\archivos.c
+	"Archivos.h"
+
+1791772399 c:\users\mattf\downloads\tp-topicos-2600\tp\archivos.h
+	"Mapa.h"
+	"PJ_Principal.h"
+	"Enemigo.h"
+	"Bomba.h"
+
+1791847573 c:\users\mattf\downloads\tp-topicos-2600\tp\mapa.h
+	"Comunes.h"
+
+1791772399 c:\users\mattf\downloads\tp-topicos-2600\tp\comunes.h
+	<time.h>
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<time.h>
+
+1791845847 c:\users\mattf\downloads\tp-topicos-2600\tp\pj_principal.h
+	"Mapa.h"
+	"Comunes.h"
+	"Bomba.h"
+	<conio.h>
+
+1791844635 c:\users\mattf\downloads\tp-topicos-2600\tp\bomba.h
+	"Comunes.h"
+	"Mapa.h"
+
+1791820393 c:\users\mattf\downloads\tp-topicos-2600\tp\enemigo.h
+	"Comunes.h"
+	"Mapa.h"
+	"PJ_Principal.h"
+
+1791846518 source:c:\users\mattf\downloads\tp-topicos-2600\tp\bomba.c
+	"Bomba.h"
+	"Enemigo.h"
+
+1791671108 source:c:\users\mattf\downloads\tp-topicos-2600\tp\comunes.c
+	"Comunes.h"
+
+1791847307 source:c:\users\mattf\downloads\tp-topicos-2600\tp\enemigo.c
+	"Enemigo.h"
+
+1791838498 source:c:\users\mattf\downloads\tp-topicos-2600\tp\interfaz.c
+	"Interfaz.h"
+
+1791772399 c:\users\mattf\downloads\tp-topicos-2600\tp\interfaz.h
+	"Mapa.h"
+	"PJ_Principal.h"
+	"Enemigo.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+
+1791844629 source:c:\users\mattf\downloads\tp-topicos-2600\tp\juego.c
+	"Juego.h"
+
+1791811996 c:\users\mattf\downloads\tp-topicos-2600\tp\juego.h
+	"Interfaz.h"
+	"PJ_Principal.h"
+	"Comunes.h"
+	"Mapa.h"
+	"Enemigo.h"
+	"Bomba.h"
+	"Archivos.h"
+
+1791811996 source:c:\users\mattf\downloads\tp-topicos-2600\tp\main.c
+	"Juego.h"
+
+1791811996 source:c:\users\mattf\downloads\tp-topicos-2600\tp\mapa.c
+	"Mapa.h"
+
+1791811996 source:c:\users\mattf\downloads\tp-topicos-2600\tp\pj_principal.c
+	"PJ_Principal.h"
 
