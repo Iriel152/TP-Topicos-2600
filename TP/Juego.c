@@ -42,7 +42,7 @@ int JuegoEnCurso(int opcion)
             if(!puerta->estado_puerta)
                 AparicionPuerta(mapa,puerta);
 
-            actualizar_bomba(bombs,mapa,ahora,puerta,enemigo);
+            actualizar_bomba(bombs,mapa,ahora,puerta,enemigo,personaje);
             EnemigoMovimientoxTiempo(ahora, enemigo, mapa, &tiempo_enemigo, personaje);
             PJMovimientoxTiempo(ahora, personaje, mapa, &tiempo_pj, &seguir,bombs);
 

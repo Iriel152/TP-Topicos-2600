@@ -117,7 +117,7 @@ int hay_bomba(const vBombas *vbomb, int x, int y)
 //*///
 //FUNCION PARA QUE EL TIMER DE LA BOMBA DECREMENTE A LAP AR QUE EL JUGADOR INTENTE MOVERSE NO LIMPIA DEL MAPA LA BOMBA
 //FALTA FUNCION BORRAR BOMBA LO TENGO AHI TODO METIDO. EN EL MOMENTO Q BORRA LA BOMBA EPLOTA
-void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta, tEnemigo *e)
+void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta, tEnemigo *e, tPersonaje *pj)
 {
     int i;
     Bomba *pivot;
@@ -136,7 +136,7 @@ void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta, tE
             {
                 m->celdas[pivot->pos.x][pivot->pos.y] = '#';
 
-                explotar_bomba(m,pivot->pos.x,pivot->pos.y,vbomb->rango,puerta,e);
+                explotar_bomba(m,pivot->pos.x,pivot->pos.y,vbomb->rango,puerta,e,pj);
 
                 pivot->activa = 2;
                 pivot->tiempo_bomba = ahora;
@@ -162,7 +162,7 @@ void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta, tE
 }
 
 
-void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo *e)
+void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo *e,tPersonaje *pj)
 {
     int i, j, aux_x, aux_y;
     int dir_x[] = {-1,1,0,0};
@@ -194,6 +194,7 @@ void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo 
            if(e != NULL && e->esta_vivo == 1 && e->pos.x == aux_x && e->pos.y == aux_y)
             {
                 e->esta_vivo == 0;
+                pj->puntaje += 270;
                 e->pos.x =-1;
                 e->pos.y = -1;
             }

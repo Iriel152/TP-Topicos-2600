@@ -16,7 +16,7 @@
 #define VIDAS_BASE 3
 
 ///ESTRUCTURAS
-typedef struct{
+typedef struct tPersonaje{
     Posicion pos;
     int vidas;
     int alcance_bomba;
