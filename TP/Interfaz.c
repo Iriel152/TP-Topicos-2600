@@ -156,3 +156,12 @@ void PantallaGameOver()
     AlinearCentro("GAME OVER", n_centrado, COLOR_NORMAL, T_No_seleccionado);
     Sleep(6000);
 }
+
+void PantallaVictoria()
+{
+    system("cls");
+    TituloSistema();
+    printf("\n\n");
+    AlinearCentro("VICTORIA", n_centrado, COLOR_NORMAL, T_No_seleccionado);
+    Sleep(6000);
+}

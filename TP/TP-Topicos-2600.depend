@@ -72,16 +72,16 @@
 	"Enemigo.h"
 	"Bomba.h"
 
-1791750346 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\mapa.h
+1791765186 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\mapa.h
 	"Comunes.h"
 
-1791757434 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.h
+1791764918 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.h
 	"Mapa.h"
 	"Comunes.h"
 	"Bomba.h"
 	<conio.h>
 
-1791757434 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\comunes.h
+1791764918 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\comunes.h
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
@@ -91,10 +91,10 @@
 1791750346 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\comunes.c
 	"Comunes.h"
 
-1791750346 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
+1791764918 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
 	"Interfaz.h"
 
-1791750346 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.h
+1791764918 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.h
 	"Mapa.h"
 	"PJ_Principal.h"
 	"Enemigo.h"
@@ -103,7 +103,7 @@
 	<string.h>
 	<conio.h>
 
-1791757496 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\main.c
+1791765999 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\main.c
 	"Interfaz.h"
 	"PJ_Principal.h"
 	"Comunes.h"
@@ -112,10 +112,10 @@
 	"Bomba.h"
 	"Archivos.h"
 
-1791757434 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.c
+1791764918 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.c
 	"PJ_Principal.h"
 
-1791750346 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\mapa.c
+1791764976 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\mapa.c
 	"Mapa.h"
 
 1791706143 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.c
@@ -277,13 +277,13 @@
 	"Mapa.h"
 	"PJ_Principal.h"
 
-1791757434 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\bomba.c
+1791763241 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\bomba.c
 	"Bomba.h"
 
-1791757434 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\bomba.h
+1791763125 c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\bomba.h
 	"Comunes.h"
 	"Mapa.h"
 
-1791750346 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.c
+1791764003 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.c
 	"Enemigo.h"
 

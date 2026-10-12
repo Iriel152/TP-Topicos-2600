@@ -143,7 +143,7 @@ void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, tPersonaje *personaje)
                     break;
                 }break;
             }
-            if(MovimientoValido(mapa, nuevaFila, nuevaColumna) && (personaje->pos.x != nuevaFila || personaje->pos.y != nuevaColumna))
+            if(MovimientoValido(mapa, nuevaFila, nuevaColumna, 0) && (personaje->pos.x != nuevaFila || personaje->pos.y != nuevaColumna))
             {
                 enemigo->pos.x = nuevaFila;
                 enemigo->pos.y = nuevaColumna;
@@ -208,7 +208,7 @@ void EnemigoMover(tMapa *mapa, tEnemigo *enemigo)
             break;
     }
 
-    if(MovimientoValido(mapa, nuevaFila, nuevaColumna))
+    if(MovimientoValido(mapa, nuevaFila, nuevaColumna, 0))
     {
         enemigo->pos.x = nuevaFila;
         enemigo->pos.y = nuevaColumna;

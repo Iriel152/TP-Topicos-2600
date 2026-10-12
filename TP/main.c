@@ -13,6 +13,9 @@ int main()
     tPersonaje *personaje;
     tEnemigo *enemigo;
     vBombas *bombs;
+    tPuerta puerta;
+
+    puerta.estado_puerta = DESACTIVADA;
 
     srand(time(NULL));
 
@@ -50,15 +53,26 @@ int main()
                 temporizador = TIEMPOFIN - ASegundos(ahora - tiempo_reloj);
                 renderizar(mapa, personaje, enemigo, temporizador);
 
-                actualizar_bomba(bombs,mapa,ahora);
+                if(!puerta.estado_puerta)
+                {
+                    AparicionPuerta(mapa,&puerta);
+                }
+
+                actualizar_bomba(bombs,mapa,ahora,&puerta);
                 EnemigoMovimientoxTiempo(ahora, enemigo, mapa, &tiempo_enemigo, personaje);
                 PJMovimientoxTiempo(ahora, personaje, mapa, &tiempo_pj, &seguir,bombs);
 
-                if(temporizador == 0)
+                if(temporizador == 0 || personaje->vidas == 0)
                 {
                     seguir = GAMEOVER;
                     PantallaGameOver();
                 }
+                if(PJEnSalida(mapa,personaje))
+                {
+                    seguir = VICTORIA;
+                    PantallaVictoria();
+                }
+
                 if(seguir == SALIR)
                     seguir = MenuEjecucion();
 

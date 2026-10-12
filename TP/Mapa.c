@@ -123,12 +123,20 @@ tMapa* Archivos_CargarMapa(const char* binPath)
     fclose(pf);
     return mapa;
 }
-int MovimientoValido(tMapa *mapa, int fila, int columna)
+int MovimientoValido(tMapa *mapa, int fila, int columna, int esPJP)
 {
     if(fila < 0 || fila >= FILAS ||
        columna < 0 || columna >= COLUMNAS)
     {
         return 0;
+    }
+
+    if(esPJP)
+    {
+        if(mapa->celdas[fila][columna] == SALIDA)
+        {
+            return 1;
+        }
     }
 
     if(mapa->celdas[fila][columna] != VACIO)
@@ -137,4 +145,34 @@ int MovimientoValido(tMapa *mapa, int fila, int columna)
     }
 
     return 1;
+}
+void AparicionPuerta(tMapa *mapa, tPuerta *puerta)
+{
+    int i,j;
+
+    puerta->cualquiera = 0;
+    puerta->vacio = 0;
+
+    for(i = 1; i < mapa->filas - 1; i++)
+    {
+        for(j = 1; j < mapa->columnas - 1; j++)
+        {
+            if(mapa->celdas[i][j] == VACIO)
+            {
+                puerta->vacio++;
+                puerta->cualquiera++;
+            }
+            if(mapa->celdas[i][j] == ROMPIBLE)
+            {
+                puerta->cualquiera++;
+            }
+        }
+    }
+
+    puerta->prob = (float)puerta->vacio/(float)puerta->cualquiera;
+
+    if(puerta->prob > PROBABILIDADPUERTA)
+    {
+        puerta->estado_puerta = ACTIVAR;
+    }
 }

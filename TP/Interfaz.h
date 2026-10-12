@@ -38,5 +38,6 @@ int SeleccionMenuPartida(int *seleccion, const char *opciones[]);
 void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e, int);
 int MostrarMenuPrincipal();
 void PantallaGameOver();
+void PantallaVictoria();
 
 #endif // INTERFAZ_H_INCLUDED

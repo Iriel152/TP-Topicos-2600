@@ -37,5 +37,6 @@ int Archivos_GuardarPersonaje(const char* binPath, tPersonaje *personaje);
 tPersonaje* Archivos_CargarPersonaje(const char* binPath);
 void PJMovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa, DWORD *tiempo_personaje, int* seguir, vBombas *vbomb);
 int  bomba_poner(vBombas *vbomb, tMapa *m, tPersonaje *p);
+int PJEnSalida(tMapa*,tPersonaje*);
 
 #endif // PJ_PRINCIPAL_H_INCLUDED

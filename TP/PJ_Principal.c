@@ -103,7 +103,7 @@ int MovimientoPJ(tMapa *m, tPersonaje *p, vBombas *vbomb)
         default: return CONTINUAR; break;
     }
 
-    if(MovimientoValido(m, NuevaFila, NuevaColumna))
+    if(MovimientoValido(m, NuevaFila, NuevaColumna, 1))
     {
         p->pos.x = NuevaFila;
         p->pos.y = NuevaColumna;
@@ -196,4 +196,13 @@ int bomba_poner(vBombas*vbomb, tMapa *m, tPersonaje *p)
     }
     return ERROR_;
 
+}
+int PJEnSalida(tMapa *m, tPersonaje *p)
+{
+    if(m->celdas[p->pos.x][p->pos.y] == SALIDA)
+    {
+        return 1;
+    }
+
+    return 0;
 }

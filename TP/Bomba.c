@@ -118,7 +118,7 @@ int hay_bomba(const vBombas *vbomb, int x, int y)
 //*///
 //FUNCION PARA QUE EL TIMER DE LA BOMBA DECREMENTE A LAP AR QUE EL JUGADOR INTENTE MOVERSE NO LIMPIA DEL MAPA LA BOMBA
 //FALTA FUNCION BORRAR BOMBA LO TENGO AHI TODO METIDO. EN EL MOMENTO Q BORRA LA BOMBA EPLOTA
-void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora)
+void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta)
 {
     int i;
     Bomba *pivot;
@@ -137,7 +137,7 @@ void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora)
             {
                 m->celdas[pivot->pos.x][pivot->pos.y] = VACIO;
 
-                explotar_bomba(m,pivot->pos.x,pivot->pos.y,vbomb->rango);
+                explotar_bomba(m,pivot->pos.x,pivot->pos.y,vbomb->rango,puerta);
 
                 pivot->activa = 0;
                 pivot->pos.x = -1;
@@ -150,7 +150,7 @@ void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora)
 }
 
 
-void explotar_bomba(tMapa *m, int x, int y, int rango)
+void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta)
 {
     int i, j, aux_x, aux_y;
     int dir_x[] = {-1,1,0,0};
@@ -168,7 +168,14 @@ void explotar_bomba(tMapa *m, int x, int y, int rango)
                 break;
             if(m->celdas[aux_x][aux_y] == ROMPIBLE)
             {
-                m->celdas[aux_x][aux_y] = VACIO;
+                if(puerta->estado_puerta == ACTIVAR)
+                {
+                    m->celdas[aux_x][aux_y] = SALIDA;
+                    puerta->estado_puerta = ACTIVA;
+                }else
+                    {
+                        m->celdas[aux_x][aux_y] = VACIO;
+                    }
                 break;
             }
             /*if(m->celdas[aux_x][aux_y] == VACIO)

@@ -33,6 +33,7 @@
 #define CARGARP 1
 #define CONTINUAR 2
 #define SALIR 3
+#define VICTORIA 4
 #define AMAYUSCULA(X) ((X) >= 'a' && (X) <= 'z') ? (X) - 32 : (X)
 
 ///ESTRUCTURAS
