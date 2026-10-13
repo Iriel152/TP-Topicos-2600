@@ -136,7 +136,7 @@ void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta, tE
             {
                 m->celdas[pivot->pos.x][pivot->pos.y] = '#';
 
-                explotar_bomba(m,pivot->pos.x,pivot->pos.y,vbomb->rango,puerta,e,pj);
+                explotar_bomba(m,pivot->pos.x,pivot->pos.y,vbomb->rango,puerta,e,pj,ahora);
 
                 pivot->activa = 2;
                 pivot->tiempo_bomba = ahora;
@@ -162,7 +162,7 @@ void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta, tE
 }
 
 
-void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo *e,tPersonaje *pj)
+void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo *e,tPersonaje *pj,DWORD ahora)
 {
     int i, j, aux_x, aux_y;
     int dir_x[] = {-1,1,0,0};
@@ -202,6 +202,8 @@ void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo 
             if(pj!=NULL && pj->pos.x == aux_x && pj->pos.y == aux_y)
             {
                 pj->vidas--;
+                pj->esta_vivo = 2;
+                pj->invul = ahora;
             }
 
             if(m->celdas[aux_x][aux_y] == VACIO)

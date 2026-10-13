@@ -171,6 +171,10 @@ void PJMovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa, DWORD 
 {
     if(_kbhit())
     {
+        if(personaje->esta_vivo == 2 && (ahora - personaje->invul) >= TIMER_INVUL)
+        {
+            personaje->esta_vivo = 1;
+        }
         if(ahora - (*tiempo_personaje) >= personaje->velocidad)
         {
             *seguir = MovimientoPJ(mapa, personaje, vbomb);

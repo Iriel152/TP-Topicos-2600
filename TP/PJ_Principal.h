@@ -14,6 +14,7 @@
 #define PJP 80
 #define PJ_Principal_DAT "../Archivos/PJ_Principal.dat"
 #define VIDAS_BASE 3
+#define TIMER_INVUL 1500
 
 ///ESTRUCTURAS
 typedef struct tPersonaje{
@@ -23,6 +24,7 @@ typedef struct tPersonaje{
     int esta_vivo;
     int velocidad;
     int puntaje;
+    DWORD invul;
 }tPersonaje;
 
 typedef struct vBombas vBombas;

@@ -165,18 +165,25 @@ void EnemigoMovimientoxTiempo(DWORD ahora, tEnemigo *enemigo, tMapa *mapa, DWORD
     {
         DireccionEnemigo(enemigo);
         EnemigoMoverRandom(mapa, enemigo, p);
-        EnemigoDanioaPJ(enemigo, p);
+        EnemigoDanioaPJ(enemigo, p, ahora);
         *tiempo_enemigo = ahora;
     }
 }
-void EnemigoDanioaPJ(tEnemigo *enemigo, tPersonaje *personaje)
+void EnemigoDanioaPJ(tEnemigo *enemigo, tPersonaje *personaje, DWORD ahora)
 {
+    if(personaje->esta_vivo == 2)
+        return;
+
     int distancia_x, distancia_y;
     distancia_x = enemigo->pos.x - personaje->pos.x;
     distancia_y = enemigo->pos.y - personaje->pos.y;
     if((distancia_x == 0 && distancia_y == 0)/*((distancia_x == 1 || distancia_x == -1) && distancia_y == 0) ||
         ((distancia_y == 1 || distancia_y == -1) && distancia_x == 0)*/)
+    {
         personaje->vidas--;
+        personaje->esta_vivo = 2;
+        personaje->invul = ahora;
+    }
 }
 void EnemigoMover(tMapa *mapa, tEnemigo *enemigo)
 {

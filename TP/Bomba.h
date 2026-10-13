@@ -35,7 +35,7 @@ int insertar_bomba(vBombas*vbomb);
 ///int  bomba_poner(vBombas *vbomb, tMapa *m, tPersonaje *p);
 int  hay_bomba(const vBombas *vbomb, int x, int y);
 void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta,tEnemigo *e,tPersonaje *pj);
-void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo *e,tPersonaje *pj);
+void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo *e,tPersonaje *pj,DWORD ahora);
 void limpiar_estela(tMapa *m, int x, int y, int rango);
 int Archivos_GuardarBombas(const char* binPath, vBombas *vbomb);
 vBombas* Archivos_CargarB(const char* binPath);
