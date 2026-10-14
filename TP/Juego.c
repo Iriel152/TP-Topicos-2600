@@ -1,5 +1,5 @@
 #include "Juego.h"
-int JuegoEnCurso(int opcion)
+int Juego_EnCurso(int opcion)
 {
     int seguir, temporizador;
     DWORD ahora, tiempo_enemigo, tiempo_reloj, tiempo_pj;
@@ -20,7 +20,7 @@ int JuegoEnCurso(int opcion)
         PJ_Principal_AparicionRandom(mapa, personaje);
         LimpiarLadosPJ(mapa, personaje);
 
-        enemigo = Archivos_CargarEnemigo(ENEMIGO_DAT);
+        enemigo = Enemigo_ArchivosCargar(ENEMIGO_DAT);
         Enemigo_AparicionRandom(mapa, enemigo);
 
         puerta = Archivos_CargarPuerta(PUERTA_DAT);
@@ -37,7 +37,7 @@ int JuegoEnCurso(int opcion)
             ahora = GetTickCount();
 
             temporizador = TIEMPOFIN - ASegundos(ahora - tiempo_reloj);
-            renderizar(mapa, personaje, enemigo, temporizador);
+            Interfaz_renderizar(mapa, personaje, enemigo, temporizador);
 
             if(!puerta->estado_puerta)
                 AparicionPuerta(mapa,puerta);
@@ -49,16 +49,16 @@ int JuegoEnCurso(int opcion)
             if(temporizador == 0 || personaje->vidas == 0)
             {
                 seguir = GAMEOVER;
-                PantallaGameOver();
+                Interfaz_PantallaMensaje(GAMEOVER_C);
             }
             if(PJEnSalida(mapa,personaje))
             {
                 seguir = VICTORIA;
-                PantallaVictoria();
+                Interfaz_PantallaMensaje(VICTORIA_C);
             }
 
             if(seguir == SALIR)
-                seguir = MenuEjecucion();
+                seguir = Interfaz_MenuEjecucion();
 
             Sleep(16);
         }

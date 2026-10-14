@@ -10,6 +10,6 @@
 #include "Bomba.h"
 #include "Archivos.h"
 
-int JuegoEnCurso(int opcion);
+int Juego_EnCurso(int opcion);
 
 #endif // JUEGO_H_INCLUDED

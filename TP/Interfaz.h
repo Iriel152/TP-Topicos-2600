@@ -6,38 +6,33 @@
 #include "PJ_Principal.h"
 #include "Enemigo.h"
 
-
 ///BIBLIOTECAS
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
 
+///TEXTO
+#define TITULO_C "BOMBERMAN"
+#define GAMEOVER_C "GAMEOVER"
+#define VICTORIA_C "VICTORIA"
 ///FORMATO TEXTO
-#define Titulo "BOMBERMAN"
-#define n_centrado 52
-#define T_seleccionado 2
-#define T_No_seleccionado 0
-#define TOTAL_OPCIONES 3
-
+#define N_CENTRADO 52
+#define T_SELECCIONADO 2
+#define T_NO_SELECCIONADO 0
 
 ///COLORES
 #define COLOR_RESET   "\033[0m"
-#define COLOR_ACTIVO  "\033[1;30;47m" // Texto negro, fondo blanco
+#define COLOR_ACTIVO  "\033[1;30;47m"
 #define COLOR_NORMAL  "\033[0;37m"
-#define RUTA_SAVE "partida.dat"
 
-void MenuInicio();
-void PantallaInicio(int *, const char *opciones[]);
-void Separador(int);
-void TituloSistema();
-void AlinearCentro(const char*, int, const char *, int);
-int SeleccionMenuInicio(int *seleccion, const char *opciones[]);
-int MenuEjecucion();
-int SeleccionMenuPartida(int *seleccion, const char *opciones[]);
-void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e, int);
-int MostrarMenuPrincipal();
-void PantallaGameOver();
-void PantallaVictoria();
+int Interfaz_MostrarMenuPrincipal();
+void Interfaz_PantallaInicio(int *, const char**, int);
+void Interfaz_TituloSistema();
+void Interfaz_Separador(int);
+void Interfaz_AlinearCentro(const char*, int, const char*, int);
+int Interfaz_MenuEjecucion();
+void Interfaz_renderizar(const tMapa*, const tPersonaje*, const tEnemigo*, int);
+void Interfaz_PantallaMensaje(const char *);
 
 #endif // INTERFAZ_H_INCLUDED

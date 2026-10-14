@@ -1,40 +1,26 @@
 #include "Interfaz.h"
-void PantallaInicio(int *seleccion, const char *opciones[])
+int Interfaz_MostrarMenuPrincipal()
 {
-    int i;
-    TituloSistema();
-    for (i = 0; i < TOTAL_OPCIONES; i++)
-    {
-        if (i == *seleccion)
-            AlinearCentro(opciones[i], n_centrado, COLOR_ACTIVO, T_seleccionado);
-        else
-            AlinearCentro(opciones[i], n_centrado,COLOR_NORMAL, T_No_seleccionado);
-    }
-    Separador(n_centrado);
-}
-int MostrarMenuPrincipal()
-{
-    int seleccion = 0;
-    int tecla;
-    const char *opciones[TOTAL_OPCIONES] = {
+    int seleccion = 0, tecla, cant_op;
+    const char *opciones[] = {
         "Nueva Partida",
         "Cargar Partida",
         "Salir"
     };
 
+    cant_op = (int)sizeof(opciones)/sizeof(*opciones);
+
     while (1)
     {
 
         system("cls");
-        PantallaInicio(&seleccion, opciones);
+        Interfaz_PantallaInicio(&seleccion, opciones, cant_op);
         tecla = _getch();
+
         if (EsLetraValida('W', tecla) == TODOOK)
-            seleccion = (seleccion - 1 + TOTAL_OPCIONES) % TOTAL_OPCIONES;
+            seleccion = (seleccion - 1 + cant_op) % cant_op;
         else if (EsLetraValida('S', tecla) == TODOOK)
-            seleccion = (seleccion + 1) % TOTAL_OPCIONES;
-        // Confirmación con tecla 'E' o Enter (ASCII 13)
-        /// Acá le quiero poner el "Enter" pero no sé si jode otra función, lo probé y anda pero igual,
-        /// habría que ver bien en la función EsLetraValida. Pero creo que no jode.
+            seleccion = (seleccion + 1) % cant_op;
         else if (EsLetraValida('E', tecla) == TODOOK)
         {
             system("cls");
@@ -50,50 +36,72 @@ int MostrarMenuPrincipal()
                     seleccion = SALIR;
                     break;
             }
-            return seleccion; // Retorna 0, 1 o 2
+            return seleccion;
         }
     }
 }
-void Separador(int n)
+void Interfaz_PantallaInicio(int *seleccion, const char **opciones, int cant)
+{
+    int i;
+
+    Interfaz_TituloSistema();
+
+    for (i = 0; i < cant; i++)
+    {
+        if (i == *seleccion)
+            Interfaz_AlinearCentro(*(opciones + i), N_CENTRADO, COLOR_ACTIVO, T_SELECCIONADO);
+        else
+            Interfaz_AlinearCentro(*(opciones + i), N_CENTRADO, COLOR_NORMAL, T_NO_SELECCIONADO);
+    }
+    Interfaz_Separador(N_CENTRADO);
+}
+void Interfaz_TituloSistema()
+{
+    Interfaz_Separador(N_CENTRADO);
+    Interfaz_AlinearCentro(TITULO_C, N_CENTRADO, COLOR_NORMAL, T_NO_SELECCIONADO);
+    Interfaz_Separador(N_CENTRADO);
+}
+void Interfaz_Separador(int n)
 {
     int i;
     for(i=0;i<n;i++)
         printf("=");
     printf("\n");
 }
-void TituloSistema()
-{
-    Separador(n_centrado);
-    AlinearCentro(Titulo, n_centrado, COLOR_NORMAL, T_No_seleccionado);
-    Separador(n_centrado);
-}
-void AlinearCentro(const char* palabra, int total, const char* color, int selec)
+void Interfaz_AlinearCentro(const char* palabra, int total, const char* color, int selec)
 {
     int tam, i;
     char* caracter = " >";
+
     tam = strlen(palabra);
     tam = tam/2;
+
     for(i=0;i<total/2 - tam - selec;i++)
         printf(" ");
     if(selec == 0)
         caracter = "";
+
     printf("%s%s%s %s\n", color, caracter, palabra, COLOR_RESET);
 }
-int MenuEjecucion()
+int Interfaz_MenuEjecucion()
 {
-    int seleccion=0, tecla;
-    const char *opciones[TOTAL_OPCIONES] = {"Continuar",
-                                            "Nueva Partida",
-                                            "Volver"};
+    int seleccion=0, tecla, cant_op;
+    const char *opciones[] = {  "Continuar",
+                                "Nueva Partida",
+                                "Volver"};
+
+    cant_op = (int)sizeof(opciones)/sizeof(*opciones);
+
     while(1)
     {
         system("cls");
-        PantallaInicio(&seleccion, opciones);
+        Interfaz_PantallaInicio(&seleccion, opciones, cant_op);
         tecla = _getch();
+
         if (EsLetraValida('W', tecla) == TODOOK)
-            seleccion = (seleccion - 1 + TOTAL_OPCIONES) % TOTAL_OPCIONES;
+            seleccion = (seleccion - 1 + cant_op) % cant_op;
         else if (EsLetraValida('S', tecla) == TODOOK)
-            seleccion = (seleccion + 1) % TOTAL_OPCIONES;
+            seleccion = (seleccion + 1) % cant_op;
         else if (EsLetraValida('E', tecla) == TODOOK)
         {
             system("cls");
@@ -109,11 +117,11 @@ int MenuEjecucion()
                     seleccion = SALIR;
                     break;
             }
-            return seleccion; // Retorna 0, 1 o 2
+            return seleccion;
         }
     }
 }
-void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e, int temporizador)
+void Interfaz_renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e, int temporizador)
 {
     int i, j;
     UINT consolaOriginal;
@@ -124,7 +132,7 @@ void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e, int temp
     consolaOriginal = GetConsoleOutputCP();
     SetConsoleOutputCP(CP_UTF8);
 
-    for(i=0; i<p->vidas ; i++)
+    for(i = 0 ; i < p->vidas ; i++)
         printf("\u2665");
 
     printf("\033[K");
@@ -132,20 +140,20 @@ void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e, int temp
     printf("\n");
     for (i = 0; i < m->filas; i++)
     {
-        for (j = 0; j < m->columnas; j++)
+        for (j = 0; j < m->columnas ; j++)
         {
             if (p != NULL && p->pos.x == i && p->pos.y == j)
             {
-                if(p->esta_vivo == 2 && (GetTickCount()%300)<150)
+                if(p->esta_vivo == 2 && (GetTickCount() % 300) < 150)
                     printf(" ");
                 else
-                    printf("%c",PJP);
+                    printf("%c", PJP);
             }
 
             else if(e != NULL && e->esta_vivo == 1 && e->pos.x == i && e->pos.y == j)
-                printf("%c",ENEMIGO_VISUAL);
+                printf("%c", ENEMIGO_VISUAL);
             else if (m->celdas[i][j] != VACIO)
-                printf("%c",m->celdas[i][j]);
+                printf("%c", m->celdas[i][j]);
             else
                 printf(" ");
         }
@@ -154,20 +162,11 @@ void renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e, int temp
 
     fflush(stdout);
 }
-void PantallaGameOver()
+void Interfaz_PantallaMensaje(const char *frase)
 {
     system("cls");
-    TituloSistema();
+    Interfaz_TituloSistema();
     printf("\n\n");
-    AlinearCentro("GAME OVER", n_centrado, COLOR_NORMAL, T_No_seleccionado);
-    Sleep(6000);
-}
-
-void PantallaVictoria()
-{
-    system("cls");
-    TituloSistema();
-    printf("\n\n");
-    AlinearCentro("VICTORIA", n_centrado, COLOR_NORMAL, T_No_seleccionado);
+    Interfaz_AlinearCentro(frase, N_CENTRADO, COLOR_NORMAL, T_NO_SELECCIONADO);
     Sleep(6000);
 }

@@ -1,18 +1,21 @@
 #ifndef ENEMIGO_H_INCLUDED
 #define ENEMIGO_H_INCLUDED
 
+///.h
 #include "Comunes.h"
 #include "Mapa.h"
 #include "PJ_Principal.h"
 
+///DEFINE
 #define MAX_ENEMIGOS 5
 #define ENEMIGO_VISUAL 69
 #define ENEMIGO_DAT "../Archivos/Enemigo.dat"
 
+///ESTRUCTURAS
 typedef struct tEnemigo
 {
-    Posicion pos; //teniendo en cuenta que ponemos Posicion dentro de
-    int esta_vivo; //comunes para que tanto el personaje como  los enemigos puedan usarla
+    Posicion pos;
+    int esta_vivo;
     int velocidad;
     int rebotes;
     int direccion;
@@ -20,16 +23,14 @@ typedef struct tEnemigo
     int valor;
 }tEnemigo;
 
-tEnemigo* Enemigo_Crear(int fila, int columna); //crea enemigo
-void Enemigo_Destruir(tEnemigo*); //libera memoria
-void Enemigo_Mover(tMapa*, tEnemigo*); //intenta moverse
-void Enemigo_AparicionRandom(tMapa*, tEnemigo*);//aparicion random
-int Archivos_GuardarEnemigo(const char* binPath, tEnemigo *enemigo);
-tEnemigo* Archivos_CargarEnemigo(const char* binPath);
-void EnemigoMover(tMapa *m, tEnemigo *e/*, int *eRebotes, int *eDireccion, int *eLados*/);
-void DireccionEnemigo(tEnemigo *enemigo);
-void EnemigoMoverRandom(tMapa *m, tEnemigo *e, tPersonaje *p);
-void EnemigoMovimientoxTiempo(DWORD tiempo, tEnemigo *enemigo, tMapa *mapa, DWORD *tiempo_enemigo, tPersonaje *p);
-void EnemigoDanioaPJ(tEnemigo *enemigo, tPersonaje *personaje, DWORD ahora);
+tEnemigo* Enemigo_Crear(int, int);
+void Enemigo_Destruir(tEnemigo*);
+int Enemigo_ArchivosGuardar(const char*, tEnemigo*);
+tEnemigo* Enemigo_ArchivosCargar(const char* );
+void Enemigo_AparicionRandom(tMapa*, tEnemigo*);
+void EnemigoMovimientoxTiempo(DWORD, tEnemigo*, tMapa*, DWORD *, tPersonaje *p);
+void DireccionEnemigo(tEnemigo*);
+void EnemigoMoverRandom(tMapa*, tEnemigo*, tPersonaje*);
+void EnemigoDanioaPJ(tEnemigo*, tPersonaje*, DWORD );
 
 #endif // ENEMIGO_H_INCLUDED

@@ -17,29 +17,12 @@ tEnemigo* Enemigo_Crear(int fila, int columna)
 
     return e;
 }
-
 void Enemigo_Destruir(tEnemigo *e)
 {
     if(e)
         free(e);
 }
-
-void Enemigo_AparicionRandom(tMapa *m, tEnemigo *e) //hay que mejorarla para que no se posicione encima de otro enemigo/del jugador
-{
-    int fila;
-    int columna;
-
-    do
-    {
-        fila = ObtenerNumeroAleatorio(1, m->filas - 2);
-        columna = ObtenerNumeroAleatorio(1, m->columnas - 2);
-
-    } while(m->celdas[fila][columna] != VACIO);
-
-    e->pos.x = fila;
-    e->pos.y = columna;
-}
-int Archivos_GuardarEnemigo(const char* binPath, tEnemigo *enemigo)
+int Enemigo_ArchivosGuardar(const char* binPath, tEnemigo *enemigo)
 {
     FILE *fbin;
     fbin = fopen(binPath, "wb");
@@ -58,7 +41,7 @@ int Archivos_GuardarEnemigo(const char* binPath, tEnemigo *enemigo)
     fclose(fbin);
     return TODOOK;
 }
-tEnemigo* Archivos_CargarEnemigo(const char* binPath)
+tEnemigo* Enemigo_ArchivosCargar(const char* binPath)
 {
     tEnemigo *enemigo;
     FILE *pf;
@@ -85,6 +68,30 @@ tEnemigo* Archivos_CargarEnemigo(const char* binPath)
     fclose(pf);
     return enemigo;
 }
+void Enemigo_AparicionRandom(tMapa *m, tEnemigo *e)
+{
+    int fila, columna;
+
+    do
+    {
+        fila = ObtenerNumeroAleatorio(1, m->filas - 2);
+        columna = ObtenerNumeroAleatorio(1, m->columnas - 2);
+
+    } while(m->celdas[fila][columna] != VACIO);
+
+    e->pos.x = fila;
+    e->pos.y = columna;
+}
+void EnemigoMovimientoxTiempo(DWORD ahora, tEnemigo *enemigo, tMapa *mapa, DWORD *tiempo_enemigo, tPersonaje *p)
+{
+    if(ahora - (*tiempo_enemigo) >= enemigo->velocidad && enemigo->esta_vivo == 1)
+    {
+        DireccionEnemigo(enemigo);
+        EnemigoMoverRandom(mapa, enemigo, p);
+        EnemigoDanioaPJ(enemigo, p, ahora);
+        *tiempo_enemigo = ahora;
+    }
+}
 void DireccionEnemigo(tEnemigo *enemigo)
 {
     if(enemigo->direccion == 0)
@@ -108,11 +115,7 @@ void DireccionEnemigo(tEnemigo *enemigo)
 }
 void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, tPersonaje *personaje)
 {
-    //int direccion;
-    int nuevaFila, nuevaColumna/*, distancia_x, distancia_y*/;
-
-//    distancia_x = enemigo->pos.x - personaje->pos.x;
-//    distancia_y = enemigo->pos.y - personaje->pos.y;
+    int nuevaFila, nuevaColumna;
 
     nuevaFila = enemigo->pos.x;
     nuevaColumna = enemigo->pos.y;
@@ -123,11 +126,11 @@ void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, tPersonaje *personaje)
             switch(enemigo->lado)
             {
                 case IZQUIERDA:
-                nuevaColumna--;    // izquierda
+                nuevaColumna--;
                 break;
 
                 case DERECHA:
-                nuevaColumna++;    // derecha
+                nuevaColumna++;
                 break;
             }break;
 
@@ -135,15 +138,15 @@ void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, tPersonaje *personaje)
             switch(enemigo->lado)
                 {
                     case ARRIBA:
-                    nuevaFila--;       // arriba
+                    nuevaFila--;
                     break;
 
                     case ABAJO:
-                    nuevaFila++;       // abajo
+                    nuevaFila++;
                     break;
                 }break;
             }
-            if(MovimientoValido(mapa, nuevaFila, nuevaColumna, 0) /*&& (personaje->pos.x != nuevaFila || personaje->pos.y != nuevaColumna)*/)
+            if(MovimientoValido(mapa, nuevaFila, nuevaColumna, 0))
             {
                 enemigo->pos.x = nuevaFila;
                 enemigo->pos.y = nuevaColumna;
@@ -159,16 +162,6 @@ void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, tPersonaje *personaje)
                         }
                 }
 }
-void EnemigoMovimientoxTiempo(DWORD ahora, tEnemigo *enemigo, tMapa *mapa, DWORD *tiempo_enemigo, tPersonaje *p)
-{
-    if(ahora - (*tiempo_enemigo) >= enemigo->velocidad && enemigo->esta_vivo == 1)
-    {
-        DireccionEnemigo(enemigo);
-        EnemigoMoverRandom(mapa, enemigo, p);
-        EnemigoDanioaPJ(enemigo, p, ahora);
-        *tiempo_enemigo = ahora;
-    }
-}
 void EnemigoDanioaPJ(tEnemigo *enemigo, tPersonaje *personaje, DWORD ahora)
 {
     if(personaje->esta_vivo == 2)
@@ -177,47 +170,10 @@ void EnemigoDanioaPJ(tEnemigo *enemigo, tPersonaje *personaje, DWORD ahora)
     int distancia_x, distancia_y;
     distancia_x = enemigo->pos.x - personaje->pos.x;
     distancia_y = enemigo->pos.y - personaje->pos.y;
-    if((distancia_x == 0 && distancia_y == 0)/*((distancia_x == 1 || distancia_x == -1) && distancia_y == 0) ||
-        ((distancia_y == 1 || distancia_y == -1) && distancia_x == 0)*/)
+    if(distancia_x == 0 && distancia_y == 0)
     {
         personaje->vidas--;
         personaje->esta_vivo = 2;
         personaje->invul = ahora;
-    }
-}
-void EnemigoMover(tMapa *mapa, tEnemigo *enemigo)
-{
-    int direccion;
-    int nuevaFila;
-    int nuevaColumna;
-
-    direccion = ObtenerNumeroAleatorio(1,4);
-
-    nuevaFila = enemigo->pos.x;
-    nuevaColumna = enemigo->pos.y;
-
-    switch(direccion)
-    {
-        case ARRIBA:
-            nuevaFila--;       // arriba
-            break;
-
-        case ABAJO:
-            nuevaFila++;       // abajo
-            break;
-
-        case IZQ:
-            nuevaColumna--;    // izquierda
-            break;
-
-        case DER:
-            nuevaColumna++;    // derecha
-            break;
-    }
-
-    if(MovimientoValido(mapa, nuevaFila, nuevaColumna, 0))
-    {
-        enemigo->pos.x = nuevaFila;
-        enemigo->pos.y = nuevaColumna;
     }
 }

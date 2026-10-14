@@ -40,7 +40,7 @@ int ArchivosCargaDatos(void)
         enemigo = Enemigo_Crear(1, 1);
         if(!enemigo)
             return ERROR_ARCH;
-        Archivos_GuardarEnemigo(ENEMIGO_DAT, enemigo);
+        Enemigo_ArchivosGuardar(ENEMIGO_DAT, enemigo);
         Enemigo_Destruir(enemigo);
     }else
         fclose(pfEnemigo);

@@ -8,11 +8,11 @@ int main()
 
     while(!fin)
     {
-        opcion = MostrarMenuPrincipal();
+        opcion = Interfaz_MostrarMenuPrincipal();
         switch(opcion)
         {
             case NUEVAP:
-                opcion = JuegoEnCurso(opcion);
+                opcion = Juego_EnCurso(opcion);
                 break;
             case CARGARP: //temporal
                 fin = 1;
