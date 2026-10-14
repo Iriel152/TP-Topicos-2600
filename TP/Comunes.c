@@ -1,14 +1,14 @@
 #include "Comunes.h"
 int EsLetraValida(int LetraEsperada, int LetraRecibida)
 {
-    if(LetraEsperada == LetraRecibida || LetraEsperada + 32 == LetraRecibida)
+    if(LetraEsperada == LetraRecibida || LetraEsperada + ('a' - 'A') == LetraRecibida)
         return TODOOK;
     else
         return ERROR_;
 }
 int Tecla_ArribaAbajo(int tecla)
 {
-    if(EsLetraValida('S', tecla) == TODOOK || EsLetraValida('W', tecla) == TODOOK)
+    if(EsLetraValida(TEC_ABAJO, tecla) == TODOOK || EsLetraValida(TEC_ARRIBA, tecla) == TODOOK)
         return TODOOK;
     else
         return ERROR_;

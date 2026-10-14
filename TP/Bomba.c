@@ -42,8 +42,8 @@ int insertar_bomba(vBombas*vbomb)
         return ERROR_;
 
     b.activa = 0;
-    b.pos.x = -1;
-    b.pos.y = -1;
+    b.pos.x = 0;
+    b.pos.y = 0;
     b.tiempo_bomba = 0;
 
     *(vbomb->bombas + vbomb->ce) = b;
@@ -134,7 +134,7 @@ void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta, tE
         {
             if(ahora - pivot->tiempo_bomba >= RELOJ_BOMBA)
             {
-                m->celdas[pivot->pos.x][pivot->pos.y] = '#';
+                m->celdas[pivot->pos.y][pivot->pos.x] = D_EXPLOSION;
 
                 explotar_bomba(m,pivot->pos.x,pivot->pos.y,vbomb->rango,puerta,e,pj,ahora);
 
@@ -149,7 +149,7 @@ void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta, tE
         {
             if(ahora - pivot->tiempo_bomba >= 300) //300 ms de retardo
             {
-                m->celdas[pivot->pos.x][pivot->pos.y] = VACIO;
+                m->celdas[pivot->pos.y][pivot->pos.x] = DM_VACIO;
                 limpiar_estela(m, pivot->pos.x, pivot->pos.y,vbomb->rango);
 
                 pivot->activa = 0;
@@ -174,19 +174,19 @@ void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo 
         {
             aux_x = x + (j * dir_x[i]);
             aux_y = y + (j * dir_y[i]);
-            if(aux_x < 0 || aux_y < 0 || aux_x >= m->filas || aux_y >= m->columnas) //chequeamos bordes
+            if(aux_x < 0 || aux_y < 0 || aux_y >= m->filas || aux_x >= m->columnas) //chequeamos bordes
                 break;             // no me gusta usar break, le voy a preguntar. Si lo tengo q hacer con bandera
-            if(m->celdas[aux_x][aux_y] == PARED || m->celdas[aux_x][aux_y] == OBSTACULO)
+            if(m->celdas[aux_y][aux_x] == DM_PARED || m->celdas[aux_y][aux_x] == DM_OBSTACULO)
                 break;
-            if(m->celdas[aux_x][aux_y] == ROMPIBLE)
+            if(m->celdas[aux_y][aux_x] == DM_ROMPIBLE)
             {
                 if(puerta->estado_puerta == ACTIVAR)
                 {
-                    m->celdas[aux_x][aux_y] = SALIDA;
+                    m->celdas[aux_y][aux_x] = D_PUERTA;
                     puerta->estado_puerta = ACTIVA;
                 }else
                     {
-                        m->celdas[aux_x][aux_y] = VACIO;
+                        m->celdas[aux_y][aux_x] = DM_VACIO;
                     }
                 break;
             }
@@ -195,8 +195,8 @@ void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo 
             {
                 e->esta_vivo = 0;
                 pj->puntaje += 270;
-                e->pos.x =-1;
-                e->pos.y = -1;
+                e->pos.x =0;
+                e->pos.y = 0;
             }
 
             if(pj!=NULL && pj->pos.x == aux_x && pj->pos.y == aux_y)
@@ -206,9 +206,9 @@ void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo 
                 pj->invul = ahora;
             }
 
-            if(m->celdas[aux_x][aux_y] == VACIO)
-               if(m->celdas[aux_x][aux_y] != TECHO && m->celdas[aux_x][aux_y] != PISO)  //Detectar q la estela no haya muro
-                    m->celdas[aux_x][aux_y] = '#'; //esto es como muestra, el tema es q no borra la estela.
+            if(m->celdas[aux_y][aux_x] == DM_VACIO)
+//               if(m->celdas[aux_y][aux_x] != DM_TECHO && m->celdas[aux_y][aux_x] != DM_PISO)  //Detectar q la estela no haya muro
+                    m->celdas[aux_y][aux_x] = D_EXPLOSION; //esto es como muestra, el tema es q no borra la estela.
 
 
 
@@ -222,8 +222,8 @@ void limpiar_estela(tMapa *m, int x, int y, int rango)
     int dir_x[] = {-1,1,0,0};
     int dir_y[] = {0,0,-1,1};
 
-    if(m->celdas[x][y] == '#')
-        m->celdas[x][y]=VACIO;
+    if(m->celdas[y][x] == D_EXPLOSION)
+        m->celdas[y][x]= DM_VACIO;
 
     for (i=0 ; i<4 ; i++)
     {
@@ -231,13 +231,13 @@ void limpiar_estela(tMapa *m, int x, int y, int rango)
         {
             aux_x = x + (j * dir_x[i]);
             aux_y = y + (j * dir_y[i]);
-            if(aux_x < 0 || aux_y < 0 || aux_x >= m->filas || aux_y >= m->columnas)
+            if((aux_x < 0) || (aux_y < 0) || (aux_y >= m->filas) || (aux_x >= m->columnas))
                 break;
-            if(m->celdas[aux_x][aux_y] == PARED || m->celdas[aux_x][aux_y] == OBSTACULO)
+            if(m->celdas[aux_y][aux_x] == DM_PARED || m->celdas[aux_y][aux_x] == DM_OBSTACULO)
                 break;
 
-            if(m->celdas[aux_x][aux_y] == '#')
-               m->celdas[aux_x][aux_y] = VACIO;
+            if(m->celdas[aux_y][aux_x] == D_EXPLOSION)
+               m->celdas[aux_y][aux_x] = DM_VACIO;
         }
     }
 

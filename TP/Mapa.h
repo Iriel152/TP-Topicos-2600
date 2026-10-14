@@ -4,22 +4,22 @@
 ///.h
 #include "Comunes.h"
 
+///DISENIO MAPA
+#define DM_PARED 219
+#define DM_TECHO 223
+#define DM_PISO  220
+#define DM_VACIO 0
+#define DM_OBSTACULO 219
+#define DM_ROMPIBLE 176
 ///DEFINE
-#define PARED 219
-#define TECHO 223
-#define PISO  220
-#define VACIO 0
 #define FILAS 15
 #define COLUMNAS 49
-#define OBSTACULO 219
-#define ROMPIBLE 176
-#define ESC 27
 #define ACTIVA 2
 #define ACTIVAR 1
 #define DESACTIVADA 0
-#define SALIDA 'S'
-#define PROBABILIDADPUERTA 0.7
 
+#define PROBABILIDADPUERTA 0.7
+///RUTAS
 #define MAPA_DAT "../Archivos/Mapa.dat"
 #define PUERTA_DAT "../Archivos/Puerta.dat"
 
@@ -43,11 +43,11 @@ void Mapa_RellenoObstaculos(tMapa *p);
 int Archivos_GuardarMapa(const char* binPath, tMapa *mapa);
 tMapa* Archivos_CargarMapa(const char* binPath);
 void Mapa_RellenoObstaculosRombiples(tMapa *p);
-int MovimientoValido(tMapa *mapa, int fila, int columna, int esPJP);
 void AparicionPuerta(tMapa *mapa, tPuerta *puerta);
-tPuerta *Mapa_CrearPuerta();
+tPuerta *Mapa_CrearPuerta(void);
 void Mapa_DestruirPuerta(tPuerta *puerta);
 int Archivos_GuardarPuerta_Mapa(const char* binPath, tPuerta *puerta);
 tPuerta* Archivos_CargarPuerta(const char* binPath);
+int MovimientoValido(tMapa *mapa, int fila, int columna, int esPJP);
 
 #endif // MAPA_H_INCLUDED

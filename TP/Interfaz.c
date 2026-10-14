@@ -27,13 +27,13 @@ int Interfaz_MostrarMenuPrincipal()
             switch(seleccion)
             {
                 case 0:
-                    seleccion = NUEVAP;
+                    seleccion = EP_NUEVAP;
                     break;
                 case 1:
-                    seleccion = CARGARP;
+                    seleccion = EP_CARGARP;
                     break;
                 case 2:
-                    seleccion = SALIR;
+                    seleccion = EP_SALIR;
                     break;
             }
             return seleccion;
@@ -49,17 +49,17 @@ void Interfaz_PantallaInicio(int *seleccion, const char **opciones, int cant)
     for (i = 0; i < cant; i++)
     {
         if (i == *seleccion)
-            Interfaz_AlinearCentro(*(opciones + i), N_CENTRADO, COLOR_ACTIVO, T_SELECCIONADO);
+            Interfaz_AlinearCentro(*(opciones + i), T_CENTRADO, COLOR_ACTIVO, T_SELECCIONADO);
         else
-            Interfaz_AlinearCentro(*(opciones + i), N_CENTRADO, COLOR_NORMAL, T_NO_SELECCIONADO);
+            Interfaz_AlinearCentro(*(opciones + i), T_CENTRADO, COLOR_NORMAL, T_NO_SELECCIONADO);
     }
-    Interfaz_Separador(N_CENTRADO);
+    Interfaz_Separador(T_CENTRADO);
 }
 void Interfaz_TituloSistema()
 {
-    Interfaz_Separador(N_CENTRADO);
-    Interfaz_AlinearCentro(TITULO_C, N_CENTRADO, COLOR_NORMAL, T_NO_SELECCIONADO);
-    Interfaz_Separador(N_CENTRADO);
+    Interfaz_Separador(T_CENTRADO);
+    Interfaz_AlinearCentro(C_TITULO, T_CENTRADO, COLOR_NORMAL, T_NO_SELECCIONADO);
+    Interfaz_Separador(T_CENTRADO);
 }
 void Interfaz_Separador(int n)
 {
@@ -108,13 +108,13 @@ int Interfaz_MenuEjecucion()
             switch(seleccion)
             {
                 case 0:
-                    seleccion = CONTINUAR;
+                    seleccion = EP_CONTINUAR;
                     break;
                 case 1:
-                    seleccion = NUEVAP;
+                    seleccion = EP_NUEVAP;
                     break;
                 case 2:
-                    seleccion = SALIR;
+                    seleccion = EP_SALIR;
                     break;
             }
             return seleccion;
@@ -142,17 +142,17 @@ void Interfaz_renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e,
     {
         for (j = 0; j < m->columnas ; j++)
         {
-            if (p != NULL && p->pos.x == i && p->pos.y == j)
+            if (p != NULL && p->pos.y == i && p->pos.x == j)
             {
                 if(p->esta_vivo == 2 && (GetTickCount() % 300) < 150)
                     printf(" ");
                 else
-                    printf("%c", PJP);
+                    printf("%c", D_PJP);
             }
 
-            else if(e != NULL && e->esta_vivo == 1 && e->pos.x == i && e->pos.y == j)
-                printf("%c", ENEMIGO_VISUAL);
-            else if (m->celdas[i][j] != VACIO)
+            else if(e != NULL && e->esta_vivo == 1 && e->pos.y == i && e->pos.x == j)
+                printf("%c", D_ENEMIGO);
+            else if (m->celdas[i][j] != DM_VACIO)
                 printf("%c", m->celdas[i][j]);
             else
                 printf(" ");
@@ -167,6 +167,6 @@ void Interfaz_PantallaMensaje(const char *frase)
     system("cls");
     Interfaz_TituloSistema();
     printf("\n\n");
-    Interfaz_AlinearCentro(frase, N_CENTRADO, COLOR_NORMAL, T_NO_SELECCIONADO);
+    Interfaz_AlinearCentro(frase, T_CENTRADO, COLOR_NORMAL, T_NO_SELECCIONADO);
     Sleep(6000);
 }

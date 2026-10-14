@@ -11,7 +11,7 @@ int Juego_EnCurso(int opcion)
 
     srand(time(NULL));
 
-    while(opcion == NUEVAP)
+    while(opcion == EP_NUEVAP)
     {
         mapa = Archivos_CargarMapa(MAPA_DAT);
         Mapa_RellenoObstaculosRombiples(mapa);
@@ -27,12 +27,12 @@ int Juego_EnCurso(int opcion)
 
         bombs = crear_vec_bombs();
 
-        seguir = CONTINUAR;
+        seguir = EP_CONTINUAR;
         tiempo_enemigo = GetTickCount();
         tiempo_pj = GetTickCount();
         tiempo_reloj = GetTickCount();
 
-        while(seguir == CONTINUAR)
+        while(seguir == EP_CONTINUAR)
         {
             ahora = GetTickCount();
 
@@ -48,22 +48,22 @@ int Juego_EnCurso(int opcion)
 
             if(temporizador == 0 || personaje->vidas == 0)
             {
-                seguir = GAMEOVER;
-                Interfaz_PantallaMensaje(GAMEOVER_C);
+                seguir = EP_GAMEOVER;
+                Interfaz_PantallaMensaje(C_GAMEOVER);
             }
             if(PJEnSalida(mapa,personaje))
             {
-                seguir = VICTORIA;
-                Interfaz_PantallaMensaje(VICTORIA_C);
+                seguir = EP_VICTORIA;
+                Interfaz_PantallaMensaje(C_VICTORIA);
             }
 
-            if(seguir == SALIR)
+            if(seguir == EP_SALIR)
                 seguir = Interfaz_MenuEjecucion();
 
             Sleep(16);
         }
 
-        if(seguir != NUEVAP)
+        if(seguir != EP_NUEVAP)
             opcion = -1;
 
         Mapa_DestruirMapa(mapa);
@@ -72,7 +72,7 @@ int Juego_EnCurso(int opcion)
         Mapa_DestruirPuerta(puerta);
         free_vec_bombs(bombs);
 
-        seguir = SALIR;
+        seguir = EP_SALIR;
     }
     return seguir;
 }

@@ -11,13 +11,13 @@ int main()
         opcion = Interfaz_MostrarMenuPrincipal();
         switch(opcion)
         {
-            case NUEVAP:
+            case EP_NUEVAP:
                 opcion = Juego_EnCurso(opcion);
                 break;
-            case CARGARP: //temporal
+            case EP_CARGARP: //temporal
                 fin = 1;
                 break;
-            case SALIR:
+            case EP_SALIR:
                 fin = 1;
                 break;
         }

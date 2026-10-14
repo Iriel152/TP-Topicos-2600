@@ -1,11 +1,11 @@
 #include "PJ_Principal.h"
-tPersonaje* PJ_Princial_CrearPersonaje(int fila, int col)
+tPersonaje* PJ_Princial_CrearPersonaje()
 {
     tPersonaje *p = (tPersonaje*)malloc(sizeof(tPersonaje));
     if(!p)
         return NULL;
-    p->pos.x = fila;
-    p->pos.y = col;
+    p->pos.x = 0;
+    p->pos.y = 0;
     p->vidas = VIDAS_BASE;
     p->alcance_bomba = 2;
     p->esta_vivo = 1;
@@ -31,94 +31,94 @@ void PJ_Principal_AparicionRandom(tMapa *m, tPersonaje *p)
             p->pos.y = 1;
             break;
         case 2:
-            p->pos.x = m->filas - 2;
-            p->pos.y = 1;
+            p->pos.x = 1;
+            p->pos.y = m->filas - 2;
             break;
         case 3:
-            p->pos.x = 1;
-            p->pos.y = m->columnas - 2;
+            p->pos.x = m->columnas - 2;
+            p->pos.y = 1;
             break;
         case 4:
-            p->pos.x = m->filas - 2;
-            p->pos.y = m->columnas - 2;
+            p->pos.x = m->columnas - 2;
+            p->pos.y = m->filas - 2;
             break;
     }
 }
-
 void LimpiarLadosPJ(tMapa *m, tPersonaje *p)
 {
-    int* arriba = &m->celdas[p->pos.x-1][p->pos.y];
-    int* abajo = &m->celdas[p->pos.x+1][p->pos.y];
-    int* izquierda = &m->celdas[p->pos.x][p->pos.y-1];
-    int* derecha = &m->celdas[p->pos.x][p->pos.y+1];
+    int f, c, *pt;
 
-    m->celdas[p->pos.x][p->pos.y] = VACIO;
+    f = p->pos.y;
+    c = p->pos.x;
 
-    if(*arriba != PARED && *arriba != TECHO && *arriba != PISO)
+    m->celdas[f][c] = DM_VACIO;
+
+    if (f - 1 >= 0)
     {
-        *arriba = VACIO;
+        pt = &m->celdas[f - 1][c];
+        if (*pt != DM_PARED && *pt != DM_TECHO && *pt != DM_OBSTACULO)
+            *pt = DM_VACIO;
     }
-    if(*abajo != PARED && *abajo != TECHO && *abajo != PISO)
+
+    if (f + 1 < m->filas)
     {
-        *abajo = VACIO;
+        pt = &m->celdas[f + 1][c];
+        if (*pt != DM_PARED && *pt != DM_PISO && *pt != DM_OBSTACULO)
+            *pt = DM_VACIO;
     }
-    if(*izquierda != PARED && *izquierda != TECHO && *izquierda != PISO)
+
+    if (c - 1 >= 0)
     {
-        *izquierda = VACIO;
+        pt = &m->celdas[f][c - 1];
+        if (*pt != DM_PARED && *pt != DM_OBSTACULO)
+            *pt = DM_VACIO;
     }
-    if(*derecha != PARED && *derecha != TECHO && *derecha != PISO)
+
+    if (c + 1 < m->columnas)
     {
-        *derecha = VACIO;
+        pt = &m->celdas[f][c + 1];
+        if (*pt != DM_PARED && *pt != DM_OBSTACULO)
+            *pt = DM_VACIO;
     }
 }
-
-//void NuevaPosicionPJ(tMapa *m, tPersonaje *p, int NuevaPosX, int NuevaPosY/*, vBombas *vbombs*/)
-//{
-//    if(m->celdas[NuevaPosX][NuevaPosY] == VACIO)
-//    {
-//        p->pos.x = NuevaPosX;
-//        p->pos.y = NuevaPosY;
-//    }
-//}
-
 int MovimientoPJ(tMapa *m, tPersonaje *p, vBombas *vbomb)
 {
     char tecla;
     int NuevaFila, NuevaColumna, escenario;
 
-    escenario = CONTINUAR;
+    escenario = EP_CONTINUAR;
     tecla = _getch();
-    NuevaFila = p->pos.x;
-    NuevaColumna = p->pos.y;
+    NuevaFila = p->pos.y;
+    NuevaColumna = p->pos.x;
 
     tecla = AMAYUSCULA(tecla);
 
     switch(tecla)
     {
-        case 'W':
+        case TEC_ARRIBA:
             NuevaFila--;
             break;
-        case 'S':
+        case TEC_ABAJO:
             NuevaFila++;
             break;
-        case 'A':
+        case TEC_IZQUIERDA:
             NuevaColumna--;
             break;
-        case 'D':
+        case TEC_DERECHA:
             NuevaColumna++;
             break;
-        case 'E':
+        case TEC_PONERSELEC:
             bomba_poner(vbomb,m,p);
             break;
-        case 27:
-            escenario = SALIR;
+        case TEC_ESC:
+            escenario = EP_SALIR;
             break;
     }
 
-    if(MovimientoValido(m, NuevaFila, NuevaColumna, 1))
+    if(MovimientoValido(m, NuevaFila, NuevaColumna, 1) == TODOOK)
     {
-        p->pos.x = NuevaFila;
-        p->pos.y = NuevaColumna;
+        p->pos.y = NuevaFila;
+        p->pos.x = NuevaColumna;
     }
 
     return escenario;
@@ -133,7 +133,7 @@ int Archivos_GuardarPersonaje(const char* binPath, tPersonaje *personaje)
 
     fwrite(&(personaje->alcance_bomba), sizeof(int), 1, fbin);
     fwrite(&(personaje->esta_vivo), sizeof(int), 1, fbin);
-    fwrite(&(personaje->pos), sizeof(int), 1, fbin);
+    fwrite(&(personaje->pos), sizeof(personaje->pos), 1, fbin);
     fwrite(&(personaje->velocidad), sizeof(int), 1, fbin);
     fwrite(&(personaje->vidas), sizeof(int), 1, fbin);
     fwrite(&(personaje->puntaje), sizeof(int), 1, fbin);
@@ -159,7 +159,7 @@ tPersonaje* Archivos_CargarPersonaje(const char* binPath)
 
     fread(&(personaje->alcance_bomba), sizeof(int), 1, pf);
     fread(&(personaje->esta_vivo), sizeof(int), 1, pf);
-    fread(&(personaje->pos), sizeof(int), 1, pf);
+    fread(&(personaje->pos), sizeof(personaje->pos), 1, pf);
     fread(&(personaje->velocidad), sizeof(int), 1, pf);
     fread(&(personaje->vidas), sizeof(int), 1, pf);
     fread(&(personaje->puntaje), sizeof(int), 1, pf);
@@ -181,7 +181,7 @@ void PJMovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa, DWORD 
             *tiempo_personaje = ahora;
         }
         else
-            _getch();
+            while(_kbhit()) _getch();
     }
 }
 int bomba_poner(vBombas*vbomb, tMapa *m, tPersonaje *p)
@@ -205,7 +205,7 @@ int bomba_poner(vBombas*vbomb, tMapa *m, tPersonaje *p)
             pivot->pos.x = p->pos.x;
             pivot->pos.y = p->pos.y;
             pivot->tiempo_bomba = GetTickCount();
-            m->celdas[p->pos.x][p->pos.y] = SIMBOLO_BOMBA;
+            m->celdas[p->pos.y][p->pos.x] = D_BOMBA;
             return TODOOK;
         }
         pivot++;
@@ -215,7 +215,7 @@ int bomba_poner(vBombas*vbomb, tMapa *m, tPersonaje *p)
 }
 int PJEnSalida(tMapa *m, tPersonaje *p)
 {
-    if(m->celdas[p->pos.x][p->pos.y] == SALIDA)
+    if(m->celdas[p->pos.y][p->pos.x] == D_PUERTA)
     {
         return 1;
     }

@@ -1,13 +1,13 @@
 #include "Enemigo.h"
-tEnemigo* Enemigo_Crear(int fila, int columna)
+tEnemigo* Enemigo_Crear()
 {
     tEnemigo *e = (tEnemigo*)malloc(sizeof(tEnemigo));
 
     if(!e)
         return NULL;
 
-    e->pos.x = fila;
-    e->pos.y = columna;
+    e->pos.x = 0;
+    e->pos.y = 0;
     e->esta_vivo = 1;
     e->velocidad = 600;
     e->rebotes = 3;
@@ -31,7 +31,7 @@ int Enemigo_ArchivosGuardar(const char* binPath, tEnemigo *enemigo)
         return ERROR_ARCH;
 
     fwrite(&(enemigo->esta_vivo), sizeof(int), 1, fbin);
-    fwrite(&(enemigo->pos), sizeof(int), 1, fbin);
+    fwrite(&(enemigo->pos), sizeof(enemigo->pos), 1, fbin);
     fwrite(&(enemigo->velocidad), sizeof(int), 1, fbin);
     fwrite(&(enemigo->rebotes), sizeof(int), 1, fbin);
     fwrite(&(enemigo->direccion), sizeof(int), 1, fbin);
@@ -58,7 +58,7 @@ tEnemigo* Enemigo_ArchivosCargar(const char* binPath)
     }
 
     fread(&(enemigo->esta_vivo), sizeof(int), 1, pf);
-    fread(&(enemigo->pos), sizeof(int), 1, pf);
+    fread(&(enemigo->pos), sizeof(enemigo->pos), 1, pf);
     fread(&(enemigo->velocidad), sizeof(int), 1, pf);
     fread(&(enemigo->rebotes), sizeof(int), 1, pf);
     fread(&(enemigo->direccion), sizeof(int), 1, pf);
@@ -77,10 +77,10 @@ void Enemigo_AparicionRandom(tMapa *m, tEnemigo *e)
         fila = ObtenerNumeroAleatorio(1, m->filas - 2);
         columna = ObtenerNumeroAleatorio(1, m->columnas - 2);
 
-    } while(m->celdas[fila][columna] != VACIO);
+    } while(m->celdas[fila][columna] != DM_VACIO);
 
-    e->pos.x = fila;
-    e->pos.y = columna;
+    e->pos.x = columna;
+    e->pos.y = fila;
 }
 void EnemigoMovimientoxTiempo(DWORD ahora, tEnemigo *enemigo, tMapa *mapa, DWORD *tiempo_enemigo, tPersonaje *p)
 {
@@ -117,8 +117,8 @@ void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, tPersonaje *personaje)
 {
     int nuevaFila, nuevaColumna;
 
-    nuevaFila = enemigo->pos.x;
-    nuevaColumna = enemigo->pos.y;
+    nuevaColumna = enemigo->pos.x;
+    nuevaFila = enemigo->pos.y;
 
     switch(enemigo->direccion)
     {
@@ -146,10 +146,10 @@ void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, tPersonaje *personaje)
                     break;
                 }break;
             }
-            if(MovimientoValido(mapa, nuevaFila, nuevaColumna, 0))
+            if(MovimientoValido(mapa, nuevaFila, nuevaColumna, 0) == TODOOK)
             {
-                enemigo->pos.x = nuevaFila;
-                enemigo->pos.y = nuevaColumna;
+                enemigo->pos.x = nuevaColumna;
+                enemigo->pos.y = nuevaFila;
             }else
                 {
                     enemigo->rebotes--;
@@ -164,12 +164,14 @@ void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, tPersonaje *personaje)
 }
 void EnemigoDanioaPJ(tEnemigo *enemigo, tPersonaje *personaje, DWORD ahora)
 {
+    int distancia_x, distancia_y;
+
     if(personaje->esta_vivo == 2)
         return;
 
-    int distancia_x, distancia_y;
     distancia_x = enemigo->pos.x - personaje->pos.x;
     distancia_y = enemigo->pos.y - personaje->pos.y;
+
     if(distancia_x == 0 && distancia_y == 0)
     {
         personaje->vidas--;

@@ -9,7 +9,8 @@
 
 #define MAX_BOMBAS 7
 #define TIMER_BOMBA 5      // se desactiva tras 3 turnos del jugador
-#define SIMBOLO_BOMBA 79  // simbolito bomba O
+
+///RUTAS
 #define BOMB_DAT "../Archivos/Bomba.dat"
 
 typedef struct Bomba{
@@ -28,7 +29,7 @@ typedef struct vBombas{
 typedef struct tEnemigo tEnemigo;
 typedef struct tPersonaje tPersonaje;
 
-vBombas* crear_vec_bombs();
+vBombas* crear_vec_bombs(void);
 void free_vec_bombs(vBombas *vbomb);
 int inicializar_vec_bombs(vBombas *vbomb);
 int insertar_bomba(vBombas*vbomb);

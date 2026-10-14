@@ -8,7 +8,7 @@
 
 ///DEFINE
 #define MAX_ENEMIGOS 5
-#define ENEMIGO_VISUAL 69
+///RUTAS
 #define ENEMIGO_DAT "../Archivos/Enemigo.dat"
 
 ///ESTRUCTURAS
@@ -23,7 +23,7 @@ typedef struct tEnemigo
     int valor;
 }tEnemigo;
 
-tEnemigo* Enemigo_Crear(int, int);
+tEnemigo* Enemigo_Crear(void);
 void Enemigo_Destruir(tEnemigo*);
 int Enemigo_ArchivosGuardar(const char*, tEnemigo*);
 tEnemigo* Enemigo_ArchivosCargar(const char* );

@@ -26,7 +26,7 @@ int ArchivosCargaDatos(void)
     pfPrincipal = fopen(PJ_Principal_DAT,"rb");
     if(!pfPrincipal)
     {
-        personaje = PJ_Princial_CrearPersonaje(1, 1);
+        personaje = PJ_Princial_CrearPersonaje();
         if(!personaje)
             return ERROR_ARCH;
         Archivos_GuardarPersonaje(PJ_Principal_DAT, personaje);
@@ -37,7 +37,7 @@ int ArchivosCargaDatos(void)
     pfEnemigo = fopen(ENEMIGO_DAT, "rb");
     if(!pfEnemigo)
     {
-        enemigo = Enemigo_Crear(1, 1);
+        enemigo = Enemigo_Crear();
         if(!enemigo)
             return ERROR_ARCH;
         Enemigo_ArchivosGuardar(ENEMIGO_DAT, enemigo);
@@ -71,54 +71,4 @@ int ArchivosCargaDatos(void)
 
     return TODOOK;
 }
-int partida_guardar_binario(const char *ruta, const tMapa *mapa, const tPersonaje *jugador) {
-    FILE *arch = fopen(ruta, "wb");
-    if (!arch) return ERROR_ARCH;
 
-    // 1. Guardar dimensiones
-    fwrite(&mapa->filas, sizeof(int), 1, arch);
-    fwrite(&mapa->columnas, sizeof(int), 1, arch);
-
-    // 2. Guardar grilla celda por celda
-    for (int i = 0; i < mapa->filas; i++) {
-        fwrite(mapa->celdas[i], sizeof(int), mapa->columnas, arch);
-    }
-
-    // 3. Guardar estado del jugador
-    fwrite(jugador, sizeof(tPersonaje), 1, arch);
-
-    fclose(arch);
-    return TODOOK;
-}
-
-int partida_cargar_binario(const char *ruta, tMapa **mapa_out, tPersonaje **jugador_out) {
-    FILE *arch = fopen(ruta, "rb");
-    if (!arch) return ERROR_ARCH;
-
-    int filas, cols;
-    fread(&filas, sizeof(int), 1, arch);
-    fread(&cols, sizeof(int), 1, arch);
-
-    tMapa *m = Mapa_CrearMapa(filas, cols);
-    if (!m) {
-        fclose(arch);
-        return ERROR_MEMORIA;
-    }
-
-    for (int i = 0; i < filas; i++) {
-        fread(m->celdas[i], sizeof(int), cols, arch);
-    }
-
-    tPersonaje *p = (tPersonaje*) malloc(sizeof(tPersonaje));
-    if (!p) {
-        Mapa_DestruirMapa(m);
-        fclose(arch);
-        return ERROR_MEMORIA;
-    }
-    fread(p, sizeof(tPersonaje), 1, arch);
-
-    fclose(arch);
-    *mapa_out = m;
-    *jugador_out = p;
-    return TODOOK;
-}

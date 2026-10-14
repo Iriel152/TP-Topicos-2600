@@ -11,10 +11,11 @@
 #include <conio.h>
 
 ///DEFINE
-#define PJP 80
-#define PJ_Principal_DAT "../Archivos/PJ_Principal.dat"
+
 #define VIDAS_BASE 3
 #define TIMER_INVUL 1500
+///RUTAS
+#define PJ_Principal_DAT "../Archivos/PJ_Principal.dat"
 
 ///ESTRUCTURAS
 typedef struct tPersonaje{
@@ -29,11 +30,10 @@ typedef struct tPersonaje{
 
 typedef struct vBombas vBombas;
 
-tPersonaje* PJ_Princial_CrearPersonaje(int, int);
+tPersonaje* PJ_Princial_CrearPersonaje(void);
 void PJ_Principal_DestruirPersonaje(tPersonaje*);
 void PJ_Principal_AparicionRandom(tMapa*,tPersonaje*);
 void LimpiarLadosPJ(tMapa*,tPersonaje*);
-//void NuevaPosicionPJ(tMapa*,tPersonaje*,int,int, vBombas*vbomb);
 int MovimientoPJ(tMapa*,tPersonaje*,vBombas* vbomb);
 int Archivos_GuardarPersonaje(const char* binPath, tPersonaje *personaje);
 tPersonaje* Archivos_CargarPersonaje(const char* binPath);
