@@ -3,6 +3,7 @@
 
 ///.h
 #include "Comunes.h"
+#include "Puerta.h"
 
 ///DISENIO MAPA
 #define DM_PARED 219
@@ -14,11 +15,7 @@
 ///DEFINE
 #define FILAS 15
 #define COLUMNAS 49
-#define ACTIVA 2
-#define ACTIVAR 1
-#define DESACTIVADA 0
 
-#define PROBABILIDADPUERTA 0.7
 ///RUTAS
 #define MAPA_DAT "../Archivos/Mapa.dat"
 #define PUERTA_DAT "../Archivos/Puerta.dat"
@@ -30,24 +27,13 @@ typedef struct{
     int **celdas;
 }tMapa;
 
-typedef struct{
-    float prob;
-    int vacio;
-    int cualquiera;
-    int estado_puerta;
-}tPuerta;
-
 tMapa* Mapa_CrearMapa(int,  int);
 void Mapa_DestruirMapa(tMapa *);
-void Mapa_RellenoObstaculos(tMapa *p);
-int Archivos_GuardarMapa(const char* binPath, tMapa *mapa);
-tMapa* Archivos_CargarMapa(const char* binPath);
-void Mapa_RellenoObstaculosRombiples(tMapa *p);
-void AparicionPuerta(tMapa *mapa, tPuerta *puerta);
-tPuerta *Mapa_CrearPuerta(void);
-void Mapa_DestruirPuerta(tPuerta *puerta);
-int Archivos_GuardarPuerta_Mapa(const char* binPath, tPuerta *puerta);
-tPuerta* Archivos_CargarPuerta(const char* binPath);
-int MovimientoValido(tMapa *mapa, int fila, int columna, int esPJP);
+void Mapa_RellenoObstaculos(tMapa*);
+int Archivos_GuardarMapa(const char*, tMapa*);
+tMapa* Archivos_CargarMapa(const char*);
+void Mapa_RellenoObstaculosRombiples(tMapa*);
+void AparicionPuerta(tMapa*, tPuerta*);
+int MovimientoValido(tMapa*, int, int, int);
 
 #endif // MAPA_H_INCLUDED

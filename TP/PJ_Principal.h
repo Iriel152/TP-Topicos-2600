@@ -32,13 +32,13 @@ typedef struct vBombas vBombas;
 
 tPersonaje* PJ_Princial_CrearPersonaje(void);
 void PJ_Principal_DestruirPersonaje(tPersonaje*);
-void PJ_Principal_AparicionRandom(tMapa*,tPersonaje*);
-void LimpiarLadosPJ(tMapa*,tPersonaje*);
-int MovimientoPJ(tMapa*,tPersonaje*,vBombas* vbomb);
-int Archivos_GuardarPersonaje(const char* binPath, tPersonaje *personaje);
-tPersonaje* Archivos_CargarPersonaje(const char* binPath);
-void PJMovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa, DWORD *tiempo_personaje, int* seguir, vBombas *vbomb);
-int  bomba_poner(vBombas *vbomb, tMapa *m, tPersonaje *p);
-int PJEnSalida(tMapa*,tPersonaje*);
+void PJ_Principal_AparicionRandom(tMapa*, tPersonaje*);
+void LimpiarLadosPJ(tMapa*, tPersonaje*);
+int MovimientoPJ(tMapa*, tPersonaje*, vBombas*);
+int Archivos_GuardarPersonaje(const char*, tPersonaje*);
+tPersonaje* Archivos_CargarPersonaje(const char*);
+void PJMovimientoxTiempo(DWORD, tPersonaje*, tMapa*, DWORD*, int*, vBombas*);
+int  bomba_poner(vBombas *, tMapa*, tPersonaje*);
+int PJEnSalida(tMapa*, tPersonaje*);
 
 #endif // PJ_PRINCIPAL_H_INCLUDED

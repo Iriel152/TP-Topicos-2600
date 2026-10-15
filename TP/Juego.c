@@ -23,7 +23,7 @@ int Juego_EnCurso(int opcion)
         enemigo = Enemigo_ArchivosCargar(ENEMIGO_DAT);
         Enemigo_AparicionRandom(mapa, enemigo);
 
-        puerta = Archivos_CargarPuerta(PUERTA_DAT);
+        puerta = Puerta_ArchivosCargar(PUERTA_DAT);
 
         bombs = crear_vec_bombs();
 
@@ -69,7 +69,7 @@ int Juego_EnCurso(int opcion)
         Mapa_DestruirMapa(mapa);
         PJ_Principal_DestruirPersonaje(personaje);
         Enemigo_Destruir(enemigo);
-        Mapa_DestruirPuerta(puerta);
+        Puerta_Destruir(puerta);
         free_vec_bombs(bombs);
 
         seguir = EP_SALIR;

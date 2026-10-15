@@ -13,7 +13,7 @@ int ArchivosCargaDatos(void)
     {
         mapa = Mapa_CrearMapa(FILAS, COLUMNAS);
         if(!mapa)
-            return ERROR_ARCH;
+            return ERROR_MEMORIA;
         Mapa_RellenoObstaculos(mapa);
         if(Archivos_GuardarMapa(MAPA_DAT, mapa) == ERROR_ARCH)
            {
@@ -27,10 +27,14 @@ int ArchivosCargaDatos(void)
     if(!pfPrincipal)
     {
         personaje = PJ_Princial_CrearPersonaje();
+
         if(!personaje)
+            return ERROR_MEMORIA;
+        if(Archivos_GuardarPersonaje(PJ_Principal_DAT, personaje) == ERROR_ARCH)
+        {
+            PJ_Principal_DestruirPersonaje(personaje);
             return ERROR_ARCH;
-        Archivos_GuardarPersonaje(PJ_Principal_DAT, personaje);
-        PJ_Principal_DestruirPersonaje(personaje);
+        }
     }else
         fclose(pfPrincipal);
 
@@ -39,9 +43,12 @@ int ArchivosCargaDatos(void)
     {
         enemigo = Enemigo_Crear();
         if(!enemigo)
+            return ERROR_MEMORIA;
+        if(Enemigo_ArchivosGuardar(ENEMIGO_DAT, enemigo) == ERROR_ARCH)
+        {
+            Enemigo_Destruir(enemigo);
             return ERROR_ARCH;
-        Enemigo_ArchivosGuardar(ENEMIGO_DAT, enemigo);
-        Enemigo_Destruir(enemigo);
+        }
     }else
         fclose(pfEnemigo);
 
@@ -50,9 +57,12 @@ int ArchivosCargaDatos(void)
     {
         vbomb=crear_vec_bombs();
         if(!vbomb)
+            return ERROR_MEMORIA;
+        if(Archivos_GuardarBombas(BOMB_DAT, vbomb) == ERROR_ARCH)
+        {
+            free_vec_bombs(vbomb);
             return ERROR_ARCH;
-        Archivos_GuardarBombas(BOMB_DAT, vbomb);
-        free_vec_bombs(vbomb);
+        }
     }
     else
         fclose(pfBombs);
@@ -60,11 +70,14 @@ int ArchivosCargaDatos(void)
     pfPuerta = fopen(PUERTA_DAT, "rb");
     if(!pfPuerta)
     {
-        puerta = Mapa_CrearPuerta();
+        puerta = Puerta_Crear();
         if(!puerta)
+            return ERROR_MEMORIA;
+        if(Puerta_ArchivosGuardar(PUERTA_DAT, puerta) == ERROR_ARCH)
+        {
+            Puerta_Destruir(puerta);
             return ERROR_ARCH;
-        Archivos_GuardarPuerta_Mapa(PUERTA_DAT, puerta);
-        Mapa_DestruirPuerta(puerta);
+        }
     }
     else
         fclose(pfPuerta);

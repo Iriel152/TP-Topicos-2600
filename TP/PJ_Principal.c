@@ -1,9 +1,12 @@
 #include "PJ_Principal.h"
 tPersonaje* PJ_Princial_CrearPersonaje()
 {
-    tPersonaje *p = (tPersonaje*)malloc(sizeof(tPersonaje));
+    tPersonaje *p;
+
+    p = (tPersonaje*)malloc(sizeof(tPersonaje));
     if(!p)
         return NULL;
+
     p->pos.x = 0;
     p->pos.y = 0;
     p->vidas = VIDAS_BASE;

@@ -31,6 +31,6 @@ void Enemigo_AparicionRandom(tMapa*, tEnemigo*);
 void EnemigoMovimientoxTiempo(DWORD, tEnemigo*, tMapa*, DWORD *, tPersonaje *p);
 void DireccionEnemigo(tEnemigo*);
 void EnemigoMoverRandom(tMapa*, tEnemigo*, tPersonaje*);
-void EnemigoDanioaPJ(tEnemigo*, tPersonaje*, DWORD );
+void EnemigoDanioaPJ(tEnemigo*, tPersonaje*, DWORD);
 
 #endif // ENEMIGO_H_INCLUDED

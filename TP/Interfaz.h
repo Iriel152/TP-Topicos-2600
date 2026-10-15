@@ -32,6 +32,6 @@ void Interfaz_Separador(int);
 void Interfaz_AlinearCentro(const char*, int, const char*, int);
 int Interfaz_MenuEjecucion(void);
 void Interfaz_renderizar(const tMapa*, const tPersonaje*, const tEnemigo*, int);
-void Interfaz_PantallaMensaje(const char *);
+void Interfaz_PantallaMensaje(const char*);
 
 #endif // INTERFAZ_H_INCLUDED

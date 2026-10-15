@@ -30,15 +30,15 @@ typedef struct tEnemigo tEnemigo;
 typedef struct tPersonaje tPersonaje;
 
 vBombas* crear_vec_bombs(void);
-void free_vec_bombs(vBombas *vbomb);
-int inicializar_vec_bombs(vBombas *vbomb);
-int insertar_bomba(vBombas*vbomb);
+void free_vec_bombs(vBombas*);
+int inicializar_vec_bombs(vBombas*);
+int insertar_bomba(vBombas*);
 ///int  bomba_poner(vBombas *vbomb, tMapa *m, tPersonaje *p);
-int  hay_bomba(const vBombas *vbomb, int x, int y);
-void actualizar_bomba(vBombas *vbomb, tMapa *m, DWORD ahora, tPuerta *puerta,tEnemigo *e,tPersonaje *pj);
-void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo *e,tPersonaje *pj,DWORD ahora);
-void limpiar_estela(tMapa *m, int x, int y, int rango);
-int Archivos_GuardarBombas(const char* binPath, vBombas *vbomb);
-vBombas* Archivos_CargarB(const char* binPath);
+int  hay_bomba(const vBombas*, int, int);
+void actualizar_bomba(vBombas*, tMapa*, DWORD, tPuerta *, tEnemigo *, tPersonaje*);
+void explotar_bomba(tMapa*, int, int, int, tPuerta*, tEnemigo*, tPersonaje*, DWORD );
+void limpiar_estela(tMapa*, int, int, int);
+int Archivos_GuardarBombas(const char*, vBombas*);
+vBombas* Archivos_CargarB(const char*);
 
 #endif // BOMBA_H_INCLUDED

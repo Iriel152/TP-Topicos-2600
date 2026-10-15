@@ -1,8 +1,9 @@
 #include "Enemigo.h"
 tEnemigo* Enemigo_Crear()
 {
-    tEnemigo *e = (tEnemigo*)malloc(sizeof(tEnemigo));
+    tEnemigo *e;
 
+    e = (tEnemigo*)malloc(sizeof(tEnemigo));
     if(!e)
         return NULL;
 

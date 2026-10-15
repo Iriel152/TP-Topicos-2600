@@ -2,9 +2,12 @@
 #include "Enemigo.h"
 vBombas* crear_vec_bombs()
 {
-    vBombas *vbomb = (vBombas*)malloc(sizeof(vBombas));
+    vBombas *vbomb;
+
+    vbomb = (vBombas*)malloc(sizeof(vBombas));
     if (!vbomb)
         return NULL;
+
     vbomb->bombas = (Bomba*)malloc(sizeof(Bomba)*MAX_BOMBAS);
     if (!vbomb->bombas)
     {
