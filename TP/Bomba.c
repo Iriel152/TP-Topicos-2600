@@ -1,6 +1,6 @@
 #include "Bomba.h"
 #include "Enemigo.h"
-vBombas* crear_vec_bombs()
+vBombas* crear_vec_bombs(void)
 {
     vBombas *vbomb;
 
@@ -183,10 +183,10 @@ void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta,tEnemigo 
                 break;
             if(m->celdas[aux_y][aux_x] == DM_ROMPIBLE)
             {
-                if(puerta->estado_puerta == ACTIVAR)
+                if(puerta->estado_puerta == E_ACTIVAR)
                 {
                     m->celdas[aux_y][aux_x] = D_PUERTA;
-                    puerta->estado_puerta = ACTIVA;
+                    puerta->estado_puerta = E_ACTIVA;
                 }else
                     {
                         m->celdas[aux_y][aux_x] = DM_VACIO;

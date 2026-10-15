@@ -5,7 +5,7 @@ tPuerta *Puerta_Crear()
     puerta = (tPuerta*)malloc(sizeof(tPuerta));
     if(!puerta)
         return NULL;
-    puerta->estado_puerta = DESACTIVADA;
+    puerta->estado_puerta = E_DESACTIVADA;
     puerta->celdas_transitables = 0;
     puerta->prob = 0;
     puerta->vacio = 0;

@@ -2,7 +2,6 @@
 #define ENEMIGO_H_INCLUDED
 
 ///.h
-#include "Comunes.h"
 #include "Mapa.h"
 #include "PJ_Principal.h"
 

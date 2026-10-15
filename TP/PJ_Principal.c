@@ -1,5 +1,5 @@
 #include "PJ_Principal.h"
-tPersonaje* PJ_Princial_CrearPersonaje()
+tPersonaje* PJ_Princial_CrearPersonaje(void)
 {
     tPersonaje *p;
 
@@ -24,9 +24,13 @@ void PJ_Principal_DestruirPersonaje(tPersonaje *p)
 }
 void PJ_Principal_AparicionRandom(tMapa *m, tPersonaje *p)
 {
-    int esquina = ObtenerNumeroAleatorio(1,4);
+    int esquina;
+
+    esquina = ObtenerNumeroAleatorio(1,4);
+
     if(!p || !m)
         return;
+
     switch(esquina)
     {
         case 1:
@@ -118,7 +122,7 @@ int MovimientoPJ(tMapa *m, tPersonaje *p, vBombas *vbomb)
             break;
     }
 
-    if(MovimientoValido(m, NuevaFila, NuevaColumna, 1) == TODOOK)
+    if(Mapa_MovimientoValido(m, NuevaFila, NuevaColumna, 1) == TODOOK)
     {
         p->pos.y = NuevaFila;
         p->pos.x = NuevaColumna;
@@ -175,9 +179,7 @@ void PJMovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa, DWORD 
     if(_kbhit())
     {
         if(personaje->esta_vivo == 2 && (ahora - personaje->invul) >= TIMER_INVUL)
-        {
             personaje->esta_vivo = 1;
-        }
         if(ahora - (*tiempo_personaje) >= personaje->velocidad)
         {
             *seguir = MovimientoPJ(mapa, personaje, vbomb);
@@ -193,7 +195,7 @@ int bomba_poner(vBombas*vbomb, tMapa *m, tPersonaje *p)
     Bomba *pivot;
 
     if(!vbomb || !m || !p)
-        return ERROR_;
+        return ERROR_MEMORIA;
 
     if(hay_bomba(vbomb, p->pos.x , p->pos.y) == ENCONTRADO)
         return ERROR_;
@@ -218,10 +220,11 @@ int bomba_poner(vBombas*vbomb, tMapa *m, tPersonaje *p)
 }
 int PJEnSalida(tMapa *m, tPersonaje *p)
 {
-    if(m->celdas[p->pos.y][p->pos.x] == D_PUERTA)
-    {
-        return 1;
-    }
+    int band;
 
-    return 0;
+    band = ERROR_;
+    if(m->celdas[p->pos.y][p->pos.x] == D_PUERTA)
+        band = TODOOK;
+
+    return band;
 }

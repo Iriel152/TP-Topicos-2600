@@ -15,7 +15,7 @@ int ArchivosCargaDatos(void)
         if(!mapa)
             return ERROR_MEMORIA;
         Mapa_RellenoObstaculos(mapa);
-        if(Archivos_GuardarMapa(MAPA_DAT, mapa) == ERROR_ARCH)
+        if(Mapa_ArchivosGuardar(MAPA_DAT, mapa) == ERROR_ARCH)
            {
               Mapa_DestruirMapa(mapa);
               return ERROR_ARCH;

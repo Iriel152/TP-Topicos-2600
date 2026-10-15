@@ -5,7 +5,6 @@
 #include "Mapa.h"
 #include "PJ_Principal.h"
 #include "Enemigo.h"
-#include "Bomba.h"
 
 ///DEFINE
 int ArchivosCargaDatos(void);

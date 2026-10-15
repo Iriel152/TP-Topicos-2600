@@ -87,7 +87,7 @@ void Mapa_RellenoObstaculosRombiples(tMapa *p)
                 p->celdas[i][j] = DM_ROMPIBLE;
         }
 }
-int Archivos_GuardarMapa(const char* binPath, tMapa *mapa)
+int Mapa_ArchivosGuardar(const char* binPath, tMapa *mapa)
 {
     int i;
     FILE *fbin;
@@ -105,7 +105,7 @@ int Archivos_GuardarMapa(const char* binPath, tMapa *mapa)
     fclose(fbin);
     return TODOOK;
 }
-tMapa* Archivos_CargarMapa(const char* binPath)
+tMapa* Mapa_ArchivosCargar(const char* binPath)
 {
     int i, filas, columnas;
     tMapa* mapa;
@@ -131,20 +131,7 @@ tMapa* Archivos_CargarMapa(const char* binPath)
     fclose(pf);
     return mapa;
 }
-int MovimientoValido(tMapa *mapa, int fila, int columna, int esPJP)
-{
-    int band = ERROR_;
-
-    if(fila >= 0 && fila < mapa->filas && columna >= 0 && columna < mapa->columnas)
-    {
-        if(mapa->celdas[fila][columna] == DM_VACIO)
-            band = TODOOK;
-        else if(esPJP && mapa->celdas[fila][columna] == D_PUERTA)
-        band = TODOOK;
-    }
-    return band;
-}
-void AparicionPuerta(tMapa *mapa, tPuerta *puerta)
+void Mapa_AparicionPuerta(tMapa *mapa, tPuerta *puerta)
 {
     int i, j;
 
@@ -158,16 +145,27 @@ void AparicionPuerta(tMapa *mapa, tPuerta *puerta)
                 puerta->celdas_transitables++;
             }
             if(mapa->celdas[i][j] == DM_ROMPIBLE)
-            {
                 puerta->celdas_transitables++;
-            }
         }
     }
 
     puerta->prob = (float)puerta->vacio / (float)puerta->celdas_transitables;
 
-    if(puerta->prob > PROBABILIDADPUERTA)
+    if(puerta->prob > PROB)
+        puerta->estado_puerta = E_ACTIVAR;
+}
+int Mapa_MovimientoValido(tMapa *mapa, int fila, int columna, int esPJP)
+{
+    int band;
+
+    band = ERROR_;
+
+    if(fila >= 0 && fila < mapa->filas && columna >= 0 && columna < mapa->columnas)
     {
-        puerta->estado_puerta = ACTIVAR;
+        if(mapa->celdas[fila][columna] == DM_VACIO)
+            band = TODOOK;
+        else if(esPJP && mapa->celdas[fila][columna] == D_PUERTA)
+            band = TODOOK;
     }
+    return band;
 }

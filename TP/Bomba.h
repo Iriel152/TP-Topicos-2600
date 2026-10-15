@@ -1,7 +1,6 @@
 #ifndef BOMBA_H_INCLUDED
 #define BOMBA_H_INCLUDED
 
-#include "Comunes.h"
 #include "Mapa.h"
 //#include "PJ_Principal.h"
 //#include "Enemigo.h"

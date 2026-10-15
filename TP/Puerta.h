@@ -1,13 +1,19 @@
 #ifndef PUERTA_H_INCLUDED
 #define PUERTA_H_INCLUDED
 
+///.h
 #include "Comunes.h"
 
-#define ACTIVA 2
-#define ACTIVAR 1
-#define DESACTIVADA 0
-#define PROBABILIDADPUERTA 0.7
+///ESTADOS
+#define E_ACTIVA 2
+#define E_ACTIVAR 1
+#define E_DESACTIVADA 0
+///RUTAS
+#define PUERTA_DAT "../Archivos/Puerta.dat"
+///DEFINE
+#define PROB 0.7
 
+///ESTRUCTURAS
 typedef struct{
     float prob;
     int vacio;

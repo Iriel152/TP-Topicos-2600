@@ -1,5 +1,5 @@
 #include "Enemigo.h"
-tEnemigo* Enemigo_Crear()
+tEnemigo* Enemigo_Crear(void)
 {
     tEnemigo *e;
 
@@ -147,7 +147,7 @@ void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, tPersonaje *personaje)
                     break;
                 }break;
             }
-            if(MovimientoValido(mapa, nuevaFila, nuevaColumna, 0) == TODOOK)
+            if(Mapa_MovimientoValido(mapa, nuevaFila, nuevaColumna, 0) == TODOOK)
             {
                 enemigo->pos.x = nuevaColumna;
                 enemigo->pos.y = nuevaFila;

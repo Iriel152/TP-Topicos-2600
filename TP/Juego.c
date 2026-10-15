@@ -13,7 +13,7 @@ int Juego_EnCurso(int opcion)
 
     while(opcion == EP_NUEVAP)
     {
-        mapa = Archivos_CargarMapa(MAPA_DAT);
+        mapa = Mapa_ArchivosCargar(MAPA_DAT);
         Mapa_RellenoObstaculosRombiples(mapa);
 
         personaje = Archivos_CargarPersonaje(PJ_Principal_DAT);
@@ -40,7 +40,7 @@ int Juego_EnCurso(int opcion)
             Interfaz_renderizar(mapa, personaje, enemigo, temporizador);
 
             if(!puerta->estado_puerta)
-                AparicionPuerta(mapa,puerta);
+                Mapa_AparicionPuerta(mapa,puerta);
 
             actualizar_bomba(bombs,mapa,ahora,puerta,enemigo,personaje);
             EnemigoMovimientoxTiempo(ahora, enemigo, mapa, &tiempo_enemigo, personaje);
@@ -51,7 +51,7 @@ int Juego_EnCurso(int opcion)
                 seguir = EP_GAMEOVER;
                 Interfaz_PantallaMensaje(C_GAMEOVER);
             }
-            if(PJEnSalida(mapa,personaje))
+            if(PJEnSalida(mapa,personaje) == TODOOK)
             {
                 seguir = EP_VICTORIA;
                 Interfaz_PantallaMensaje(C_VICTORIA);

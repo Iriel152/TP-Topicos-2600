@@ -18,7 +18,6 @@
 
 ///RUTAS
 #define MAPA_DAT "../Archivos/Mapa.dat"
-#define PUERTA_DAT "../Archivos/Puerta.dat"
 
 ///ESTRUCTURAS
 typedef struct{
@@ -30,10 +29,10 @@ typedef struct{
 tMapa* Mapa_CrearMapa(int,  int);
 void Mapa_DestruirMapa(tMapa *);
 void Mapa_RellenoObstaculos(tMapa*);
-int Archivos_GuardarMapa(const char*, tMapa*);
-tMapa* Archivos_CargarMapa(const char*);
+int Mapa_ArchivosGuardar(const char*, tMapa*);
+tMapa* Mapa_ArchivosCargar(const char*);
 void Mapa_RellenoObstaculosRombiples(tMapa*);
-void AparicionPuerta(tMapa*, tPuerta*);
-int MovimientoValido(tMapa*, int, int, int);
+void Mapa_AparicionPuerta(tMapa*, tPuerta*);
+int Mapa_MovimientoValido(tMapa*, int, int, int);
 
 #endif // MAPA_H_INCLUDED
