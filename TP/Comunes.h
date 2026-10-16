@@ -54,11 +54,21 @@ typedef struct{
     int x;
     int y;
 }Posicion;
+typedef struct{
+    void *vec;
+    size_t ce;
+    size_t tam;
+    size_t maxElem;
+}tVector;
 
+tVector* CrearVector(size_t tam);
+int Insertar_Vector(tVector*, const void*);
+void DestruirVector(tVector*);
+int Vector_ArchivosGuardar(const char*, tVector*);
+tVector* Vector_ArchivosCargar(const char*, size_t);
 int EsLetraValida(int, int);
 int Tecla_ArribaAbajo(int);
 int ObtenerNumeroAleatorio(int, int);
 int ASegundos(DWORD);
-
 
 #endif // COMUNES_H_INCLUDED

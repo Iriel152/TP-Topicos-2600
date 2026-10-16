@@ -121,10 +121,15 @@ int Interfaz_MenuEjecucion()
         }
     }
 }
-void Interfaz_renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e, int temporizador)
+void Interfaz_renderizar(const tMapa *m, const tPersonaje *p, tVector *vec_e, tVector *vec_b, int temporizador)
 {
-    int i, j;
+    int i, j, k, ocupado;
+    tEnemigo *enemigo;
+    tBomba *bomba;
     UINT consolaOriginal;
+
+    enemigo = (tEnemigo*)vec_e->vec;
+    bomba = (tBomba*)vec_b->vec;
 
     printf("\033[H");
     printf("TIEMPO %3d\t PUNTAJE %7d\tVIDAS ", temporizador, p->puntaje);
@@ -142,20 +147,44 @@ void Interfaz_renderizar(const tMapa *m, const tPersonaje *p, const tEnemigo *e,
     {
         for (j = 0; j < m->columnas ; j++)
         {
+            ocupado = 0;
             if (p != NULL && p->pos.y == i && p->pos.x == j)
             {
                 if(p->esta_vivo == 2 && (GetTickCount() % 300) < 150)
                     printf(" ");
                 else
                     printf("%c", D_PJP);
+                ocupado = 1;
             }
-
-            else if(e != NULL && e->esta_vivo == 1 && e->pos.y == i && e->pos.x == j)
-                printf("%c", D_ENEMIGO);
-            else if (m->celdas[i][j] != DM_VACIO)
-                printf("%c", m->celdas[i][j]);
-            else
-                printf(" ");
+            if(!ocupado && enemigo != NULL)
+            {
+                for(k = 0 ; k < vec_e->ce ; k++)
+                {
+                    if((enemigo + k)->esta_vivo == 1 && (enemigo + k)->pos.y == i && (enemigo + k)->pos.x == j)
+                    {
+                        printf("%c", D_ENEMIGO);
+                        ocupado = 1;
+                    }
+                }
+            }
+            if(!ocupado && bomba != NULL)
+            {
+                for(k = 0 ; k < vec_b->ce ; k++)
+                {
+                    if(bomba->activa == 1 && (bomba + k)->pos.y == i && (bomba + k)->pos.x == j)
+                    {
+                        printf("%c", D_BOMBA);
+                        ocupado = 1;
+                    }
+                }
+            }
+            if(!ocupado)
+            {
+                if (m->celdas[i][j] != DM_VACIO)
+                    printf("%c", m->celdas[i][j]);
+                else
+                    printf(" ");
+            }
         }
         printf("\n");
     }

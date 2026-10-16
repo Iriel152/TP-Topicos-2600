@@ -5,9 +5,8 @@ int Juego_EnCurso(int opcion)
     DWORD ahora, tiempo_enemigo, tiempo_reloj, tiempo_pj;
     tMapa *mapa;
     tPersonaje *personaje;
-    tEnemigo *enemigo;
-    vBombas *bombs;
     tPuerta *puerta;
+    tVector *vec_enemigo, *vec_bomba;
 
     srand(time(NULL));
 
@@ -16,16 +15,16 @@ int Juego_EnCurso(int opcion)
         mapa = Mapa_ArchivosCargar(MAPA_DAT);
         Mapa_RellenoObstaculosRombiples(mapa);
 
-        personaje = Archivos_CargarPersonaje(PJ_Principal_DAT);
-        PJ_Principal_AparicionRandom(mapa, personaje);
-        LimpiarLadosPJ(mapa, personaje);
-
-        enemigo = Enemigo_ArchivosCargar(ENEMIGO_DAT);
-        Enemigo_AparicionRandom(mapa, enemigo);
+        personaje = PJ_ArchivosCargar(PJ_Principal_DAT);
+        PJ_AparicionRandom(mapa, personaje);
+        PJ_LimpiarLados(mapa, personaje);
 
         puerta = Puerta_ArchivosCargar(PUERTA_DAT);
 
-        bombs = crear_vec_bombs();
+        vec_enemigo = Vector_ArchivosCargar(ENEMIGO_DAT, sizeof(tEnemigo));
+        Enemigo_AparicionRandom(mapa, vec_enemigo, personaje);
+
+        vec_bomba = Vector_ArchivosCargar(BOMBA_DAT, sizeof(tBomba));
 
         seguir = EP_CONTINUAR;
         tiempo_enemigo = GetTickCount();
@@ -37,21 +36,21 @@ int Juego_EnCurso(int opcion)
             ahora = GetTickCount();
 
             temporizador = TIEMPOFIN - ASegundos(ahora - tiempo_reloj);
-            Interfaz_renderizar(mapa, personaje, enemigo, temporizador);
+            Interfaz_renderizar(mapa, personaje, vec_enemigo, vec_bomba, temporizador);
 
             if(!puerta->estado_puerta)
                 Mapa_AparicionPuerta(mapa,puerta);
 
-            actualizar_bomba(bombs,mapa,ahora,puerta,enemigo,personaje);
-            EnemigoMovimientoxTiempo(ahora, enemigo, mapa, &tiempo_enemigo, personaje);
-            PJMovimientoxTiempo(ahora, personaje, mapa, &tiempo_pj, &seguir,bombs);
+//            actualizar_bomba(vec_bomba, mapa, ahora, puerta, vec_enemigo, personaje);
+            EnemigoMovimientoxTiempo(ahora, vec_enemigo, mapa, &tiempo_enemigo, personaje);
+            PJ_MovimientoxTiempo(ahora, personaje, mapa, &tiempo_pj, &seguir, vec_bomba);
 
             if(temporizador == 0 || personaje->vidas == 0)
             {
                 seguir = EP_GAMEOVER;
                 Interfaz_PantallaMensaje(C_GAMEOVER);
             }
-            if(PJEnSalida(mapa,personaje) == TODOOK)
+            if(PJ_EnSalida(mapa, personaje) == TODOOK)
             {
                 seguir = EP_VICTORIA;
                 Interfaz_PantallaMensaje(C_VICTORIA);
@@ -67,10 +66,10 @@ int Juego_EnCurso(int opcion)
             opcion = -1;
 
         Mapa_DestruirMapa(mapa);
-        PJ_Principal_DestruirPersonaje(personaje);
-        Enemigo_Destruir(enemigo);
+        PJ_Destruir(personaje);
         Puerta_Destruir(puerta);
-        free_vec_bombs(bombs);
+        DestruirVector(vec_enemigo);
+        DestruirVector(vec_bomba);
 
         seguir = EP_SALIR;
     }

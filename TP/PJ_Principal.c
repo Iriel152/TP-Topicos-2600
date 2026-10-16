@@ -1,5 +1,5 @@
 #include "PJ_Principal.h"
-tPersonaje* PJ_Princial_CrearPersonaje(void)
+tPersonaje* PJ_Crear(void)
 {
     tPersonaje *p;
 
@@ -17,12 +17,56 @@ tPersonaje* PJ_Princial_CrearPersonaje(void)
 
     return p;
 }
-void PJ_Principal_DestruirPersonaje(tPersonaje *p)
+void PJ_Destruir(tPersonaje *p)
 {
     if(p)
         free(p);
 }
-void PJ_Principal_AparicionRandom(tMapa *m, tPersonaje *p)
+int PJ_ArchivosGuardar(const char* binPath, tPersonaje *personaje)
+{
+    FILE *fbin;
+    fbin = fopen(binPath, "wb");
+
+    if(!fbin)
+        return ERROR_ARCH;
+
+    fwrite(&(personaje->alcance_bomba), sizeof(int), 1, fbin);
+    fwrite(&(personaje->esta_vivo), sizeof(int), 1, fbin);
+    fwrite(&(personaje->pos), sizeof(personaje->pos), 1, fbin);
+    fwrite(&(personaje->velocidad), sizeof(int), 1, fbin);
+    fwrite(&(personaje->vidas), sizeof(int), 1, fbin);
+    fwrite(&(personaje->puntaje), sizeof(int), 1, fbin);
+
+    fclose(fbin);
+    return TODOOK;
+}
+tPersonaje* PJ_ArchivosCargar(const char* binPath)
+{
+    tPersonaje *personaje;
+    FILE *pf;
+
+    pf = fopen(binPath, "rb");
+    if(!pf)
+        return NULL;
+
+    personaje = (tPersonaje*)malloc(sizeof(tPersonaje));
+    if(!personaje)
+    {
+        fclose(pf);
+        return NULL;
+    }
+
+    fread(&(personaje->alcance_bomba), sizeof(int), 1, pf);
+    fread(&(personaje->esta_vivo), sizeof(int), 1, pf);
+    fread(&(personaje->pos), sizeof(personaje->pos), 1, pf);
+    fread(&(personaje->velocidad), sizeof(int), 1, pf);
+    fread(&(personaje->vidas), sizeof(int), 1, pf);
+    fread(&(personaje->puntaje), sizeof(int), 1, pf);
+
+    fclose(pf);
+    return personaje;
+}
+void PJ_AparicionRandom(tMapa *m, tPersonaje *p)
 {
     int esquina;
 
@@ -51,7 +95,7 @@ void PJ_Principal_AparicionRandom(tMapa *m, tPersonaje *p)
             break;
     }
 }
-void LimpiarLadosPJ(tMapa *m, tPersonaje *p)
+void PJ_LimpiarLados(tMapa *m, tPersonaje *p)
 {
     int f, c, *pt;
 
@@ -88,7 +132,22 @@ void LimpiarLadosPJ(tMapa *m, tPersonaje *p)
             *pt = DM_VACIO;
     }
 }
-int MovimientoPJ(tMapa *m, tPersonaje *p, vBombas *vbomb)
+void PJ_MovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa, DWORD *tiempo_personaje, int *seguir, tVector *vbomb)
+{
+    if(_kbhit())
+    {
+        if(personaje->esta_vivo == 2 && (ahora - personaje->invul) >= TIMER_INVUL)
+            personaje->esta_vivo = 1;
+        if(ahora - (*tiempo_personaje) >= personaje->velocidad)
+        {
+            *seguir = PJ_Movimiento(mapa, personaje, vbomb);
+            *tiempo_personaje = ahora;
+        }
+        else
+            while(_kbhit()) _getch();
+    }
+}
+int PJ_Movimiento(tMapa *m, tPersonaje *p, tVector *vbomb)
 {
     char tecla;
     int NuevaFila, NuevaColumna, escenario;
@@ -115,7 +174,7 @@ int MovimientoPJ(tMapa *m, tPersonaje *p, vBombas *vbomb)
             NuevaColumna++;
             break;
         case TEC_PONERSELEC:
-            bomba_poner(vbomb,m,p);
+//            PJ_PoneBomba(vbomb, m, p);
             break;
         case TEC_ESC:
             escenario = EP_SALIR;
@@ -130,95 +189,36 @@ int MovimientoPJ(tMapa *m, tPersonaje *p, vBombas *vbomb)
 
     return escenario;
 }
-int Archivos_GuardarPersonaje(const char* binPath, tPersonaje *personaje)
-{
-    FILE *fbin;
-    fbin = fopen(binPath, "wb");
-
-    if(!fbin)
-        return ERROR_ARCH;
-
-    fwrite(&(personaje->alcance_bomba), sizeof(int), 1, fbin);
-    fwrite(&(personaje->esta_vivo), sizeof(int), 1, fbin);
-    fwrite(&(personaje->pos), sizeof(personaje->pos), 1, fbin);
-    fwrite(&(personaje->velocidad), sizeof(int), 1, fbin);
-    fwrite(&(personaje->vidas), sizeof(int), 1, fbin);
-    fwrite(&(personaje->puntaje), sizeof(int), 1, fbin);
-
-    fclose(fbin);
-    return TODOOK;
-}
-tPersonaje* Archivos_CargarPersonaje(const char* binPath)
-{
-    tPersonaje *personaje;
-    FILE *pf;
-
-    pf = fopen(binPath, "rb");
-    if(!pf)
-        return NULL;
-
-    personaje = (tPersonaje*)malloc(sizeof(tPersonaje));
-    if(!personaje)
-    {
-        fclose(pf);
-        return NULL;
-    }
-
-    fread(&(personaje->alcance_bomba), sizeof(int), 1, pf);
-    fread(&(personaje->esta_vivo), sizeof(int), 1, pf);
-    fread(&(personaje->pos), sizeof(personaje->pos), 1, pf);
-    fread(&(personaje->velocidad), sizeof(int), 1, pf);
-    fread(&(personaje->vidas), sizeof(int), 1, pf);
-    fread(&(personaje->puntaje), sizeof(int), 1, pf);
-
-    fclose(pf);
-    return personaje;
-}
-void PJMovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa, DWORD *tiempo_personaje, int *seguir, vBombas *vbomb)
-{
-    if(_kbhit())
-    {
-        if(personaje->esta_vivo == 2 && (ahora - personaje->invul) >= TIMER_INVUL)
-            personaje->esta_vivo = 1;
-        if(ahora - (*tiempo_personaje) >= personaje->velocidad)
-        {
-            *seguir = MovimientoPJ(mapa, personaje, vbomb);
-            *tiempo_personaje = ahora;
-        }
-        else
-            while(_kbhit()) _getch();
-    }
-}
-int bomba_poner(vBombas*vbomb, tMapa *m, tPersonaje *p)
-{
-    int i;
-    Bomba *pivot;
-
-    if(!vbomb || !m || !p)
-        return ERROR_MEMORIA;
-
-    if(hay_bomba(vbomb, p->pos.x , p->pos.y) == ENCONTRADO)
-        return ERROR_;
-
-    pivot = vbomb->bombas;
-
-    for (i = 0; i < vbomb->ce; i++)
-    {
-        if(!pivot->activa)
-        {
-            pivot->activa = 1;
-            pivot->pos.x = p->pos.x;
-            pivot->pos.y = p->pos.y;
-            pivot->tiempo_bomba = GetTickCount();
-            m->celdas[p->pos.y][p->pos.x] = D_BOMBA;
-            return TODOOK;
-        }
-        pivot++;
-    }
-    return ERROR_;
-
-}
-int PJEnSalida(tMapa *m, tPersonaje *p)
+//int PJ_PoneBomba(tVector *vbomb, tMapa *m, tPersonaje *p)
+//{
+//    int i;
+//    tVector *pivot;
+//
+//    if(!vbomb || !m || !p)
+//        return ERROR_MEMORIA;
+//
+//    if(hay_bomba(vbomb, p->pos.x , p->pos.y) == ENCONTRADO)
+//        return ERROR_;
+//
+//    pivot = vbomb->bombas;
+//
+//    for (i = 0; i < vbomb->ce; i++)
+//    {
+//        if(!pivot->activa)
+//        {
+//            pivot->activa = 1;
+//            pivot->pos.x = p->pos.x;
+//            pivot->pos.y = p->pos.y;
+//            pivot->tiempo_bomba = GetTickCount();
+//            m->celdas[p->pos.y][p->pos.x] = D_BOMBA;
+//            return TODOOK;
+//        }
+//        pivot++;
+//    }
+//    return ERROR_;
+//
+//}
+int PJ_EnSalida(tMapa *m, tPersonaje *p)
 {
     int band;
 

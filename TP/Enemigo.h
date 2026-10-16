@@ -2,11 +2,10 @@
 #define ENEMIGO_H_INCLUDED
 
 ///.h
-#include "Mapa.h"
 #include "PJ_Principal.h"
 
 ///DEFINE
-#define MAX_ENEMIGOS 5
+#define CANT_ENEMIGO 5
 ///RUTAS
 #define ENEMIGO_DAT "../Archivos/Enemigo.dat"
 
@@ -15,7 +14,7 @@ typedef struct tEnemigo
 {
     Posicion pos;
     int esta_vivo;
-    int velocidad;
+    DWORD velocidad;
     int rebotes;
     int direccion;
     int lado;
@@ -25,9 +24,10 @@ typedef struct tEnemigo
 tEnemigo* Enemigo_Crear(void);
 void Enemigo_Destruir(tEnemigo*);
 int Enemigo_ArchivosGuardar(const char*, tEnemigo*);
+void Enemigo_RellenarVec(tVector*, int);
 tEnemigo* Enemigo_ArchivosCargar(const char* );
-void Enemigo_AparicionRandom(tMapa*, tEnemigo*);
-void EnemigoMovimientoxTiempo(DWORD, tEnemigo*, tMapa*, DWORD *, tPersonaje *p);
+void Enemigo_AparicionRandom(tMapa*, tVector*, tPersonaje*);
+void EnemigoMovimientoxTiempo(DWORD, tVector*, tMapa*, DWORD *, tPersonaje *p);
 void DireccionEnemigo(tEnemigo*);
 void EnemigoMoverRandom(tMapa*, tEnemigo*, tPersonaje*);
 void EnemigoDanioaPJ(tEnemigo*, tPersonaje*, DWORD);

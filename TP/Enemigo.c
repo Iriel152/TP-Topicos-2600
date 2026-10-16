@@ -42,6 +42,23 @@ int Enemigo_ArchivosGuardar(const char* binPath, tEnemigo *enemigo)
     fclose(fbin);
     return TODOOK;
 }
+void Enemigo_RellenarVec(tVector *v, int cant)
+{
+    int i;
+    tEnemigo enemigo;
+
+    enemigo.pos.x = 0;
+    enemigo.pos.y = 0;
+    enemigo.direccion = 0;
+    enemigo.esta_vivo = 1;
+    enemigo.velocidad = 600;
+    enemigo.valor = 200;
+    enemigo.rebotes = 3;
+    enemigo.lado = 0;
+
+    for(i = 0 ; i < cant ; i++)
+        Insertar_Vector(v, &enemigo);
+}
 tEnemigo* Enemigo_ArchivosCargar(const char* binPath)
 {
     tEnemigo *enemigo;
@@ -69,29 +86,46 @@ tEnemigo* Enemigo_ArchivosCargar(const char* binPath)
     fclose(pf);
     return enemigo;
 }
-void Enemigo_AparicionRandom(tMapa *m, tEnemigo *e)
+void Enemigo_AparicionRandom(tMapa *m, tVector *v, tPersonaje *p)
 {
-    int fila, columna;
+    int fila, columna, i, x, y;
+    tEnemigo *enemigo;
+    x = p->pos.x;
+    y = p->pos.y;
 
-    do
+    enemigo = (tEnemigo*)v->vec;
+
+    for(i = 0; i < v->ce ; i++)
     {
-        fila = ObtenerNumeroAleatorio(1, m->filas - 2);
-        columna = ObtenerNumeroAleatorio(1, m->columnas - 2);
-
-    } while(m->celdas[fila][columna] != DM_VACIO);
-
-    e->pos.x = columna;
-    e->pos.y = fila;
-}
-void EnemigoMovimientoxTiempo(DWORD ahora, tEnemigo *enemigo, tMapa *mapa, DWORD *tiempo_enemigo, tPersonaje *p)
-{
-    if(ahora - (*tiempo_enemigo) >= enemigo->velocidad && enemigo->esta_vivo == 1)
-    {
-        DireccionEnemigo(enemigo);
-        EnemigoMoverRandom(mapa, enemigo, p);
-        EnemigoDanioaPJ(enemigo, p, ahora);
-        *tiempo_enemigo = ahora;
+        do
+        {
+            fila = ObtenerNumeroAleatorio(1, m->filas - 2);
+            columna = ObtenerNumeroAleatorio(1, m->columnas - 2);
+        }while(m->celdas[fila][columna] != DM_VACIO && fila == x && columna == y);
+        (enemigo + i)->pos.x = columna;
+        (enemigo + i)->pos.y = fila;
     }
+}
+void EnemigoMovimientoxTiempo(DWORD ahora, tVector *v, tMapa *mapa, DWORD *tiempo_enemigo, tPersonaje *p)
+{
+    int i, movimiento;
+    tEnemigo *enemigo;
+
+    enemigo = (tEnemigo*)v->vec;
+    movimiento = 0;
+
+    for(i = 0 ; i < v->ce ; i++)
+    {
+        if(ahora - (*tiempo_enemigo) >= (enemigo+i)->velocidad && (enemigo+i)->esta_vivo == 1)
+        {
+            DireccionEnemigo(enemigo+i);
+            EnemigoMoverRandom(mapa, enemigo+i, p);
+            EnemigoDanioaPJ(enemigo+i, p, ahora);
+            movimiento = 1;
+        }
+    }
+    if(movimiento == 1)
+        *tiempo_enemigo = ahora;
 }
 void DireccionEnemigo(tEnemigo *enemigo)
 {

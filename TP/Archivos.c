@@ -4,9 +4,8 @@ int ArchivosCargaDatos(void)
     FILE *pfMapa, *pfPrincipal, *pfEnemigo, *pfBombs, *pfPuerta;
     tMapa *mapa;
     tPersonaje *personaje;
-    tEnemigo *enemigo;
-    vBombas *vbomb;
     tPuerta *puerta;
+    tVector *vec_bomba, *vec_enemigo;
 
     pfMapa = fopen(MAPA_DAT,"rb");
     if(!pfMapa)
@@ -26,46 +25,17 @@ int ArchivosCargaDatos(void)
     pfPrincipal = fopen(PJ_Principal_DAT,"rb");
     if(!pfPrincipal)
     {
-        personaje = PJ_Princial_CrearPersonaje();
+        personaje = PJ_Crear();
 
         if(!personaje)
             return ERROR_MEMORIA;
-        if(Archivos_GuardarPersonaje(PJ_Principal_DAT, personaje) == ERROR_ARCH)
+        if(PJ_ArchivosGuardar(PJ_Principal_DAT, personaje) == ERROR_ARCH)
         {
-            PJ_Principal_DestruirPersonaje(personaje);
+            PJ_Destruir(personaje);
             return ERROR_ARCH;
         }
     }else
         fclose(pfPrincipal);
-
-    pfEnemigo = fopen(ENEMIGO_DAT, "rb");
-    if(!pfEnemigo)
-    {
-        enemigo = Enemigo_Crear();
-        if(!enemigo)
-            return ERROR_MEMORIA;
-        if(Enemigo_ArchivosGuardar(ENEMIGO_DAT, enemigo) == ERROR_ARCH)
-        {
-            Enemigo_Destruir(enemigo);
-            return ERROR_ARCH;
-        }
-    }else
-        fclose(pfEnemigo);
-
-    pfBombs = fopen(BOMB_DAT, "rb");
-    if(!pfBombs)
-    {
-        vbomb=crear_vec_bombs();
-        if(!vbomb)
-            return ERROR_MEMORIA;
-        if(Archivos_GuardarBombas(BOMB_DAT, vbomb) == ERROR_ARCH)
-        {
-            free_vec_bombs(vbomb);
-            return ERROR_ARCH;
-        }
-    }
-    else
-        fclose(pfBombs);
 
     pfPuerta = fopen(PUERTA_DAT, "rb");
     if(!pfPuerta)
@@ -82,6 +52,40 @@ int ArchivosCargaDatos(void)
     else
         fclose(pfPuerta);
 
+    pfEnemigo = fopen(ENEMIGO_DAT, "rb");
+    if(!pfEnemigo)
+    {
+        vec_enemigo = CrearVector(sizeof(tEnemigo));
+        if(!vec_enemigo)
+            return ERROR_MEMORIA;
+        Enemigo_RellenarVec(vec_enemigo, CANT_ENEMIGO);
+//        Rellenar_VecEnemigo(vec_enemigo, CANT_ENEMIGO);
+
+        if(Vector_ArchivosGuardar(ENEMIGO_DAT, vec_enemigo) == ERROR_ARCH)
+        {
+            DestruirVector(vec_enemigo);
+            return ERROR_ARCH;
+        }
+    }else
+        fclose(pfEnemigo);
+
+    pfBombs = fopen(BOMBA_DAT, "rb");
+    if(!pfBombs)
+    {
+        vec_bomba = CrearVector(sizeof(tBomba));
+        if(!vec_bomba)
+            return ERROR_MEMORIA;
+
+//        Rellenar_VecBomba(vec_bomba, CANT_BOMBA);
+
+        if(Vector_ArchivosGuardar(BOMBA_DAT, vec_bomba) == ERROR_ARCH)
+        {
+            DestruirVector(vec_bomba);
+            return ERROR_ARCH;
+        }
+    }
+    else
+        fclose(pfBombs);
+
     return TODOOK;
 }
-

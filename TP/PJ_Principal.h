@@ -5,12 +5,10 @@
 #include "Mapa.h"
 #include "Bomba.h"
 
-
 ///BIBLIOTECAS
 #include <conio.h>
 
 ///DEFINE
-
 #define VIDAS_BASE 3
 #define TIMER_INVUL 1500
 ///RUTAS
@@ -27,17 +25,17 @@ typedef struct tPersonaje{
     DWORD invul;
 }tPersonaje;
 
-typedef struct vBombas vBombas;
+//typedef struct vBombas vBombas;
 
-tPersonaje* PJ_Princial_CrearPersonaje(void);
-void PJ_Principal_DestruirPersonaje(tPersonaje*);
-void PJ_Principal_AparicionRandom(tMapa*, tPersonaje*);
-void LimpiarLadosPJ(tMapa*, tPersonaje*);
-int MovimientoPJ(tMapa*, tPersonaje*, vBombas*);
-int Archivos_GuardarPersonaje(const char*, tPersonaje*);
-tPersonaje* Archivos_CargarPersonaje(const char*);
-void PJMovimientoxTiempo(DWORD, tPersonaje*, tMapa*, DWORD*, int*, vBombas*);
-int  bomba_poner(vBombas *, tMapa*, tPersonaje*);
-int PJEnSalida(tMapa*, tPersonaje*);
+tPersonaje* PJ_Crear(void);
+void PJ_Destruir(tPersonaje*);
+int PJ_ArchivosGuardar(const char*, tPersonaje*);
+tPersonaje* PJ_ArchivosCargar(const char*);
+void PJ_AparicionRandom(tMapa*, tPersonaje*);
+void PJ_LimpiarLados(tMapa*, tPersonaje*);
+void PJ_MovimientoxTiempo(DWORD, tPersonaje*, tMapa*, DWORD*, int*, tVector*);
+int PJ_Movimiento(tMapa*, tPersonaje*, tVector*);
+int  PJ_PoneBomba(tVector *, tMapa*, tPersonaje*);
+int PJ_EnSalida(tMapa*, tPersonaje*);
 
 #endif // PJ_PRINCIPAL_H_INCLUDED

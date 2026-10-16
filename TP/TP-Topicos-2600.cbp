@@ -63,6 +63,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="PJ_Principal.h" />
+		<Unit filename="Puerta.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Puerta.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

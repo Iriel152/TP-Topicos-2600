@@ -3,10 +3,8 @@
 
 ///.h
 #include "Interfaz.h"
-#include "PJ_Principal.h"
-#include "Mapa.h"
-#include "Enemigo.h"
 #include "Archivos.h"
+#include "Bomba.h"
 
 int Juego_EnCurso(int opcion);
 

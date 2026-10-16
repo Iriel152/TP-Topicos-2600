@@ -2,8 +2,6 @@
 #define INTERFAZ_H_INCLUDED
 
 ///.h
-#include "Mapa.h"
-#include "PJ_Principal.h"
 #include "Enemigo.h"
 
 ///BIBLIOTECAS
@@ -31,7 +29,7 @@ void Interfaz_TituloSistema(void);
 void Interfaz_Separador(int);
 void Interfaz_AlinearCentro(const char*, int, const char*, int);
 int Interfaz_MenuEjecucion(void);
-void Interfaz_renderizar(const tMapa*, const tPersonaje*, const tEnemigo*, int);
+void Interfaz_renderizar(const tMapa *m, const tPersonaje *p, tVector *e, tVector *b, int temporizador);
 void Interfaz_PantallaMensaje(const char*);
 
 #endif // INTERFAZ_H_INCLUDED

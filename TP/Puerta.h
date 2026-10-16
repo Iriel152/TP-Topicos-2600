@@ -23,7 +23,7 @@ typedef struct{
 
 tPuerta *Puerta_Crear(void);
 void Puerta_Destruir(tPuerta*);
-tPuerta* Puerta_ArchivosCargar(const char*);
 int Puerta_ArchivosGuardar(const char*, tPuerta*);
+tPuerta* Puerta_ArchivosCargar(const char*);
 
 #endif // PUERTA_H_INCLUDED
