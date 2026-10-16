@@ -55,15 +55,15 @@ int ArchivosCargaDatos(void)
     pfEnemigo = fopen(ENEMIGO_DAT, "rb");
     if(!pfEnemigo)
     {
-        vec_enemigo = CrearVector(sizeof(tEnemigo));
+        vec_enemigo = Comunes_CrearVector(sizeof(tEnemigo));
         if(!vec_enemigo)
             return ERROR_MEMORIA;
         Enemigo_RellenarVec(vec_enemigo, CANT_ENEMIGO);
 //        Rellenar_VecEnemigo(vec_enemigo, CANT_ENEMIGO);
 
-        if(Vector_ArchivosGuardar(ENEMIGO_DAT, vec_enemigo) == ERROR_ARCH)
+        if(Comunes_VectorArchivosGuardar(ENEMIGO_DAT, vec_enemigo) == ERROR_ARCH)
         {
-            DestruirVector(vec_enemigo);
+            Comunes_DestruirVector(vec_enemigo);
             return ERROR_ARCH;
         }
     }else
@@ -72,15 +72,15 @@ int ArchivosCargaDatos(void)
     pfBombs = fopen(BOMBA_DAT, "rb");
     if(!pfBombs)
     {
-        vec_bomba = CrearVector(sizeof(tBomba));
+        vec_bomba = Comunes_CrearVector(sizeof(tBomba));
         if(!vec_bomba)
             return ERROR_MEMORIA;
 
 //        Rellenar_VecBomba(vec_bomba, CANT_BOMBA);
 
-        if(Vector_ArchivosGuardar(BOMBA_DAT, vec_bomba) == ERROR_ARCH)
+        if(Comunes_VectorArchivosGuardar(BOMBA_DAT, vec_bomba) == ERROR_ARCH)
         {
-            DestruirVector(vec_bomba);
+            Comunes_DestruirVector(vec_bomba);
             return ERROR_ARCH;
         }
     }

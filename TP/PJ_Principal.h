@@ -35,6 +35,7 @@ void PJ_AparicionRandom(tMapa*, tPersonaje*);
 void PJ_LimpiarLados(tMapa*, tPersonaje*);
 void PJ_MovimientoxTiempo(DWORD, tPersonaje*, tMapa*, DWORD*, int*, tVector*);
 int PJ_Movimiento(tMapa*, tPersonaje*, tVector*);
+void ValidarEspacio(tMapa*, tPersonaje*, int*, int*);
 int  PJ_PoneBomba(tVector *, tMapa*, tPersonaje*);
 int PJ_EnSalida(tMapa*, tPersonaje*);
 

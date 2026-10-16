@@ -17,11 +17,11 @@ int Interfaz_MostrarMenuPrincipal()
         Interfaz_PantallaInicio(&seleccion, opciones, cant_op);
         tecla = _getch();
 
-        if (EsLetraValida('W', tecla) == TODOOK)
+        if (Comunes_EsLetraValida('W', tecla) == TODOOK)
             seleccion = (seleccion - 1 + cant_op) % cant_op;
-        else if (EsLetraValida('S', tecla) == TODOOK)
+        else if (Comunes_EsLetraValida('S', tecla) == TODOOK)
             seleccion = (seleccion + 1) % cant_op;
-        else if (EsLetraValida('E', tecla) == TODOOK)
+        else if (Comunes_EsLetraValida('E', tecla) == TODOOK)
         {
             system("cls");
             switch(seleccion)
@@ -98,11 +98,11 @@ int Interfaz_MenuEjecucion()
         Interfaz_PantallaInicio(&seleccion, opciones, cant_op);
         tecla = _getch();
 
-        if (EsLetraValida('W', tecla) == TODOOK)
+        if (Comunes_EsLetraValida('W', tecla) == TODOOK)
             seleccion = (seleccion - 1 + cant_op) % cant_op;
-        else if (EsLetraValida('S', tecla) == TODOOK)
+        else if (Comunes_EsLetraValida('S', tecla) == TODOOK)
             seleccion = (seleccion + 1) % cant_op;
-        else if (EsLetraValida('E', tecla) == TODOOK)
+        else if (Comunes_EsLetraValida('E', tecla) == TODOOK)
         {
             system("cls");
             switch(seleccion)

@@ -10,7 +10,7 @@
 
 ///RETURNS
 #define ERROR_MEMORIA -1
-#define TODOOK    0
+#define TODOOK 0
 #define ERROR_ -2
 #define ERROR_ARCH -3
 #define ENCONTRADO 1
@@ -35,15 +35,7 @@
 #define D_BOMBA 'O'
 #define D_PUERTA 'S'
 #define D_EXPLOSION '#'
-///
-#define HORIZONTAL 1
-#define VERTICAL 2
-#define IZQUIERDA 1
-#define DERECHA 2
-#define ARRIBA 1
-#define ABAJO 2
-#define IZQ 3
-#define DER 4
+///DEFINE
 #define TIEMPOFIN 200
 #define SEGUNDOS 1000
 ///MACROS
@@ -61,14 +53,14 @@ typedef struct{
     size_t maxElem;
 }tVector;
 
-tVector* CrearVector(size_t tam);
-int Insertar_Vector(tVector*, const void*);
-void DestruirVector(tVector*);
-int Vector_ArchivosGuardar(const char*, tVector*);
-tVector* Vector_ArchivosCargar(const char*, size_t);
-int EsLetraValida(int, int);
-int Tecla_ArribaAbajo(int);
-int ObtenerNumeroAleatorio(int, int);
-int ASegundos(DWORD);
+tVector* Comunes_CrearVector(size_t tam);
+int Comunes_InsertarVector(tVector*, const void*);
+void Comunes_DestruirVector(tVector*);
+int Comunes_VectorArchivosGuardar(const char*, tVector*);
+tVector* Comunes_VectorArchivosCargar(const char*, size_t);
+int Comunes_EsLetraValida(int, int);
+int Comunes_TeclaArribaAbajo(int);
+int Comunes_ObtenerNumeroAleatorio(int, int);
+int Comunes_ASegundos(DWORD);
 
 #endif // COMUNES_H_INCLUDED

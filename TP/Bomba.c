@@ -11,19 +11,8 @@ void Bomba_RellenarVec(tVector *v, int cant)
     bomba.tiempo_bomba = 0;
 
     for(i = 0 ; i < cant ; i++)
-        Insertar_Vector(v, &bomba);
+        Comunes_InsertarVector(v, &bomba);
 }
-//int inicializar_vec_bombs(vBombas *vbomb)
-//{
-//    if(!vbomb)
-//        return ERROR_MEMORIA;
-//
-//    vbomb->rango=1;
-//    if(insertar_bomba(vbomb) != TODOOK)
-//       return ERROR_;
-//    return TODOOK;
-//}
-//
 ////chequea si hay bomba xd
 //
 //int hay_bomba(const vBombas *vbomb, int x, int y)
@@ -203,58 +192,4 @@ void Bomba_RellenarVec(tVector *v, int cant)
 //    }
 //
 //
-//}
-//
-//int Archivos_GuardarBombas(const char* binPath, vBombas *vbomb)
-//{
-//    FILE *fbin;
-//    fbin = fopen(binPath,"wb");
-//
-//    if(!fbin)
-//        return ERROR_ARCH;
-//    fwrite(&(vbomb->ce),sizeof(int),1,fbin);
-//    fwrite(&(vbomb->rango),sizeof(int),1,fbin);
-//    fwrite(&(vbomb->tam),sizeof(int),1,fbin);
-//
-//    if(vbomb->tam > 0 && vbomb->bombas != NULL)
-//    {
-//        fwrite(vbomb->bombas,sizeof(Bomba),vbomb->tam,fbin);
-//    }
-//    fclose(fbin);
-//    return TODOOK;
-//}
-//
-//vBombas* Archivos_CargarBombas(const char* binPath)
-//{
-//    FILE *pf;
-//    vBombas *vbomb;
-//
-//    pf = fopen(binPath,"rb");
-//    if(!pf)
-//        return NULL;
-//
-//    vbomb = (vBombas*)malloc(sizeof(vBombas));
-//    if(!vbomb)
-//    {
-//        fclose(pf);
-//        return NULL;
-//    }
-//
-//    fread(&(vbomb->ce),sizeof(int),1,pf);
-//    fread(&(vbomb->rango),sizeof(int),1,pf);
-//    fread(&(vbomb->tam),sizeof(int),1,pf);
-//
-//    vbomb->bombas = (Bomba*)malloc(sizeof(Bomba) * vbomb->tam);
-//    if(!vbomb->bombas)
-//    {
-//        free(vbomb);
-//        fclose(pf);
-//        return NULL;
-//    }
-//
-//    if (vbomb->tam > 0)
-//        fread(vbomb->bombas,sizeof(Bomba),vbomb->tam,pf);
-//
-//    fclose(pf);
-//    return vbomb;
 //}

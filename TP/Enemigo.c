@@ -1,47 +1,4 @@
 #include "Enemigo.h"
-tEnemigo* Enemigo_Crear(void)
-{
-    tEnemigo *e;
-
-    e = (tEnemigo*)malloc(sizeof(tEnemigo));
-    if(!e)
-        return NULL;
-
-    e->pos.x = 0;
-    e->pos.y = 0;
-    e->esta_vivo = 1;
-    e->velocidad = 600;
-    e->rebotes = 3;
-    e->direccion = 0;
-    e->lado = 0;
-    e->valor = 200;
-
-    return e;
-}
-void Enemigo_Destruir(tEnemigo *e)
-{
-    if(e)
-        free(e);
-}
-int Enemigo_ArchivosGuardar(const char* binPath, tEnemigo *enemigo)
-{
-    FILE *fbin;
-    fbin = fopen(binPath, "wb");
-
-    if(!fbin)
-        return ERROR_ARCH;
-
-    fwrite(&(enemigo->esta_vivo), sizeof(int), 1, fbin);
-    fwrite(&(enemigo->pos), sizeof(enemigo->pos), 1, fbin);
-    fwrite(&(enemigo->velocidad), sizeof(int), 1, fbin);
-    fwrite(&(enemigo->rebotes), sizeof(int), 1, fbin);
-    fwrite(&(enemigo->direccion), sizeof(int), 1, fbin);
-    fwrite(&(enemigo->lado), sizeof(int), 1, fbin);
-    fwrite(&(enemigo->valor), sizeof(int), 1, fbin);
-
-    fclose(fbin);
-    return TODOOK;
-}
 void Enemigo_RellenarVec(tVector *v, int cant)
 {
     int i;
@@ -57,51 +14,17 @@ void Enemigo_RellenarVec(tVector *v, int cant)
     enemigo.lado = 0;
 
     for(i = 0 ; i < cant ; i++)
-        Insertar_Vector(v, &enemigo);
-}
-tEnemigo* Enemigo_ArchivosCargar(const char* binPath)
-{
-    tEnemigo *enemigo;
-    FILE *pf;
-
-    pf = fopen(binPath, "rb");
-    if(!pf)
-        return NULL;
-
-    enemigo = (tEnemigo*)malloc(sizeof(tEnemigo));
-    if(!enemigo)
-    {
-        fclose(pf);
-        return NULL;
-    }
-
-    fread(&(enemigo->esta_vivo), sizeof(int), 1, pf);
-    fread(&(enemigo->pos), sizeof(enemigo->pos), 1, pf);
-    fread(&(enemigo->velocidad), sizeof(int), 1, pf);
-    fread(&(enemigo->rebotes), sizeof(int), 1, pf);
-    fread(&(enemigo->direccion), sizeof(int), 1, pf);
-    fread(&(enemigo->lado), sizeof(int), 1, pf);
-    fread(&(enemigo->valor), sizeof(int), 1, pf);
-
-    fclose(pf);
-    return enemigo;
+        Comunes_InsertarVector(v, &enemigo);
 }
 void Enemigo_AparicionRandom(tMapa *m, tVector *v, tPersonaje *p)
 {
-    int fila, columna, i, x, y;
+    int fila, columna, i;
     tEnemigo *enemigo;
-    x = p->pos.x;
-    y = p->pos.y;
-
     enemigo = (tEnemigo*)v->vec;
 
-    for(i = 0; i < v->ce ; i++)
+    for(i = 0 ; i < v->ce ; i++)
     {
-        do
-        {
-            fila = ObtenerNumeroAleatorio(1, m->filas - 2);
-            columna = ObtenerNumeroAleatorio(1, m->columnas - 2);
-        }while(m->celdas[fila][columna] != DM_VACIO && fila == x && columna == y);
+        ValidarEspacio(m, p, &fila, &columna);
         (enemigo + i)->pos.x = columna;
         (enemigo + i)->pos.y = fila;
     }
@@ -116,88 +39,88 @@ void EnemigoMovimientoxTiempo(DWORD ahora, tVector *v, tMapa *mapa, DWORD *tiemp
 
     for(i = 0 ; i < v->ce ; i++)
     {
-        if(ahora - (*tiempo_enemigo) >= (enemigo+i)->velocidad && (enemigo+i)->esta_vivo == 1)
+        if(ahora - (*tiempo_enemigo) >= (enemigo + i)->velocidad && (enemigo + i)->esta_vivo == 1)
         {
-            DireccionEnemigo(enemigo+i);
-            EnemigoMoverRandom(mapa, enemigo+i, p);
-            EnemigoDanioaPJ(enemigo+i, p, ahora);
+            Enemigo_Direccion(enemigo + i);
+            Enemigo_MoverRandom(mapa, enemigo + i, p, v);
+            Enemigo_DanioaPJ(enemigo + i, p, ahora);
             movimiento = 1;
         }
     }
     if(movimiento == 1)
         *tiempo_enemigo = ahora;
 }
-void DireccionEnemigo(tEnemigo *enemigo)
+void Enemigo_Direccion(tEnemigo *enemigo)
 {
     if(enemigo->direccion == 0)
     {
-        enemigo->direccion = ObtenerNumeroAleatorio(1,2);
-        enemigo->lado= ObtenerNumeroAleatorio(1,2);
+        enemigo->direccion = Comunes_ObtenerNumeroAleatorio(1,2);
+        enemigo->lado = Comunes_ObtenerNumeroAleatorio(1,2);
     }
 
-    if(enemigo->rebotes == 0)
+    if(enemigo->rebotes <= 0)
     {
         if(enemigo->direccion == 1)
-            {
-                enemigo->direccion= 2;
-            }else
-                {
-                    enemigo->direccion = 1;
-                }
+            enemigo->direccion = 2;
+        else
+            enemigo->direccion = 1;
 
         enemigo->rebotes = 4;
     }
 }
-void EnemigoMoverRandom(tMapa *mapa, tEnemigo *enemigo, tPersonaje *personaje)
+void Enemigo_MoverRandom(tMapa *mapa, tEnemigo *enemigo, tPersonaje *personaje, tVector *v)
 {
     int nuevaFila, nuevaColumna;
 
     nuevaColumna = enemigo->pos.x;
     nuevaFila = enemigo->pos.y;
 
-    switch(enemigo->direccion)
+    if (enemigo->direccion == 1)
     {
-        case ARRIBA:
-            switch(enemigo->lado)
-            {
-                case IZQUIERDA:
-                nuevaColumna--;
-                break;
-
-                case DERECHA:
-                nuevaColumna++;
-                break;
-            }break;
-
-        case ABAJO:
-            switch(enemigo->lado)
-                {
-                    case ARRIBA:
-                    nuevaFila--;
-                    break;
-
-                    case ABAJO:
-                    nuevaFila++;
-                    break;
-                }break;
-            }
-            if(Mapa_MovimientoValido(mapa, nuevaFila, nuevaColumna, 0) == TODOOK)
-            {
-                enemigo->pos.x = nuevaColumna;
-                enemigo->pos.y = nuevaFila;
-            }else
-                {
-                    enemigo->rebotes--;
-                    if(enemigo->lado == 1)
-                    {
-                        enemigo->lado= 2;
-                    }else
-                        {
-                            enemigo->lado = 1;
-                        }
-                }
+        if (enemigo->lado == 1)
+            nuevaColumna--;
+        else
+            nuevaColumna++;
+    }
+    else if (enemigo->direccion == 2)
+    {
+        if (enemigo->lado == 1)
+            nuevaFila--;
+        else
+            nuevaFila++;
+    }
+    if(Mapa_MovimientoValido(mapa, nuevaFila, nuevaColumna, 0) == TODOOK &&
+       Enemigo_ColisionEnemigos(v, enemigo, nuevaFila, nuevaColumna) == NO_ENCONTRADO)
+    {
+        enemigo->pos.x = nuevaColumna;
+        enemigo->pos.y = nuevaFila;
+    }else
+    {
+        enemigo->rebotes--;
+        if(enemigo->lado == 1)
+            enemigo->lado = 2;
+        else
+            enemigo->lado = 1;
+    }
 }
-void EnemigoDanioaPJ(tEnemigo *enemigo, tPersonaje *personaje, DWORD ahora)
+int Enemigo_ColisionEnemigos(tVector *v, tEnemigo *enemigo_actual, int fila, int columna)
+{
+    int i;
+    tEnemigo *enemigos = (tEnemigo*)v->vec;
+
+    for(i = 0 ; i < v->ce ; i++)
+    {
+        if((enemigos + i) != enemigo_actual &&
+           (enemigos + i)->esta_vivo == 1)
+        {
+            if((enemigos + i)->pos.y == fila &&
+               (enemigos + i)->pos.x == columna)
+                return ENCONTRADO;
+        }
+    }
+    return NO_ENCONTRADO;
+}
+void Enemigo_DanioaPJ(tEnemigo *enemigo, tPersonaje *personaje, DWORD ahora)
 {
     int distancia_x, distancia_y;
 

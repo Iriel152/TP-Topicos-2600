@@ -21,10 +21,10 @@ int Juego_EnCurso(int opcion)
 
         puerta = Puerta_ArchivosCargar(PUERTA_DAT);
 
-        vec_enemigo = Vector_ArchivosCargar(ENEMIGO_DAT, sizeof(tEnemigo));
+        vec_enemigo = Comunes_VectorArchivosCargar(ENEMIGO_DAT, sizeof(tEnemigo));
         Enemigo_AparicionRandom(mapa, vec_enemigo, personaje);
 
-        vec_bomba = Vector_ArchivosCargar(BOMBA_DAT, sizeof(tBomba));
+        vec_bomba = Comunes_VectorArchivosCargar(BOMBA_DAT, sizeof(tBomba));
 
         seguir = EP_CONTINUAR;
         tiempo_enemigo = GetTickCount();
@@ -35,7 +35,7 @@ int Juego_EnCurso(int opcion)
         {
             ahora = GetTickCount();
 
-            temporizador = TIEMPOFIN - ASegundos(ahora - tiempo_reloj);
+            temporizador = TIEMPOFIN - Comunes_ASegundos(ahora - tiempo_reloj);
             Interfaz_renderizar(mapa, personaje, vec_enemigo, vec_bomba, temporizador);
 
             if(!puerta->estado_puerta)
@@ -68,8 +68,8 @@ int Juego_EnCurso(int opcion)
         Mapa_DestruirMapa(mapa);
         PJ_Destruir(personaje);
         Puerta_Destruir(puerta);
-        DestruirVector(vec_enemigo);
-        DestruirVector(vec_bomba);
+        Comunes_DestruirVector(vec_enemigo);
+        Comunes_DestruirVector(vec_bomba);
 
         seguir = EP_SALIR;
     }

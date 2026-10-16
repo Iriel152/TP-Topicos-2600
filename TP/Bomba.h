@@ -25,7 +25,5 @@ void Bomba_RellenarVec(tVector *v, int cant);
 //void actualizar_bomba(vBombas*, tMapa*, DWORD, tPuerta *, tEnemigo *, tPersonaje*);
 //void explotar_bomba(tMapa*, int, int, int, tPuerta*, tEnemigo*, tPersonaje*, DWORD );
 //void limpiar_estela(tMapa*, int, int, int);
-//int Archivos_GuardarBombas(const char*, vBombas*);
-//vBombas* Archivos_CargarB(const char*);
 
 #endif // BOMBA_H_INCLUDED

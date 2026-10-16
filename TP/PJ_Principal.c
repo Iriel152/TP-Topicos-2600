@@ -70,7 +70,7 @@ void PJ_AparicionRandom(tMapa *m, tPersonaje *p)
 {
     int esquina;
 
-    esquina = ObtenerNumeroAleatorio(1,4);
+    esquina = Comunes_ObtenerNumeroAleatorio(1,4);
 
     if(!p || !m)
         return;
@@ -188,6 +188,17 @@ int PJ_Movimiento(tMapa *m, tPersonaje *p, tVector *vbomb)
     }
 
     return escenario;
+}
+void ValidarEspacio(tMapa *m, tPersonaje *p, int *fila, int *columna)
+{
+    int x, y;
+    x = p->pos.x;
+    y = p->pos.y;
+    do
+    {
+        *fila = Comunes_ObtenerNumeroAleatorio(1, m->filas - 2);
+        *columna = Comunes_ObtenerNumeroAleatorio(1, m->columnas - 2);
+    }while(m->celdas[*fila][*columna] != DM_VACIO || (*columna == x && *fila == y));
 }
 //int PJ_PoneBomba(tVector *vbomb, tMapa *m, tPersonaje *p)
 //{

@@ -21,15 +21,12 @@ typedef struct tEnemigo
     int valor;
 }tEnemigo;
 
-tEnemigo* Enemigo_Crear(void);
-void Enemigo_Destruir(tEnemigo*);
-int Enemigo_ArchivosGuardar(const char*, tEnemigo*);
 void Enemigo_RellenarVec(tVector*, int);
-tEnemigo* Enemigo_ArchivosCargar(const char* );
 void Enemigo_AparicionRandom(tMapa*, tVector*, tPersonaje*);
-void EnemigoMovimientoxTiempo(DWORD, tVector*, tMapa*, DWORD *, tPersonaje *p);
-void DireccionEnemigo(tEnemigo*);
-void EnemigoMoverRandom(tMapa*, tEnemigo*, tPersonaje*);
-void EnemigoDanioaPJ(tEnemigo*, tPersonaje*, DWORD);
+void EnemigoMovimientoxTiempo(DWORD, tVector*, tMapa*, DWORD*, tPersonaje*);
+void Enemigo_Direccion(tEnemigo*);
+void Enemigo_MoverRandom(tMapa*, tEnemigo*, tPersonaje*, tVector*);
+int Enemigo_ColisionEnemigos(tVector*, tEnemigo*, int, int);
+void Enemigo_DanioaPJ(tEnemigo*, tPersonaje*, DWORD);
 
 #endif // ENEMIGO_H_INCLUDED

@@ -1,5 +1,5 @@
 #include "Comunes.h"
-tVector* CrearVector(size_t tam)
+tVector* Comunes_CrearVector(size_t tam)
 {
     tVector *v;
 
@@ -16,11 +16,11 @@ tVector* CrearVector(size_t tam)
 
     return v;
 }
-void DestruirVector(tVector* v)
+void Comunes_DestruirVector(tVector* v)
 {
     free(v->vec);
 }
-int Vector_ArchivosGuardar(const char *binPath, tVector *v)
+int Comunes_VectorArchivosGuardar(const char *binPath, tVector *v)
 {
     FILE *fbin;
     fbin = fopen(binPath,"wb");
@@ -36,7 +36,7 @@ int Vector_ArchivosGuardar(const char *binPath, tVector *v)
     fclose(fbin);
     return TODOOK;
 }
-int Insertar_Vector(tVector *v, const void *elemento)
+int Comunes_InsertarVector(tVector *v, const void *elemento)
 {
     int NuevoMax;
     void *Bloque, *pos;
@@ -64,7 +64,7 @@ int Insertar_Vector(tVector *v, const void *elemento)
 
     return TODOOK;
 }
-tVector* Vector_ArchivosCargar(const char* binPath, size_t tam)
+tVector* Comunes_VectorArchivosCargar(const char* binPath, size_t tam)
 {
     size_t cant;
     FILE *pf;
@@ -75,7 +75,7 @@ tVector* Vector_ArchivosCargar(const char* binPath, size_t tam)
 
     fread(&cant, sizeof(size_t), 1, pf);
 
-    v = CrearVector(tam);
+    v = Comunes_CrearVector(tam);
     if(!v)
     {
         fclose(pf);
@@ -99,25 +99,25 @@ tVector* Vector_ArchivosCargar(const char* binPath, size_t tam)
     fclose(pf);
     return v;
 }
-int EsLetraValida(int LetraEsperada, int LetraRecibida)
+int Comunes_EsLetraValida(int LetraEsperada, int LetraRecibida)
 {
     if(LetraEsperada == LetraRecibida || LetraEsperada + ('a' - 'A') == LetraRecibida)
         return TODOOK;
     else
         return ERROR_;
 }
-int Tecla_ArribaAbajo(int tecla)
+int Comunes_TeclaArribaAbajo(int tecla)
 {
-    if(EsLetraValida(TEC_ABAJO, tecla) == TODOOK || EsLetraValida(TEC_ARRIBA, tecla) == TODOOK)
+    if(Comunes_EsLetraValida(TEC_ABAJO, tecla) == TODOOK || Comunes_EsLetraValida(TEC_ARRIBA, tecla) == TODOOK)
         return TODOOK;
     else
         return ERROR_;
 }
-int ObtenerNumeroAleatorio(int min, int max)
+int Comunes_ObtenerNumeroAleatorio(int min, int max)
 {
     return (rand()%(max - min + 1)) + min;
 }
-int ASegundos(DWORD tiempo)
+int Comunes_ASegundos(DWORD tiempo)
 {
     return ((int)tiempo / SEGUNDOS);
 }
