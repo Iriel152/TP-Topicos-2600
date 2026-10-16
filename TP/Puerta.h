@@ -4,10 +4,6 @@
 ///.h
 #include "Comunes.h"
 
-///ESTADOS
-#define E_ACTIVA 2
-#define E_ACTIVAR 1
-#define E_DESACTIVADA 0
 ///RUTAS
 #define PUERTA_DAT "../Archivos/Puerta.dat"
 ///DEFINE

@@ -59,7 +59,6 @@ int ArchivosCargaDatos(void)
         if(!vec_enemigo)
             return ERROR_MEMORIA;
         Enemigo_RellenarVec(vec_enemigo, CANT_ENEMIGO);
-//        Rellenar_VecEnemigo(vec_enemigo, CANT_ENEMIGO);
 
         if(Comunes_VectorArchivosGuardar(ENEMIGO_DAT, vec_enemigo) == ERROR_ARCH)
         {
@@ -76,7 +75,7 @@ int ArchivosCargaDatos(void)
         if(!vec_bomba)
             return ERROR_MEMORIA;
 
-//        Rellenar_VecBomba(vec_bomba, CANT_BOMBA);
+        Bomba_RellenarVec(vec_bomba, CANT_BOMBA);
 
         if(Comunes_VectorArchivosGuardar(BOMBA_DAT, vec_bomba) == ERROR_ARCH)
         {

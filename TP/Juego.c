@@ -36,12 +36,12 @@ int Juego_EnCurso(int opcion)
             ahora = GetTickCount();
 
             temporizador = TIEMPOFIN - Comunes_ASegundos(ahora - tiempo_reloj);
-            Interfaz_renderizar(mapa, personaje, vec_enemigo, vec_bomba, temporizador);
+            Interfaz_renderizar(mapa, personaje, puerta, vec_enemigo, vec_bomba, temporizador, ahora);
 
             if(!puerta->estado_puerta)
-                Mapa_AparicionPuerta(mapa,puerta);
+                Mapa_AparicionPuerta(mapa, puerta);
 
-//            actualizar_bomba(vec_bomba, mapa, ahora, puerta, vec_enemigo, personaje);
+//            actualizar_bomba(vec_bomba, ahora);
             EnemigoMovimientoxTiempo(ahora, vec_enemigo, mapa, &tiempo_enemigo, personaje);
             PJ_MovimientoxTiempo(ahora, personaje, mapa, &tiempo_pj, &seguir, vec_bomba);
 

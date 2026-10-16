@@ -29,7 +29,7 @@ void Interfaz_TituloSistema(void);
 void Interfaz_Separador(int);
 void Interfaz_AlinearCentro(const char*, int, const char*, int);
 int Interfaz_MenuEjecucion(void);
-void Interfaz_renderizar(const tMapa *m, const tPersonaje *p, tVector *e, tVector *b, int temporizador);
+void Interfaz_renderizar(const tMapa *m, tPersonaje *p, tPuerta*, tVector *e, tVector *b, int temporizador, DWORD);
 void Interfaz_PantallaMensaje(const char*);
 
 #endif // INTERFAZ_H_INCLUDED

@@ -31,12 +31,12 @@ tPersonaje* PJ_Crear(void);
 void PJ_Destruir(tPersonaje*);
 int PJ_ArchivosGuardar(const char*, tPersonaje*);
 tPersonaje* PJ_ArchivosCargar(const char*);
-void PJ_AparicionRandom(tMapa*, tPersonaje*);
-void PJ_LimpiarLados(tMapa*, tPersonaje*);
-void PJ_MovimientoxTiempo(DWORD, tPersonaje*, tMapa*, DWORD*, int*, tVector*);
-int PJ_Movimiento(tMapa*, tPersonaje*, tVector*);
-void ValidarEspacio(tMapa*, tPersonaje*, int*, int*);
-int  PJ_PoneBomba(tVector *, tMapa*, tPersonaje*);
-int PJ_EnSalida(tMapa*, tPersonaje*);
+void PJ_AparicionRandom(tMapa*, tPersonaje*);//MUDAR A MAPA.H
+void PJ_LimpiarLados(tMapa*, tPersonaje*);//MUDAR A MAPA.H
+void PJ_MovimientoxTiempo(DWORD, tPersonaje*, tMapa*, DWORD*, int*, tVector*);//MUDAR A MAPA.H
+int PJ_Movimiento(tMapa*, tPersonaje*, tVector*);//MUDAR A MAPA.H
+void ValidarEspacio(tMapa*, tPersonaje*, int*, int*);//MUDAR A MAPA.H
+int  PJ_PoneBomba(tVector *, tMapa*, tPersonaje*);//MUDAR A MAPA.H
+int PJ_EnSalida(tMapa*, tPersonaje*);//MUDAR A MAPA.H
 
 #endif // PJ_PRINCIPAL_H_INCLUDED

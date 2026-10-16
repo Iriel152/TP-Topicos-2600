@@ -8,7 +8,7 @@ int Interfaz_MostrarMenuPrincipal()
         "Salir"
     };
 
-    cant_op = (int)sizeof(opciones)/sizeof(*opciones);
+    cant_op = (int)sizeof(opciones) / sizeof(*opciones);
 
     while (1)
     {
@@ -46,7 +46,7 @@ void Interfaz_PantallaInicio(int *seleccion, const char **opciones, int cant)
 
     Interfaz_TituloSistema();
 
-    for (i = 0; i < cant; i++)
+    for (i = 0 ; i < cant ; i++)
     {
         if (i == *seleccion)
             Interfaz_AlinearCentro(*(opciones + i), T_CENTRADO, COLOR_ACTIVO, T_SELECCIONADO);
@@ -64,7 +64,7 @@ void Interfaz_TituloSistema()
 void Interfaz_Separador(int n)
 {
     int i;
-    for(i=0;i<n;i++)
+    for(i = 0 ; i < n ; i++)
         printf("=");
     printf("\n");
 }
@@ -74,9 +74,9 @@ void Interfaz_AlinearCentro(const char* palabra, int total, const char* color, i
     char* caracter = " >";
 
     tam = strlen(palabra);
-    tam = tam/2;
+    tam = tam / 2;
 
-    for(i=0;i<total/2 - tam - selec;i++)
+    for(i = 0 ; i < total / 2 - tam - selec ; i++)
         printf(" ");
     if(selec == 0)
         caracter = "";
@@ -90,7 +90,7 @@ int Interfaz_MenuEjecucion()
                                 "Nueva Partida",
                                 "Volver"};
 
-    cant_op = (int)sizeof(opciones)/sizeof(*opciones);
+    cant_op = (int)sizeof(opciones) / sizeof(*opciones);
 
     while(1)
     {
@@ -121,7 +121,7 @@ int Interfaz_MenuEjecucion()
         }
     }
 }
-void Interfaz_renderizar(const tMapa *m, const tPersonaje *p, tVector *vec_e, tVector *vec_b, int temporizador)
+void Interfaz_renderizar(const tMapa *m, tPersonaje *p, tPuerta *puerta, tVector *vec_e, tVector *vec_b, int temporizador, DWORD ahora)
 {
     int i, j, k, ocupado;
     tEnemigo *enemigo;
@@ -143,9 +143,9 @@ void Interfaz_renderizar(const tMapa *m, const tPersonaje *p, tVector *vec_e, tV
     printf("\033[K");
     SetConsoleOutputCP(consolaOriginal);
     printf("\n");
-    for (i = 0; i < m->filas; i++)
+    for (i = 0 ; i < m->filas ; i++)
     {
-        for (j = 0; j < m->columnas ; j++)
+        for (j = 0 ; j < m->columnas ; j++)
         {
             ocupado = 0;
             if (p != NULL && p->pos.y == i && p->pos.x == j)
@@ -160,7 +160,9 @@ void Interfaz_renderizar(const tMapa *m, const tPersonaje *p, tVector *vec_e, tV
             {
                 for(k = 0 ; k < vec_e->ce ; k++)
                 {
-                    if((enemigo + k)->esta_vivo == 1 && (enemigo + k)->pos.y == i && (enemigo + k)->pos.x == j)
+                    if((enemigo + k)->esta_vivo == 1 &&
+                       (enemigo + k)->pos.y == i &&
+                       (enemigo + k)->pos.x == j)
                     {
                         printf("%c", D_ENEMIGO);
                         ocupado = 1;
@@ -171,9 +173,14 @@ void Interfaz_renderizar(const tMapa *m, const tPersonaje *p, tVector *vec_e, tV
             {
                 for(k = 0 ; k < vec_b->ce ; k++)
                 {
-                    if(bomba->activa == 1 && (bomba + k)->pos.y == i && (bomba + k)->pos.x == j)
+                    if((bomba + k)->activa == E_ACTIVA &&
+                       (bomba + k)->pos.y == i &&
+                       (bomba + k)->pos.x == j)
                     {
                         printf("%c", D_BOMBA);
+//                        explotar_bomba(m, i, j, (bomba + i)->rango, puerta, vec_e, p, ahora);
+                        //Posiblemente habra que sacarlo aun no lo se, sino habria que hacer alguna funcion
+                        //para cuando se active la bomba desde tmapa?
                         ocupado = 1;
                     }
                 }
@@ -188,7 +195,6 @@ void Interfaz_renderizar(const tMapa *m, const tPersonaje *p, tVector *vec_e, tV
         }
         printf("\n");
     }
-
     fflush(stdout);
 }
 void Interfaz_PantallaMensaje(const char *frase)

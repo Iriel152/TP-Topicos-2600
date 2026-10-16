@@ -39,7 +39,8 @@ void EnemigoMovimientoxTiempo(DWORD ahora, tVector *v, tMapa *mapa, DWORD *tiemp
 
     for(i = 0 ; i < v->ce ; i++)
     {
-        if(ahora - (*tiempo_enemigo) >= (enemigo + i)->velocidad && (enemigo + i)->esta_vivo == 1)
+        if(ahora - (*tiempo_enemigo) >= (enemigo + i)->velocidad &&
+           (enemigo + i)->esta_vivo == 1)
         {
             Enemigo_Direccion(enemigo + i);
             Enemigo_MoverRandom(mapa, enemigo + i, p, v);
@@ -137,3 +138,62 @@ void Enemigo_DanioaPJ(tEnemigo *enemigo, tPersonaje *personaje, DWORD ahora)
         personaje->invul = ahora;
     }
 }
+//void explotar_bomba(tMapa *m, int x, int y, int rango, tPuerta *puerta, tVector *v, tPersonaje *pj, DWORD ahora)
+//{
+//    int i, j,k, aux_x, aux_y;
+//    int dir_x[] = {-1,1,0,0};
+//    int dir_y[] = {0,0,-1,1};
+//    tEnemigo *enemigo;
+//
+//    enemigo = (tEnemigo*)v->vec;
+//
+//    for (i = 0 ; i < 4 ; i++)
+//    {
+//        for(j = 1; j <= rango; j++)
+//        {
+//            aux_x = x + (j * dir_x[i]);
+//            aux_y = y + (j * dir_y[i]);
+//            if(aux_x < 0 || aux_y < 0 || aux_y >= m->filas || aux_x >= m->columnas) //chequeamos bordes
+//                break;             // no me gusta usar break, le voy a preguntar. Si lo tengo q hacer con bandera
+//            if(m->celdas[aux_y][aux_x] == DM_PARED || m->celdas[aux_y][aux_x] == DM_OBSTACULO)
+//                break;
+//            if(m->celdas[aux_y][aux_x] == DM_ROMPIBLE)
+//            {
+//                if(puerta->estado_puerta == E_ACTIVAR)
+//                {
+//                    m->celdas[aux_y][aux_x] = D_PUERTA;
+//                    puerta->estado_puerta = E_ACTIVA;
+//                }else
+//                    {
+//                        m->celdas[aux_y][aux_x] = DM_VACIO;
+//                    }
+//                break;
+//            }
+//            if(enemigo != NULL)
+//            {
+//                for(k = 0 ; k < v->ce ; k++)
+//                {
+//                     if((enemigo + k)->esta_vivo == 1 &&
+//                        (enemigo + k)->pos.x == aux_x
+//                        && (enemigo + k)->pos.y == aux_y)
+//                    {
+//                        (enemigo + k)->esta_vivo = 0;
+//                        pj->puntaje += 270;
+//                        (enemigo + k)->pos.x =0;
+//                        (enemigo + k)->pos.y = 0;
+//                    }
+//                }
+//            }
+//            if(pj!=NULL && pj->pos.x == aux_x && pj->pos.y == aux_y)
+//            {
+//                pj->vidas--;
+//                pj->esta_vivo = 2;
+//                pj->invul = ahora;
+//            }
+//
+//            if(m->celdas[aux_y][aux_x] == DM_VACIO)
+////               if(m->celdas[aux_y][aux_x] != DM_TECHO && m->celdas[aux_y][aux_x] != DM_PISO)  //Detectar q la estela no haya muro
+//                    m->celdas[aux_y][aux_x] = D_EXPLOSION; //esto es como muestra, el tema es q no borra la estela.
+//        }
+//    }
+//}

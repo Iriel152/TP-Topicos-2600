@@ -174,7 +174,7 @@ int PJ_Movimiento(tMapa *m, tPersonaje *p, tVector *vbomb)
             NuevaColumna++;
             break;
         case TEC_PONERSELEC:
-//            PJ_PoneBomba(vbomb, m, p);
+            PJ_PoneBomba(vbomb, m, p);
             break;
         case TEC_ESC:
             escenario = EP_SALIR;
@@ -200,35 +200,32 @@ void ValidarEspacio(tMapa *m, tPersonaje *p, int *fila, int *columna)
         *columna = Comunes_ObtenerNumeroAleatorio(1, m->columnas - 2);
     }while(m->celdas[*fila][*columna] != DM_VACIO || (*columna == x && *fila == y));
 }
-//int PJ_PoneBomba(tVector *vbomb, tMapa *m, tPersonaje *p)
-//{
-//    int i;
-//    tVector *pivot;
-//
-//    if(!vbomb || !m || !p)
-//        return ERROR_MEMORIA;
-//
-//    if(hay_bomba(vbomb, p->pos.x , p->pos.y) == ENCONTRADO)
-//        return ERROR_;
-//
-//    pivot = vbomb->bombas;
-//
-//    for (i = 0; i < vbomb->ce; i++)
-//    {
-//        if(!pivot->activa)
-//        {
-//            pivot->activa = 1;
-//            pivot->pos.x = p->pos.x;
-//            pivot->pos.y = p->pos.y;
-//            pivot->tiempo_bomba = GetTickCount();
-//            m->celdas[p->pos.y][p->pos.x] = D_BOMBA;
-//            return TODOOK;
-//        }
-//        pivot++;
-//    }
-//    return ERROR_;
-//
-//}
+int PJ_PoneBomba(tVector *v, tMapa *m, tPersonaje *p)
+{
+    int i;
+    tBomba *bomba;
+
+    if(!v || !m || !p)
+        return ERROR_MEMORIA;
+
+    if(Bomba_Existencia(v, p->pos.x , p->pos.y) == ENCONTRADO)
+        return ENCONTRADO;
+
+    bomba = (tBomba*)v->vec;
+
+    for (i = 0 ; i < v->ce ; i++)
+    {
+        if((bomba + i)->activa == E_DESACTIVADA)
+        {
+            (bomba + i)->activa = E_ACTIVAR;
+            (bomba + i)->pos.x = p->pos.x;
+            (bomba + i)->pos.y = p->pos.y;
+            (bomba + i)->tiempo_bomba = GetTickCount();
+            return TODOOK;
+        }
+    }
+    return ENCONTRADO;
+}
 int PJ_EnSalida(tMapa *m, tPersonaje *p)
 {
     int band;
