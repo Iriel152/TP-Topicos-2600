@@ -11,7 +11,7 @@ tPersonaje* PJ_Crear(void)
     p->pos.y = 0;
     p->vidas = VIDAS_BASE;
     p->alcance_bomba = 2;
-    p->esta_vivo = 1;
+    p->esta_vivo = E_VIVO;
     p->velocidad = 550;
     p->puntaje = 0;
 
@@ -136,8 +136,8 @@ void PJ_MovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa, DWORD
 {
     if(_kbhit())
     {
-        if(personaje->esta_vivo == 2 && (ahora - personaje->invul) >= TIMER_INVUL)
-            personaje->esta_vivo = 1;
+        if(personaje->esta_vivo == E_INMORTAL && (ahora - personaje->invul) >= TIMER_INVUL)
+            personaje->esta_vivo = E_VIVO;
         if(ahora - (*tiempo_personaje) >= personaje->velocidad)
         {
             *seguir = PJ_Movimiento(mapa, personaje, vbomb);
@@ -188,17 +188,6 @@ int PJ_Movimiento(tMapa *m, tPersonaje *p, tVector *vbomb)
     }
 
     return escenario;
-}
-void ValidarEspacio(tMapa *m, tPersonaje *p, int *fila, int *columna)
-{
-    int x, y;
-    x = p->pos.x;
-    y = p->pos.y;
-    do
-    {
-        *fila = Comunes_ObtenerNumeroAleatorio(1, m->filas - 2);
-        *columna = Comunes_ObtenerNumeroAleatorio(1, m->columnas - 2);
-    }while(m->celdas[*fila][*columna] != DM_VACIO || (*columna == x && *fila == y));
 }
 int PJ_PoneBomba(tVector *v, tMapa *m, tPersonaje *p)
 {

@@ -1,6 +1,5 @@
 (si está bien borren esto)///Revisar las colisiones del Enemigo con el PJ (2 opciones, 1 hacer que pj pueda pasar donde este el enemigo y que el enemigo siga su trayecto sin importar que este el pj o 2 hacer que reboten entre ambos)
 Hacer que el enemigo muera por la bomba[HECHO // OJEAR, TODAVIA NO METE FREE]
-Revisar si el enemigo no aparece donde este el pj u otro enemigo
 Soltar aleatoriamente a partir de los bloques destructibles los potenciadores.
 temporizador de activo al potenciador
 Ver teclas

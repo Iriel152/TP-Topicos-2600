@@ -166,6 +166,7 @@ void Interfaz_renderizar(const tMapa *m, tPersonaje *p, tPuerta *puerta, tVector
                     {
                         printf("%c", D_ENEMIGO);
                         ocupado = 1;
+                        break;
                     }
                 }
             }
@@ -182,6 +183,7 @@ void Interfaz_renderizar(const tMapa *m, tPersonaje *p, tPuerta *puerta, tVector
                         //Posiblemente habra que sacarlo aun no lo se, sino habria que hacer alguna funcion
                         //para cuando se active la bomba desde tmapa?
                         ocupado = 1;
+                        break;
                     }
                 }
             }

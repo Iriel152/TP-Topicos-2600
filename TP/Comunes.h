@@ -36,9 +36,12 @@
 #define D_PUERTA 'S'
 #define D_EXPLOSION '#'
 ///ESTADOS
-#define E_ACTIVA 2
-#define E_ACTIVAR 1
 #define E_DESACTIVADA 0
+#define E_ACTIVAR 1
+#define E_ACTIVA 2
+#define E_VIVO 1
+#define E_INMORTAL 2
+#define E_MUERTO 3
 ///DEFINE
 #define TIEMPOFIN 200
 #define SEGUNDOS 1000

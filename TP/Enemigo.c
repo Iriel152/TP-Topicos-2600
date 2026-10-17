@@ -7,7 +7,7 @@ void Enemigo_RellenarVec(tVector *v, int cant)
     enemigo.pos.x = 0;
     enemigo.pos.y = 0;
     enemigo.direccion = 0;
-    enemigo.esta_vivo = 1;
+    enemigo.esta_vivo = E_VIVO;
     enemigo.velocidad = 600;
     enemigo.valor = 200;
     enemigo.rebotes = 3;
@@ -24,10 +24,36 @@ void Enemigo_AparicionRandom(tMapa *m, tVector *v, tPersonaje *p)
 
     for(i = 0 ; i < v->ce ; i++)
     {
-        ValidarEspacio(m, p, &fila, &columna);
+        ValidarEspacio(m, p, v, i, &fila, &columna);
         (enemigo + i)->pos.x = columna;
         (enemigo + i)->pos.y = fila;
     }
+}
+void ValidarEspacio(tMapa *m, tPersonaje *p, tVector *v_enemigo, int limite, int *fila, int *columna)
+{
+    int x, y, i, superpuesto;
+    tEnemigo *enemigo;
+
+    x = p->pos.x;
+    y = p->pos.y;
+
+    enemigo = (tEnemigo*)v_enemigo->vec;
+
+    do
+    {
+        superpuesto = 0;
+        *fila = Comunes_ObtenerNumeroAleatorio(1, m->filas - 2);
+        *columna = Comunes_ObtenerNumeroAleatorio(1, m->columnas - 2);
+
+        for(i = 0 ; i < limite ; i++)
+        {
+            if((enemigo + i)->pos.x == *columna && (enemigo + i)->pos.y == *fila)
+            {
+                superpuesto = 1;
+                break;
+            }
+        }
+    }while(m->celdas[*fila][*columna] != DM_VACIO || (*columna == x && *fila == y) || superpuesto == 1);
 }
 void EnemigoMovimientoxTiempo(DWORD ahora, tVector *v, tMapa *mapa, DWORD *tiempo_enemigo, tPersonaje *p)
 {
@@ -40,7 +66,7 @@ void EnemigoMovimientoxTiempo(DWORD ahora, tVector *v, tMapa *mapa, DWORD *tiemp
     for(i = 0 ; i < v->ce ; i++)
     {
         if(ahora - (*tiempo_enemigo) >= (enemigo + i)->velocidad &&
-           (enemigo + i)->esta_vivo == 1)
+           (enemigo + i)->esta_vivo == E_VIVO)
         {
             Enemigo_Direccion(enemigo + i);
             Enemigo_MoverRandom(mapa, enemigo + i, p, v);
@@ -112,7 +138,7 @@ int Enemigo_ColisionEnemigos(tVector *v, tEnemigo *enemigo_actual, int fila, int
     for(i = 0 ; i < v->ce ; i++)
     {
         if((enemigos + i) != enemigo_actual &&
-           (enemigos + i)->esta_vivo == 1)
+           (enemigos + i)->esta_vivo == E_VIVO)
         {
             if((enemigos + i)->pos.y == fila &&
                (enemigos + i)->pos.x == columna)
@@ -125,7 +151,7 @@ void Enemigo_DanioaPJ(tEnemigo *enemigo, tPersonaje *personaje, DWORD ahora)
 {
     int distancia_x, distancia_y;
 
-    if(personaje->esta_vivo == 2)
+    if(personaje->esta_vivo == E_INMORTAL)
         return;
 
     distancia_x = enemigo->pos.x - personaje->pos.x;
@@ -134,7 +160,7 @@ void Enemigo_DanioaPJ(tEnemigo *enemigo, tPersonaje *personaje, DWORD ahora)
     if(distancia_x == 0 && distancia_y == 0)
     {
         personaje->vidas--;
-        personaje->esta_vivo = 2;
+        personaje->esta_vivo = E_INMORTAL;
         personaje->invul = ahora;
     }
 }
@@ -173,11 +199,11 @@ void Enemigo_DanioaPJ(tEnemigo *enemigo, tPersonaje *personaje, DWORD ahora)
 //            {
 //                for(k = 0 ; k < v->ce ; k++)
 //                {
-//                     if((enemigo + k)->esta_vivo == 1 &&
+//                     if((enemigo + k)->esta_vivo == E_VIVO &&
 //                        (enemigo + k)->pos.x == aux_x
 //                        && (enemigo + k)->pos.y == aux_y)
 //                    {
-//                        (enemigo + k)->esta_vivo = 0;
+//                        (enemigo + k)->esta_vivo = E_MUERTO;
 //                        pj->puntaje += 270;
 //                        (enemigo + k)->pos.x =0;
 //                        (enemigo + k)->pos.y = 0;
@@ -187,7 +213,7 @@ void Enemigo_DanioaPJ(tEnemigo *enemigo, tPersonaje *personaje, DWORD ahora)
 //            if(pj!=NULL && pj->pos.x == aux_x && pj->pos.y == aux_y)
 //            {
 //                pj->vidas--;
-//                pj->esta_vivo = 2;
+//                pj->esta_vivo = E_INMORTAL;
 //                pj->invul = ahora;
 //            }
 //

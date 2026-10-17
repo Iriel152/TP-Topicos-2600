@@ -35,7 +35,6 @@ void PJ_AparicionRandom(tMapa*, tPersonaje*);//MUDAR A MAPA.H
 void PJ_LimpiarLados(tMapa*, tPersonaje*);//MUDAR A MAPA.H
 void PJ_MovimientoxTiempo(DWORD, tPersonaje*, tMapa*, DWORD*, int*, tVector*);//MUDAR A MAPA.H
 int PJ_Movimiento(tMapa*, tPersonaje*, tVector*);//MUDAR A MAPA.H
-void ValidarEspacio(tMapa*, tPersonaje*, int*, int*);//MUDAR A MAPA.H
 int  PJ_PoneBomba(tVector *, tMapa*, tPersonaje*);//MUDAR A MAPA.H
 int PJ_EnSalida(tMapa*, tPersonaje*);//MUDAR A MAPA.H
 
