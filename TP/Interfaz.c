@@ -122,22 +122,17 @@ void Interfaz_renderizar(const tMapa *m, tPersonaje *p, tPuerta *puerta, tVector
     int i, j, k, ocupado;
     tEnemigo *enemigo;
     tBomba *bomba;
-    UINT consolaOriginal;
 
     enemigo = (tEnemigo*)vec_e->vec;
     bomba = (tBomba*)vec_b->vec;
 
     printf("\033[H");
-    printf("TIEMPO %3d\t PUNTAJE %7d\tVIDAS ", temporizador, p->puntaje);
-
-    consolaOriginal = GetConsoleOutputCP();
-    SetConsoleOutputCP(CP_UTF8);
+    printf("TIEMPO %3d\t PUNTAJE %7d     VIDAS ", temporizador, p->puntaje);
 
     for(i = 0 ; i < p->vidas ; i++)
-        printf("\u2665");
+        printf("<3");
 
     printf("\033[K");
-    SetConsoleOutputCP(consolaOriginal);
     printf("\n");
     for (i = 0 ; i < m->filas ; i++)
     {
@@ -170,14 +165,11 @@ void Interfaz_renderizar(const tMapa *m, tPersonaje *p, tPuerta *puerta, tVector
             {
                 for(k = 0 ; k < vec_b->ce ; k++)
                 {
-                    if((bomba + k)->activa == E_ACTIVA &&
+                    if((bomba + k)->activa == E_ACTIVAR &&
                        (bomba + k)->pos.y == i &&
                        (bomba + k)->pos.x == j)
                     {
                         printf("%c", D_BOMBA);
-//                        explotar_bomba(m, i, j, (bomba + i)->rango, puerta, vec_e, p, ahora);
-                        //Posiblemente habra que sacarlo aun no lo se, sino habria que hacer alguna funcion
-                        //para cuando se active la bomba desde tmapa?
                         ocupado = 1;
                         break;
                     }

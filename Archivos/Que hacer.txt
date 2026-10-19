@@ -1,4 +1,1 @@
-Hacer que el enemigo muera por la bomba[HECHO // OJEAR, TODAVIA NO METE FREE]
-Soltar aleatoriamente a partir de los bloques destructibles los potenciadores.
-temporizador de activo al potenciador
 Revisar actualizar_bomba, limpiar_estela y explotar_bomba

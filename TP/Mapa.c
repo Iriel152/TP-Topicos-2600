@@ -163,7 +163,9 @@ int Mapa_MovimientoValido(tMapa *mapa, int fila, int columna, int esPJP)
     if(fila >= 0 && fila < mapa->filas &&
        columna >= 0 && columna < mapa->columnas)
     {
-        if(mapa->celdas[fila][columna] == DM_VACIO)
+        if(mapa->celdas[fila][columna] == DM_VACIO ||
+           mapa->celdas[fila][columna] == D_MASRANGO ||
+           mapa->celdas[fila][columna] == D_MASBOMBA)
             band = TODOOK;
         else if(esPJP && mapa->celdas[fila][columna] == D_PUERTA)
             band = TODOOK;

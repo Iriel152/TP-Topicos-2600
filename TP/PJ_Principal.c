@@ -136,7 +136,8 @@ void PJ_LimpiarLados(tMapa *m, tPersonaje *p)
     }
 }
 void PJ_MovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa,
-                          DWORD *tiempo_personaje, int *seguir, tVector *vbomb)
+                          DWORD *tiempo_personaje, int *seguir, tVector *vbomb,
+                          tVector *v_pot)
 {
     if(personaje->esta_vivo == E_INMORTAL && (ahora - personaje->invul) >= TIMER_INVUL)
             personaje->esta_vivo = E_VIVO;
@@ -144,14 +145,14 @@ void PJ_MovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa,
     {
         if(ahora - (*tiempo_personaje) >= personaje->velocidad)
         {
-            *seguir = PJ_Movimiento(mapa, personaje, vbomb);
+            *seguir = PJ_Movimiento(mapa, personaje, vbomb, v_pot);
             *tiempo_personaje = ahora;
             while(_kbhit())
                 _getch();
         }
     }
 }
-int PJ_Movimiento(tMapa *m, tPersonaje *p, tVector *vbomb)
+int PJ_Movimiento(tMapa *m, tPersonaje *p, tVector *vbomb, tVector *v_pot)
 {
     char tecla;
     int NuevaFila, NuevaColumna, escenario;
@@ -189,6 +190,8 @@ int PJ_Movimiento(tMapa *m, tPersonaje *p, tVector *vbomb)
     {
         p->pos.y = NuevaFila;
         p->pos.x = NuevaColumna;
+
+        PJ_EnPotenciador(m, p, vbomb, v_pot);
     }
 
     return escenario;
@@ -229,3 +232,39 @@ int PJ_EnSalida(tMapa *m, tPersonaje *p)
 
     return band;
 }
+//////
+void PJ_EnPotenciador(tMapa *m, tPersonaje *p, tVector *v_b, tVector *v_pot)
+{
+    int i;
+
+    if(!v_pot || !v_pot->vec)
+        return;
+
+     tPotenciador *pot = (tPotenciador*)v_pot->vec;
+
+    for(i = 0; i < v_pot->ce ; i++)
+    {
+        if((pot + i)->estado == E_ACTIVA &&
+           (pot + i)->pos.x == p->pos.x &&
+           (pot + i)->pos.y == p->pos.y)
+           {
+                if((pot + i)->tipo == T_MAS_RANGO)
+                {
+                    if(p->alcance_bomba <= 10)
+                        p->alcance_bomba++;
+                }
+                else if((pot + i)->tipo == T_MAS_BOMBA)
+                    Bomba_RellenarVec(v_b,1);
+
+                (pot + i)->estado = E_DESACTIVADA;
+                (pot + i)->pos.x = 0;
+                (pot + i)->pos.y = 0;
+
+                m->celdas[p->pos.y][p->pos.x] = DM_VACIO;
+                break;
+           }
+
+    }
+
+}
+//////

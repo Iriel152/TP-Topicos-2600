@@ -63,6 +63,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="PJ_Principal.h" />
+		<Unit filename="Potenciador.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Potenciador.h" />
 		<Unit filename="Puerta.c">
 			<Option compilerVar="CC" />
 		</Unit>

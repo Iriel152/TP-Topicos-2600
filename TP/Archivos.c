@@ -1,11 +1,11 @@
 #include "Archivos.h"
 int ArchivosCargaDatos(void)
 {
-    FILE *pfMapa, *pfPrincipal, *pfEnemigo, *pfBombs, *pfPuerta;
+    FILE *pfMapa, *pfPrincipal, *pfEnemigo, *pfBombs, *pfPot, *pfPuerta;
     tMapa *mapa;
     tPersonaje *personaje;
     tPuerta *puerta;
-    tVector *vec_bomba, *vec_enemigo;
+    tVector *vec_bomba, *vec_enemigo, *vec_pot;
 
     pfMapa = fopen(MAPA_DAT,"rb");
     if(!pfMapa)
@@ -85,6 +85,24 @@ int ArchivosCargaDatos(void)
     }
     else
         fclose(pfBombs);
+
+    pfPot = fopen(POTENCIADOR_DAT, "rb");
+    if(!pfPot)
+    {
+        vec_pot = Comunes_CrearVector(sizeof(tPotenciador));
+        if(!vec_pot)
+            return ERROR_MEMORIA;
+
+        Potenciador_RellenarVec(vec_pot, CANT_POT);
+
+        if(Comunes_VectorArchivosGuardar(POTENCIADOR_DAT, vec_pot) == ERROR_ARCH)
+        {
+            Comunes_DestruirVector(vec_pot);
+            return ERROR_ARCH;
+        }
+    }
+    else
+        fclose(pfPot);
 
     return TODOOK;
 }

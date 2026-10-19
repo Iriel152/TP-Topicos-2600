@@ -4,6 +4,7 @@
 ///.h
 #include "Mapa.h"
 #include "Bomba.h"
+#include "Potenciador.h"
 
 ///BIBLIOTECAS
 #include <conio.h>
@@ -33,9 +34,11 @@ int PJ_ArchivosGuardar(const char*, tPersonaje*);
 tPersonaje* PJ_ArchivosCargar(const char*);
 void PJ_AparicionRandom(tMapa*, tPersonaje*);//MUDAR A MAPA.H
 void PJ_LimpiarLados(tMapa*, tPersonaje*);//MUDAR A MAPA.H
-void PJ_MovimientoxTiempo(DWORD, tPersonaje*, tMapa*, DWORD*, int*, tVector*);//MUDAR A MAPA.H
-int PJ_Movimiento(tMapa*, tPersonaje*, tVector*);//MUDAR A MAPA.H
+void PJ_MovimientoxTiempo(DWORD, tPersonaje*, tMapa*, DWORD*, int*, tVector*, tVector*);//MUDAR A MAPA.H
+int PJ_Movimiento(tMapa*, tPersonaje*, tVector*, tVector*);//MUDAR A MAPA.H
 int  PJ_PoneBomba(tVector *, tMapa*, tPersonaje*);//MUDAR A MAPA.H
 int PJ_EnSalida(tMapa*, tPersonaje*);//MUDAR A MAPA.H
-
+/////
+void PJ_EnPotenciador(tMapa*, tPersonaje*,tVector *v_b, tVector*);
+/////
 #endif // PJ_PRINCIPAL_H_INCLUDED

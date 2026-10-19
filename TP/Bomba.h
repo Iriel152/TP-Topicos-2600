@@ -3,6 +3,12 @@
 
 ///.h
 #include "Comunes.h"
+///////
+#include "Puerta.h"
+#include "Mapa.h"
+#include "Enemigo.h"
+#include "PJ_Principal.h"
+///////
 
 ///DEFINE
 #define CANT_BOMBA 7
@@ -19,10 +25,18 @@ typedef struct Bomba{
     int rango;
 } tBomba;
 
+////
+typedef struct tPersonaje tPersonaje;
+typedef struct tEnemigo tEnemigo;
+////
+
 void Bomba_RellenarVec(tVector *, int);
 int Bomba_Existencia(tVector*, int, int);
-
-void actualizar_bomba(tVector*, DWORD);
-//void limpiar_estela(tMapa*, int, int, int);
-
+/////
+int ProcesarRompible(tMapa*,int,int,tPuerta*, tVector*);
+void actualizar_bomba(tVector*, tMapa*, DWORD, tPuerta*,tVector*, tPersonaje*, tVector*);
+void explotar_bomba(tMapa*, tBomba*, tPuerta*, tVector*, tPersonaje*, DWORD, tVector*);
+void limpiar_estela(tMapa*, tBomba*, int);
+void control_vec_enemigo(tVector*, int, int, tPersonaje *);
+/////
 #endif // BOMBA_H_INCLUDED

@@ -18,7 +18,12 @@ tVector* Comunes_CrearVector(size_t tam)
 }
 void Comunes_DestruirVector(tVector* v)
 {
-    free(v->vec);
+    if(v != NULL)
+    {
+        if(v->vec != NULL)
+            free(v->vec);
+        free(v);
+    }
 }
 int Comunes_VectorArchivosGuardar(const char *binPath, tVector *v)
 {

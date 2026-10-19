@@ -34,6 +34,12 @@
 #define D_BOMBA 'O'
 #define D_PUERTA 'S'
 #define D_EXPLOSION '#'
+/////
+#define D_MASBOMBA 'B'
+#define D_MASRANGO 'R'
+#define PROB_RANGO 5
+#define PROB_BOMBA 3
+/////
 ///ESTADOS
 #define E_DESACTIVADA 0
 #define E_ACTIVAR 1
@@ -44,6 +50,10 @@
 ///DEFINE
 #define TIEMPOFIN 200
 #define SEGUNDOS 1000
+/////
+#define PROB_RANGO 5
+#define PROB_BOMBA 3
+/////
 ///MACROS
 #define AMAYUSCULA(X) ((X) >= 'a' && (X) <= 'z') ? (X) - 32 : (X)
 

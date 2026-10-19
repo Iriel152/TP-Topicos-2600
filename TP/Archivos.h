@@ -3,6 +3,7 @@
 
 ///.h
 #include "Enemigo.h"
+#include "Potenciador.h"
 
 ///DEFINE
 int ArchivosCargaDatos(void);
