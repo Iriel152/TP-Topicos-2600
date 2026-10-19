@@ -11,7 +11,7 @@
 ///////
 
 ///DEFINE
-#define CANT_BOMBA 7
+#define CANT_BOMBA 1
 #define TIMER_BOMBA 5
 ///RUTAS
 #define BOMBA_DAT "../Archivos/Bomba.dat"
@@ -25,10 +25,6 @@ typedef struct Bomba{
     int rango;
 } tBomba;
 
-////
-typedef struct tPersonaje tPersonaje;
-typedef struct tEnemigo tEnemigo;
-////
 
 void Bomba_RellenarVec(tVector *, int);
 int Bomba_Existencia(tVector*, int, int);

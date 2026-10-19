@@ -10,9 +10,9 @@ tPersonaje* PJ_Crear(void)
     p->pos.x = 0;
     p->pos.y = 0;
     p->vidas = VIDAS_BASE;
-    p->alcance_bomba = 2;
+    p->alcance_bomba = 1;
     p->esta_vivo = E_VIVO;
-    p->velocidad = 550;
+    p->velocidad = 200;
     p->puntaje = 0;
     p->invul = 0;
 
@@ -217,6 +217,7 @@ int PJ_PoneBomba(tVector *v, tMapa *m, tPersonaje *p)
             (bomba + i)->pos.x = p->pos.x;
             (bomba + i)->pos.y = p->pos.y;
             (bomba + i)->tiempo_bomba = GetTickCount();
+            m->celdas[p->pos.y][p->pos.x] = D_BOMBA;
             return TODOOK;
         }
     }

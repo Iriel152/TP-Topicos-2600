@@ -117,70 +117,67 @@
 1792394255 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.h
 	"PJ_Principal.h"
 
-1791811995 source:c:\users\admin\documents\github\tp-topicos-2600\tp\archivos.c
+1792417203 source:c:\users\admin\documents\github\tp-topicos-2600\tp\archivos.c
 	"Archivos.h"
 
-1791772399 c:\users\admin\documents\github\tp-topicos-2600\tp\archivos.h
-	"Mapa.h"
-	"PJ_Principal.h"
+1792417203 c:\users\admin\documents\github\tp-topicos-2600\tp\archivos.h
 	"Enemigo.h"
-	"Bomba.h"
+	"Potenciador.h"
 
-1791811996 c:\users\admin\documents\github\tp-topicos-2600\tp\mapa.h
+1792150571 c:\users\admin\documents\github\tp-topicos-2600\tp\mapa.h
 	"Comunes.h"
+	"Puerta.h"
 
-1791845847 c:\users\admin\documents\github\tp-topicos-2600\tp\pj_principal.h
+1792417203 c:\users\admin\documents\github\tp-topicos-2600\tp\pj_principal.h
 	"Mapa.h"
-	"Comunes.h"
 	"Bomba.h"
+	"Potenciador.h"
 	<conio.h>
 
-1791772399 c:\users\admin\documents\github\tp-topicos-2600\tp\comunes.h
+1792421898 c:\users\admin\documents\github\tp-topicos-2600\tp\comunes.h
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
 	<time.h>
 
-1791671108 source:c:\users\admin\documents\github\tp-topicos-2600\tp\comunes.c
+1792417203 source:c:\users\admin\documents\github\tp-topicos-2600\tp\comunes.c
 	"Comunes.h"
 
-1791811996 source:c:\users\admin\documents\github\tp-topicos-2600\tp\mapa.c
+1792421586 source:c:\users\admin\documents\github\tp-topicos-2600\tp\mapa.c
 	"Mapa.h"
 
-1791838664 source:c:\users\admin\documents\github\tp-topicos-2600\tp\enemigo.c
+1792417203 source:c:\users\admin\documents\github\tp-topicos-2600\tp\enemigo.c
 	"Enemigo.h"
 
-1791820393 c:\users\admin\documents\github\tp-topicos-2600\tp\enemigo.h
-	"Comunes.h"
-	"Mapa.h"
+1792417203 c:\users\admin\documents\github\tp-topicos-2600\tp\enemigo.h
 	"PJ_Principal.h"
 
-1791838498 source:c:\users\admin\documents\github\tp-topicos-2600\tp\interfaz.c
+1792417203 source:c:\users\admin\documents\github\tp-topicos-2600\tp\interfaz.c
 	"Interfaz.h"
 
-1791772399 c:\users\admin\documents\github\tp-topicos-2600\tp\interfaz.h
-	"Mapa.h"
-	"PJ_Principal.h"
+1792150571 c:\users\admin\documents\github\tp-topicos-2600\tp\interfaz.h
 	"Enemigo.h"
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<conio.h>
 
-1791811996 source:c:\users\admin\documents\github\tp-topicos-2600\tp\main.c
+1792417203 source:c:\users\admin\documents\github\tp-topicos-2600\tp\main.c
 	"Juego.h"
 
-1791811996 source:c:\users\admin\documents\github\tp-topicos-2600\tp\pj_principal.c
+1792422126 source:c:\users\admin\documents\github\tp-topicos-2600\tp\pj_principal.c
 	"PJ_Principal.h"
 
-1791844635 c:\users\admin\documents\github\tp-topicos-2600\tp\bomba.h
+1792422180 c:\users\admin\documents\github\tp-topicos-2600\tp\bomba.h
 	"Comunes.h"
+	"Puerta.h"
 	"Mapa.h"
-
-1791845847 source:c:\users\admin\documents\github\tp-topicos-2600\tp\bomba.c
-	"Bomba.h"
 	"Enemigo.h"
+	"PJ_Principal.h"
+
+1792418452 source:c:\users\admin\documents\github\tp-topicos-2600\tp\bomba.c
+	"Bomba.h"
 
 1790375925 source:c:\users\admin\documents\github\tp-topicos-2600\tp\mapa.h
 
@@ -283,16 +280,12 @@
 	"Archivos.h"
 	"Bomba.h"
 
-1791811996 c:\users\admin\documents\github\tp-topicos-2600\tp\juego.h
+1792150571 c:\users\admin\documents\github\tp-topicos-2600\tp\juego.h
 	"Interfaz.h"
-	"PJ_Principal.h"
-	"Comunes.h"
-	"Mapa.h"
-	"Enemigo.h"
-	"Bomba.h"
 	"Archivos.h"
+	"Bomba.h"
 
-1791844629 source:c:\users\admin\documents\github\tp-topicos-2600\tp\juego.c
+1792417203 source:c:\users\admin\documents\github\tp-topicos-2600\tp\juego.c
 	"Juego.h"
 
 1791811995 source:c:\users\mattf\downloads\tp-topicos-2600\tp\archivos.c
@@ -384,4 +377,17 @@
 1792400230 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\potenciador.h
 	"Comunes.h"
 	"Mapa.h"
+
+1792084111 source:c:\users\admin\documents\github\tp-topicos-2600\tp\puerta.c
+	"Puerta.h"
+
+1792150571 c:\users\admin\documents\github\tp-topicos-2600\tp\puerta.h
+	"Comunes.h"
+
+1792417203 c:\users\admin\documents\github\tp-topicos-2600\tp\potenciador.h
+	"Comunes.h"
+	"Mapa.h"
+
+1792417203 source:c:\users\admin\documents\github\tp-topicos-2600\tp\potenciador.c
+	"Potenciador.h"
 

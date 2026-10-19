@@ -98,7 +98,7 @@ void explotar_bomba(tMapa *m, tBomba *b, tPuerta *puerta, tVector *v_en, tPerson
             aux_x = (b->pos.x) + (j * dir_x[i]);
             aux_y = (b->pos.y) + (j * dir_y[i]);
             if(aux_x < 0 || aux_y < 0 || aux_y >= m->filas || aux_x >= m->columnas) //chequeamos bordes
-                break;             // no me gusta usar break, le voy a preguntar. Si lo tengo q hacer con bandera
+                break;
             if(m->celdas[aux_y][aux_x] == DM_PARED || m->celdas[aux_y][aux_x] == DM_OBSTACULO)
                 break;
             if(m->celdas[aux_y][aux_x] == DM_ROMPIBLE)

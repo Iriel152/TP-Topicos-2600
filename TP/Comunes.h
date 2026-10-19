@@ -47,13 +47,11 @@
 #define E_VIVO 1
 #define E_INMORTAL 2
 #define E_MUERTO 3
+
 ///DEFINE
 #define TIEMPOFIN 200
 #define SEGUNDOS 1000
-/////
-#define PROB_RANGO 5
-#define PROB_BOMBA 3
-/////
+
 ///MACROS
 #define AMAYUSCULA(X) ((X) >= 'a' && (X) <= 'z') ? (X) - 32 : (X)
 
