@@ -29,7 +29,8 @@ void Enemigo_AparicionRandom(tMapa *m, tVector *v, tPersonaje *p)
         (enemigo + i)->pos.y = fila;
     }
 }
-void ValidarEspacio(tMapa *m, tPersonaje *p, tVector *v_enemigo, int limite, int *fila, int *columna)
+void ValidarEspacio(tMapa *m, tPersonaje *p, tVector *v_enemigo, int limite,
+                    int *fila, int *columna)
 {
     int x, y, i, superpuesto;
     tEnemigo *enemigo;
@@ -53,9 +54,11 @@ void ValidarEspacio(tMapa *m, tPersonaje *p, tVector *v_enemigo, int limite, int
                 break;
             }
         }
-    }while(m->celdas[*fila][*columna] != DM_VACIO || (*columna == x && *fila == y) || superpuesto == 1);
+    }while(m->celdas[*fila][*columna] != DM_VACIO ||
+           (*columna == x && *fila == y) ||superpuesto == 1);
 }
-void EnemigoMovimientoxTiempo(DWORD ahora, tVector *v, tMapa *mapa, DWORD *tiempo_enemigo, tPersonaje *p)
+void EnemigoMovimientoxTiempo(DWORD ahora, tVector *v, tMapa *mapa,
+                              DWORD *tiempo_enemigo, tPersonaje *p)
 {
     int i, movimiento;
     tEnemigo *enemigo;

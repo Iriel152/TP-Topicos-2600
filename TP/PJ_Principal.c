@@ -14,6 +14,7 @@ tPersonaje* PJ_Crear(void)
     p->esta_vivo = E_VIVO;
     p->velocidad = 550;
     p->puntaje = 0;
+    p->invul = 0;
 
     return p;
 }
@@ -62,6 +63,8 @@ tPersonaje* PJ_ArchivosCargar(const char* binPath)
     fread(&(personaje->velocidad), sizeof(int), 1, pf);
     fread(&(personaje->vidas), sizeof(int), 1, pf);
     fread(&(personaje->puntaje), sizeof(int), 1, pf);
+
+    personaje->invul = 0;
 
     fclose(pf);
     return personaje;
@@ -132,19 +135,20 @@ void PJ_LimpiarLados(tMapa *m, tPersonaje *p)
             *pt = DM_VACIO;
     }
 }
-void PJ_MovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa, DWORD *tiempo_personaje, int *seguir, tVector *vbomb)
+void PJ_MovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa,
+                          DWORD *tiempo_personaje, int *seguir, tVector *vbomb)
 {
+    if(personaje->esta_vivo == E_INMORTAL && (ahora - personaje->invul) >= TIMER_INVUL)
+            personaje->esta_vivo = E_VIVO;
     if(_kbhit())
     {
-        if(personaje->esta_vivo == E_INMORTAL && (ahora - personaje->invul) >= TIMER_INVUL)
-            personaje->esta_vivo = E_VIVO;
         if(ahora - (*tiempo_personaje) >= personaje->velocidad)
         {
             *seguir = PJ_Movimiento(mapa, personaje, vbomb);
             *tiempo_personaje = ahora;
+            while(_kbhit())
+                _getch();
         }
-        else
-            while(_kbhit()) _getch();
     }
 }
 int PJ_Movimiento(tMapa *m, tPersonaje *p, tVector *vbomb)

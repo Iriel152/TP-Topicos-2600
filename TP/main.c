@@ -14,9 +14,6 @@ int main()
             case EP_NUEVAP:
                 opcion = Juego_EnCurso(opcion);
                 break;
-            case EP_CARGARP: //temporal
-                fin = 1;
-                break;
             case EP_SALIR:
                 fin = 1;
                 break;

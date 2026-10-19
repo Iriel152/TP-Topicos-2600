@@ -10,7 +10,7 @@
 1787195559 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp-topicos\tp\interfaz.c
 	"Interfaz.h"
 
-1792226072 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
+1792389053 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.c
 	"Interfaz.h"
 
 1792225852 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\interfaz.h
@@ -20,7 +20,7 @@
 	<string.h>
 	<conio.h>
 
-1792226511 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.c
+1792390115 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.c
 	"PJ_Principal.h"
 
 1792225965 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\pj_principal.h
@@ -28,17 +28,17 @@
 	"Bomba.h"
 	<conio.h>
 
-1792225852 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.c
+1792390435 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.c
 	"Comunes.h"
 
-1792226511 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.h
+1792389068 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\comunes.h
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
 	<time.h>
 
-1792225852 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\main.c
+1792389045 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\main.c
 	"Juego.h"
 
 1792225852 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\archivos.c
@@ -109,7 +109,7 @@
 1791764976 source:c:\users\mattf\onedrive\documentos\github\tp-topicos-2600\tp\mapa.c
 	"Mapa.h"
 
-1792226511 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.c
+1792226987 source:c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.c
 	"Enemigo.h"
 
 1792226008 c:\users\iriel\onedrive\documentos\github\tp-topicos-2600\tp\enemigo.h

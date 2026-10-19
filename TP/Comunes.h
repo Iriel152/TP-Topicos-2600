@@ -25,7 +25,6 @@
 ///ESTADOS PARTIDA
 #define EP_GAMEOVER -1
 #define EP_NUEVAP 0
-#define EP_CARGARP 1
 #define EP_CONTINUAR 2
 #define EP_SALIR 3
 #define EP_VICTORIA 4

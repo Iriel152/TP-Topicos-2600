@@ -108,7 +108,8 @@ int Comunes_EsLetraValida(int LetraEsperada, int LetraRecibida)
 }
 int Comunes_TeclaArribaAbajo(int tecla)
 {
-    if(Comunes_EsLetraValida(TEC_ABAJO, tecla) == TODOOK || Comunes_EsLetraValida(TEC_ARRIBA, tecla) == TODOOK)
+    if(Comunes_EsLetraValida(TEC_ABAJO, tecla) == TODOOK ||
+       Comunes_EsLetraValida(TEC_ARRIBA, tecla) == TODOOK)
         return TODOOK;
     else
         return ERROR_;

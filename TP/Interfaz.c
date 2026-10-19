@@ -4,9 +4,7 @@ int Interfaz_MostrarMenuPrincipal()
     int seleccion = 0, tecla, cant_op;
     const char *opciones[] = {
         "Nueva Partida",
-        "Cargar Partida",
-        "Salir"
-    };
+        "Salir"};
 
     cant_op = (int)sizeof(opciones) / sizeof(*opciones);
 
@@ -30,9 +28,6 @@ int Interfaz_MostrarMenuPrincipal()
                     seleccion = EP_NUEVAP;
                     break;
                 case 1:
-                    seleccion = EP_CARGARP;
-                    break;
-                case 2:
                     seleccion = EP_SALIR;
                     break;
             }
@@ -121,7 +116,8 @@ int Interfaz_MenuEjecucion()
         }
     }
 }
-void Interfaz_renderizar(const tMapa *m, tPersonaje *p, tPuerta *puerta, tVector *vec_e, tVector *vec_b, int temporizador, DWORD ahora)
+void Interfaz_renderizar(const tMapa *m, tPersonaje *p, tPuerta *puerta, tVector *vec_e,
+                         tVector *vec_b, int temporizador, DWORD ahora)
 {
     int i, j, k, ocupado;
     tEnemigo *enemigo;
