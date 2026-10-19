@@ -25,6 +25,10 @@ typedef struct Bomba{
     int rango;
 } tBomba;
 
+////
+typedef struct tPersonaje tPersonaje;
+typedef struct tEnemigo tEnemigo;
+////
 
 void Bomba_RellenarVec(tVector *, int);
 int Bomba_Existencia(tVector*, int, int);

@@ -11,7 +11,7 @@
 
 ///DEFINE
 #define VIDAS_BASE 3
-#define TIMER_INVUL 1500
+#define TIMER_INVUL 2000
 ///RUTAS
 #define PJ_Principal_DAT "../Archivos/PJ_Principal.dat"
 

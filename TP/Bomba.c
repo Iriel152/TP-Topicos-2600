@@ -86,9 +86,12 @@ void explotar_bomba(tMapa *m, tBomba *b, tPuerta *puerta, tVector *v_en, tPerson
     m->celdas[b->pos.y][b->pos.x] = D_EXPLOSION;  //dibuja el centro
     if(pj != NULL && pj->pos.x == b->pos.x && pj->pos.y == b->pos.y) //chequea si esta en el centro
     {
-        pj->vidas--;
-        pj->esta_vivo = 2; // Invulnerable
-        pj->invul = ahora;
+        if(pj->esta_vivo == E_VIVO)
+       {
+            pj->vidas--;
+            pj->esta_vivo = E_INMORTAL;
+            pj->invul = ahora;
+       }
     }
 
     for (i = 0 ; i < 4 ; i++)
@@ -110,10 +113,15 @@ void explotar_bomba(tMapa *m, tBomba *b, tPuerta *puerta, tVector *v_en, tPerson
 
             if(pj!=NULL && pj->pos.x == aux_x && pj->pos.y == aux_y)
             {
-                pj->vidas--;
-                pj->esta_vivo = 2;
-                pj->invul = ahora;
+                if(pj->esta_vivo == E_VIVO)
+               {
+                    pj->vidas--;
+                    pj->esta_vivo = E_INMORTAL;
+                    pj->invul = ahora;
+                }
+                break;
             }
+
 
             if(m->celdas[aux_y][aux_x] == DM_VACIO ||
                m->celdas[aux_y][aux_x] == D_MASRANGO ||
