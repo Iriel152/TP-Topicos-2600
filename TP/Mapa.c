@@ -135,6 +135,9 @@ void Mapa_AparicionPuerta(tMapa *mapa, tPuerta *puerta)
 {
     int i, j;
 
+    puerta->vacio = 0;
+    puerta->celdas_transitables = 0;
+
     for(i = 1 ; i < mapa->filas - 1 ; i++)
     {
         for(j = 1 ; j < mapa->columnas - 1 ; j++)

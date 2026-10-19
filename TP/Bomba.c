@@ -112,7 +112,7 @@ void explotar_bomba(tMapa *m, tBomba *b, tPuerta *puerta, tVector *v_en, tPerson
                 break;
             if(m->celdas[aux_y][aux_x] == DM_ROMPIBLE)
             {
-                if(ProcesarRompible(m, aux_x, aux_y, puerta, vec_p) == ERROR_) //ERROR_ PORQ SIGNIFICA Q AHI HAY QUE CORTAR CICLO
+                if(ProcesarRompible(m, aux_x, aux_y, puerta, vec_p,ahora) == ERROR_) //ERROR_ PORQ SIGNIFICA Q AHI HAY QUE CORTAR CICLO
                     break;
             }
             control_vec_enemigo(v_en, aux_x, aux_y, pj);
@@ -190,7 +190,7 @@ void control_vec_enemigo(tVector *v_en, int x, int y, tPersonaje *p)
         }
     }
 }
-int ProcesarRompible(tMapa *m, int x, int y, tPuerta *puerta, tVector* vec_p)
+int ProcesarRompible(tMapa *m, int x, int y, tPuerta *puerta, tVector* vec_p, DWORD ahora)
 {
     if(puerta != NULL && puerta->estado_puerta == E_ACTIVAR)
     {
@@ -199,7 +199,7 @@ int ProcesarRompible(tMapa *m, int x, int y, tPuerta *puerta, tVector* vec_p)
         return ERROR_;
     }
 
-    Potenciador_GenerarAleatorio(vec_p, m, x, y, GetTickCount());
+    Potenciador_GenerarAleatorio(vec_p, m, x, y, ahora);
 
     return ERROR_;
 }

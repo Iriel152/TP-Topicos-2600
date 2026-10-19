@@ -59,3 +59,30 @@ void Potenciador_GenerarAleatorio(tVector *v_pot, tMapa *m, int x, int y, DWORD 
         }
     }
 }
+
+void actualizar_potenciador(tMapa *m, tVector *v_pot, DWORD ahora)
+{
+    int i;
+    tPotenciador *pot;
+
+    if(!m || !v_pot)
+        return;
+
+    pot = (tPotenciador*)v_pot->vec;
+
+    for(i = 0 ; i < v_pot->ce ; i++)
+    {
+        if((pot + i)->estado == E_ACTIVA)
+        {
+            if((ahora - (pot + i)->t_creacion) >= TIMER_POT)
+            {
+                m->celdas[(pot + i)->pos.y][(pot + i)->pos.x] = DM_VACIO;
+                (pot + i)->estado = E_DESACTIVADA;
+                (pot + i)->tipo = 0;
+                (pot + i)->pos.x = 0;
+                (pot + i)->pos.y = 0;
+                (pot + i)->t_creacion = 0;
+            }
+        }
+    }
+}

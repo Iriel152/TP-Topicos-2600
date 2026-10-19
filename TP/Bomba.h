@@ -29,7 +29,7 @@ typedef struct Puerta tPuerta;
 void Bomba_RellenarVec(tVector *, int);
 int Bomba_Existencia(tVector*, int, int);
 /////
-int ProcesarRompible(tMapa*,int,int,tPuerta*, tVector*);
+int ProcesarRompible(tMapa*,int,int,tPuerta*, tVector*, DWORD);
 void actualizar_bomba(tVector*, tMapa*, DWORD, tPuerta*,tVector*, tPersonaje*, tVector*);
 void explotar_bomba(tMapa*, tBomba*, tPuerta*, tVector*, tPersonaje*, DWORD, tVector*);
 void limpiar_estela(tMapa*, tBomba*, int);
