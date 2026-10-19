@@ -2,7 +2,7 @@
 #define ENEMIGO_H_INCLUDED
 
 ///.h
-#include "PJ_Principal.h"
+#include "Comunes.h"
 
 ///DEFINE
 #define CANT_ENEMIGO 5
@@ -20,7 +20,10 @@ typedef struct tEnemigo
     int lado;
     int valor;
 }tEnemigo;
+
+typedef struct Mapa tMapa;
 typedef struct tPersonaje tPersonaje;
+
 void Enemigo_RellenarVec(tVector*, int);
 void Enemigo_AparicionRandom(tMapa*, tVector*, tPersonaje*); //MUDAR A MAPA.H
 void ValidarEspacio(tMapa*, tPersonaje*, tVector*, int, int*, int*);

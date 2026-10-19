@@ -10,7 +10,7 @@
 #define PROB 0.7
 
 ///ESTRUCTURAS
-typedef struct{
+typedef struct Puerta{
     float prob;
     int vacio;
     int celdas_transitables;

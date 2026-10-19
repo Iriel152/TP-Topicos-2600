@@ -1,4 +1,9 @@
 #include "Archivos.h"
+#include "Mapa.h"
+#include "PJ_Principal.h"
+#include "Puerta.h"
+#include "Bomba.h"
+
 int ArchivosCargaDatos(void)
 {
     FILE *pfMapa, *pfPrincipal, *pfEnemigo, *pfBombs, *pfPot, *pfPuerta;
@@ -103,6 +108,13 @@ int ArchivosCargaDatos(void)
     }
     else
         fclose(pfPot);
+
+    if (!pfMapa) Mapa_DestruirMapa(mapa);
+    if (!pfPrincipal) PJ_Destruir(personaje);
+    if (!pfPuerta) Puerta_Destruir(puerta);
+    if (!pfEnemigo) Comunes_DestruirVector(vec_enemigo);
+    if (!pfBombs) Comunes_DestruirVector(vec_bomba);
+    if (!pfPot) Comunes_DestruirVector(vec_pot);
 
     return TODOOK;
 }

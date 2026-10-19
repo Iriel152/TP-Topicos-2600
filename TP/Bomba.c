@@ -1,4 +1,10 @@
 #include "Bomba.h"
+#include "Mapa.h"
+#include "PJ_Principal.h"
+#include "Puerta.h"
+#include "Potenciador.h"
+#include "Enemigo.h"
+
 void Bomba_RellenarVec(tVector *v, int cant)
 {
     int i;

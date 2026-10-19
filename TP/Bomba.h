@@ -3,12 +3,7 @@
 
 ///.h
 #include "Comunes.h"
-///////
-#include "Puerta.h"
-#include "Mapa.h"
-#include "Enemigo.h"
-#include "PJ_Principal.h"
-///////
+
 
 ///DEFINE
 #define CANT_BOMBA 1
@@ -25,9 +20,10 @@ typedef struct Bomba{
     int rango;
 } tBomba;
 
-////
+/// esto se hace porque se usa una estructura como puntero es lo que se llama una forward declaration
+typedef struct Mapa tMapa;
 typedef struct tPersonaje tPersonaje;
-typedef struct tEnemigo tEnemigo;
+typedef struct Puerta tPuerta;
 ////
 
 void Bomba_RellenarVec(tVector *, int);

@@ -2,12 +2,8 @@
 #define PJ_PRINCIPAL_H_INCLUDED
 
 ///.h
-#include "Mapa.h"
-#include "Bomba.h"
-#include "Potenciador.h"
+#include "Comunes.h"
 
-///BIBLIOTECAS
-#include <conio.h>
 
 ///DEFINE
 #define VIDAS_BASE 3
@@ -26,7 +22,7 @@ typedef struct tPersonaje{
     DWORD invul;
 }tPersonaje;
 
-//typedef struct vBombas vBombas;
+typedef struct Mapa tMapa;
 
 tPersonaje* PJ_Crear(void);
 void PJ_Destruir(tPersonaje*);

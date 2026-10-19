@@ -2,7 +2,12 @@
 #define INTERFAZ_H_INCLUDED
 
 ///.h
+#include "Comunes.h"
+#include "Mapa.h"
+#include "PJ_Principal.h"
+#include "Puerta.h"
 #include "Enemigo.h"
+#include "Bomba.h"
 
 ///BIBLIOTECAS
 #include <stdio.h>

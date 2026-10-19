@@ -1,4 +1,9 @@
+#include <conio.h>
 #include "PJ_Principal.h"
+#include "Mapa.h"
+#include "Bomba.h"
+#include "Potenciador.h"
+
 tPersonaje* PJ_Crear(void)
 {
     tPersonaje *p;

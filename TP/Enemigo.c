@@ -1,4 +1,7 @@
 #include "Enemigo.h"
+#include "Mapa.h"
+#include "PJ_Principal.h"
+
 void Enemigo_RellenarVec(tVector *v, int cant)
 {
     int i;

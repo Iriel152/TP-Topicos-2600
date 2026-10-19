@@ -4,8 +4,6 @@
 ///.h
 #include "Comunes.h"
 #include "Puerta.h"
-//#include "Enemigo.h" //DESCOMENTAR DESPUES DE MUDAR LOS .H
-//#include "PJ_Principal.h"//DESCOMENTAR DESPUES DE MUDAR LOS .H
 
 ///DISENIO MAPA
 #define DM_PARED 219
@@ -22,7 +20,7 @@
 #define MAPA_DAT "../Archivos/Mapa.dat"
 
 ///ESTRUCTURAS
-typedef struct{
+typedef struct Mapa {
     int filas;
     int columnas;
     int **celdas;
