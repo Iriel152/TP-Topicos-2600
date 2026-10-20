@@ -46,7 +46,7 @@ int Juego_EnCurso(int opcion)
             actualizar_bomba(vec_bomba, mapa, ahora, puerta, vec_enemigo, personaje, vec_pot);
             actualizar_potenciador(mapa, vec_pot, ahora);
             EnemigoMovimientoxTiempo(ahora, vec_enemigo, mapa, &tiempo_enemigo, personaje);
-            PJ_MovimientoxTiempo(ahora, personaje, mapa, &tiempo_pj, &seguir, vec_bomba, vec_pot);
+            PJ_MovimientoxTiempo(ahora, personaje, mapa, &tiempo_pj, &seguir, vec_bomba, vec_pot,vec_enemigo);
             if(temporizador == 0 || personaje->vidas == 0)
             {
                 seguir = EP_GAMEOVER;

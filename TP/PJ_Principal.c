@@ -3,6 +3,7 @@
 #include "Mapa.h"
 #include "Bomba.h"
 #include "Potenciador.h"
+#include "Enemigo.h"
 
 tPersonaje* PJ_Crear(void)
 {
@@ -142,7 +143,7 @@ void PJ_LimpiarLados(tMapa *m, tPersonaje *p)
 }
 void PJ_MovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa,
                           DWORD *tiempo_personaje, int *seguir, tVector *vbomb,
-                          tVector *v_pot)
+                          tVector *v_pot,tVector *v_enemigo)
 {
     if(personaje->esta_vivo == E_INMORTAL && (ahora - personaje->invul) >= TIMER_INVUL)
             personaje->esta_vivo = E_VIVO;
@@ -150,14 +151,14 @@ void PJ_MovimientoxTiempo(DWORD ahora, tPersonaje *personaje, tMapa *mapa,
     {
         if(ahora - (*tiempo_personaje) >= personaje->velocidad)
         {
-            *seguir = PJ_Movimiento(mapa, personaje, vbomb, v_pot);
+            *seguir = PJ_Movimiento(mapa, personaje, vbomb, v_pot, v_enemigo, ahora);
             *tiempo_personaje = ahora;
             while(_kbhit())
                 _getch();
         }
     }
 }
-int PJ_Movimiento(tMapa *m, tPersonaje *p, tVector *vbomb, tVector *v_pot)
+int PJ_Movimiento(tMapa *m, tPersonaje *p, tVector *vbomb, tVector *v_pot, tVector *v_enemigo, DWORD ahora)
 {
     char tecla;
     int NuevaFila, NuevaColumna, escenario;
@@ -197,6 +198,7 @@ int PJ_Movimiento(tMapa *m, tPersonaje *p, tVector *vbomb, tVector *v_pot)
         p->pos.x = NuevaColumna;
 
         PJ_EnPotenciador(m, p, vbomb, v_pot);
+        PJ_EnEnemigo(m,p,v_enemigo,ahora);
     }
 
     return escenario;
@@ -273,4 +275,26 @@ void PJ_EnPotenciador(tMapa *m, tPersonaje *p, tVector *v_b, tVector *v_pot)
     }
 
 }
-//////
+////
+void PJ_EnEnemigo(tMapa*m,tPersonaje*p,tVector*v_en,DWORD ahora)
+{
+    int i;
+    tEnemigo *enemy;
+
+    if(!p || !v_en || p->esta_vivo == E_INMORTAL)
+        return;
+
+    enemy = (tEnemigo*)v_en->vec;
+
+    for(i=0 ; i< v_en->ce ; i++)
+    {
+        if((enemy + i)->esta_vivo == E_VIVO && (enemy + i)->pos.x == p->pos.x
+            && (enemy + i)->pos.y == p->pos.y)
+        {
+            p->esta_vivo = E_INMORTAL;
+            p->vidas--;
+            p->invul = ahora;
+            break;
+        }
+    }
+}

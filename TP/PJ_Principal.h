@@ -30,11 +30,12 @@ int PJ_ArchivosGuardar(const char*, tPersonaje*);
 tPersonaje* PJ_ArchivosCargar(const char*);
 void PJ_AparicionRandom(tMapa*, tPersonaje*);//MUDAR A MAPA.H
 void PJ_LimpiarLados(tMapa*, tPersonaje*);//MUDAR A MAPA.H
-void PJ_MovimientoxTiempo(DWORD, tPersonaje*, tMapa*, DWORD*, int*, tVector*, tVector*);//MUDAR A MAPA.H
-int PJ_Movimiento(tMapa*, tPersonaje*, tVector*, tVector*);//MUDAR A MAPA.H
+void PJ_MovimientoxTiempo(DWORD, tPersonaje*, tMapa*, DWORD*, int*, tVector*, tVector*, tVector*);//MUDAR A MAPA.H
+int PJ_Movimiento(tMapa*, tPersonaje*, tVector*, tVector*, tVector*,DWORD);//MUDAR A MAPA.H
 int  PJ_PoneBomba(tVector *, tMapa*, tPersonaje*);//MUDAR A MAPA.H
 int PJ_EnSalida(tMapa*, tPersonaje*);//MUDAR A MAPA.H
 /////
 void PJ_EnPotenciador(tMapa*, tPersonaje*,tVector *v_b, tVector*);
 /////
+void PJ_EnEnemigo(tMapa*,tPersonaje*,tVector*,DWORD);
 #endif // PJ_PRINCIPAL_H_INCLUDED
